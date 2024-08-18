@@ -11,8 +11,6 @@ const urlsToCache = [
     '/global.js',
     '/beziero.js',
     '/embed.jpg',
-    '/leaflet/',
-    '/resources/'
 ];
 
 const VERSION_URL = '/version.json';
