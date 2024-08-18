@@ -1,0 +1,35 @@
+{
+    "name": "雨世界地图",
+    "short_name": "雨世界地图",
+    "theme_color": "#000",
+    "background_color": "#000",
+    "display": "fullscreen",
+    "scope": "/",
+    "start_url": "/rw-map.html",
+    "icons": [
+        {
+            "src": "resources/img/pwa/192.jpg",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "resources/img/pwa/192.jpg",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "resources/img/pwa/512.jpg",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "resources/img/pwa/512.jpg",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}
