@@ -47,7 +47,7 @@ async function cleanUpCache(cache) {
                 const blob = await response.blob();
                 totalSize -= blob.size;
                 await cache.delete(request);
-                console.log(`Deleted cached file: ${request.url}`);
+                console.log(`已删除缓存文件: ${request.url}`);
             }
         }
     }
@@ -60,7 +60,7 @@ async function fetchCacheVersion() {
         const data = await response.json();
         return data.cacheVersion;
     } catch (error) {
-        console.error('Failed to fetch cache version:', error);
+        console.error('无法获取缓存版本:', error);
         return cacheVersion; // 如果获取版本号失败，返回当前版本号
     }
 }
@@ -72,37 +72,41 @@ async function updateCache() {
         console.log(`缓存更新: 本地 ${cacheVersion} --> 最新 ${newCacheVersion}`);
         cacheVersion = newCacheVersion;
 
-        await caches.keys().then((cacheNames) => {
-            return Promise.all(
-                cacheNames.map((cacheName) => {
-                    if (cacheName !== cacheVersion) {
-                        console.log(`删除过时缓存: ${cacheName}`);
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        });
+        const cacheNames = await caches.keys();
+        await Promise.all(
+            cacheNames.map((cacheName) => {
+                if (cacheName !== cacheVersion) {
+                    console.log(`删除过时缓存: ${cacheName}`);
+                    return caches.delete(cacheName);
+                }
+            })
+        );
 
         const cache = await caches.open(cacheVersion);
         console.log('启用最新缓存:', cacheVersion);
-        await Promise.allSettled(
-            urlsToCache.map(url => {
-                // 不缓存 version.json
-                if (url === VERSION_URL) {
-                    return Promise.resolve();
-                }
 
-                return fetch(url)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`${url} failed with status ${response.status}`);
-                        }
-                        return cache.put(url, response);
-                    })
-                    .catch(error => console.error('Fetching failed for:', url, error));
-            })
-        );
+        await cacheResources(cache, urlsToCache);
     }
+}
+
+// 缓存资源文件
+async function cacheResources(cache, urls) {
+    await Promise.allSettled(
+        urls.map(url => {
+            if (url === VERSION_URL) {
+                return Promise.resolve();
+            }
+
+            return fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`${url} failed with status ${response.status}`);
+                    }
+                    return cache.put(url, response);
+                })
+                .catch(error => console.error('Fetching failed for:', url, error));
+        })
+    );
 }
 
 // 安装阶段：缓存初始资源
@@ -110,59 +114,57 @@ self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(cacheVersion)
             .then((cache) => {
-                console.log('Opened cache');
-                return Promise.allSettled(
-                    urlsToCache.map(url => {
-                        // 不缓存 version.json
-                        if (url === VERSION_URL) {
-                            return Promise.resolve();
-                        }
-
-                        return fetch(url)
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error(`${url} failed with status ${response.status}`);
-                                }
-                                return cache.put(url, response);
-                            })
-                            .catch(error => console.error('Fetching failed for:', url, error));
-                    })
-                );
+                console.log('已启用缓存');
+                return cacheResources(cache, urlsToCache);
             })
+            .catch((error) => console.error('缓存安装失败:', error))
     );
 });
 
 // 拦截 fetch 请求，优先从缓存中获取资源，若未命中则从网络获取并缓存
 self.addEventListener('fetch', (event) => {
-    // 不缓存 version.json 文件
+    const requestURL = new URL(event.request.url);
+
+    // 仅处理 HTTP 和 HTTPS 请求
+    if (requestURL.protocol !== 'http:' && requestURL.protocol !== 'https:') {
+        return;
+    }
+
     if (event.request.url.includes(VERSION_URL)) {
-        return fetch(event.request);
+        event.respondWith(fetch(event.request));
+        return;
     }
 
     event.respondWith(
-        caches.match(event.request).then((cachedResponse) => {
-            if (cachedResponse) {
-                return cachedResponse;
-            }
-
-            return fetch(event.request).then((networkResponse) => {
-                if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-                    return networkResponse;
+        caches.match(event.request)
+            .then((cachedResponse) => {
+                if (cachedResponse) {
+                    return cachedResponse;
                 }
 
-                const responseClone = networkResponse.clone();
+                return fetch(event.request)
+                    .then((networkResponse) => {
+                        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+                            return networkResponse;
+                        }
 
-                caches.open(cacheVersion).then(async (cache) => {
-                    await cache.put(event.request, responseClone);
-                    await cleanUpCache(cache); // 缓存新文件后清理超出大小限制的部分
-                });
+                        const responseClone = networkResponse.clone();
+                        caches.open(cacheVersion).then(async (cache) => {
+                            await cache.put(event.request, responseClone);
+                            await cleanUpCache(cache); // 缓存新文件后清理超出大小限制的部分
+                        });
 
-                return networkResponse;
-            }).catch((error) => {
-                console.error('Fetch failed:', error);
-                return new Response('Network error occurred', { status: 408 });
-            });
-        })
+                        return networkResponse;
+                    })
+                    .catch((error) => {
+                        console.error('Fetch 失败:', error);
+                        return new Response('Network error occurred', { status: 408 });
+                    });
+            })
+            .catch((error) => {
+                console.error('缓存匹配失败:', error);
+                return new Response('Cache match failed', { status: 500 });
+            })
     );
 });
 
@@ -171,8 +173,8 @@ self.addEventListener('message', (event) => {
     if (event.data && event.data.type === 'CHECK_VERSION_AND_UPDATE_CACHE') {
         updateCache().then(() => {
             event.ports[0].postMessage({ status: 'updated' });
-        }).catch(error => {
-            console.error('Failed to update cache:', error);
+        }).catch((error) => {
+            console.error('更新缓存失败:', error);
             event.ports[0].postMessage({ status: 'error', error: error.message });
         });
     }
