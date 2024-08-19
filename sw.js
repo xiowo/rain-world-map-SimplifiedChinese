@@ -15,7 +15,6 @@ const urlsToCache = [
 
 const VERSION_URL = '/version.json';
 let cacheVersion = '0.0.0';
-const MAX_CACHE_SIZE = 10 * 1024 * 1024; // 10MB
 
 // 从 caches 中读取 cacheVersion
 async function getCacheVersion() {
@@ -31,42 +30,6 @@ async function getCacheVersion() {
 async function setCacheVersion(version) {
     const cache = await caches.open('version-cache');
     await cache.put('cacheVersion', new Response(version));
-}
-
-// 计算缓存大小
-async function getCacheSize(cache) {
-    let totalSize = 0;
-    const requests = await cache.keys();
-    for (const request of requests) {
-        const response = await cache.match(request);
-        if (response) {
-            const blob = await response.blob();
-            totalSize += blob.size;
-        }
-    }
-    return totalSize;
-}
-
-// 清理超出大小限制的缓存
-async function cleanUpCache(cache) {
-    const requests = await cache.keys();
-    let totalSize = await getCacheSize(cache);
-
-    // 删除过时的 PNG 文件，排除 /resources/ 目录下的文件
-    for (const request of requests) {
-        if (totalSize <= MAX_CACHE_SIZE) break;
-
-        const url = new URL(request.url);
-        if (url.pathname.endsWith('.png') && !url.pathname.startsWith('/resources/')) {
-            const response = await cache.match(request);
-            if (response) {
-                const blob = await response.blob();
-                totalSize -= blob.size;
-                await cache.delete(request);
-                console.log(`已删除缓存文件: ${request.url}`);
-            }
-        }
-    }
 }
 
 // 获取最新的版本号
@@ -172,7 +135,6 @@ self.addEventListener('fetch', (event) => {
 
                         caches.open(cacheVersion).then(async (cache) => {
                             await cache.put(event.request, responseClone);
-                            await cleanUpCache(cache); // 缓存新文件后清理超出大小限制的部分
                         });
 
                         return networkResponse;
