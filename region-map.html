@@ -27,6 +27,10 @@
             margin: 0;
         }
 
+        p {
+            font-size: 10px;
+        }
+
         #mapid {
             height: 100%;
             padding: 0;
@@ -128,6 +132,13 @@
         /* Difficulty select and layers panel */
         .right-panel {
             right: 24px;
+        }
+
+        .right-panel .resources {
+            display: flex;
+            align-items: center;
+            color: #A9A4B2;
+            font-size: 12px;
         }
 
         .difficulty-select {
@@ -258,6 +269,20 @@
 
         <div>图层</div>
         <div id="layer-content" class="scroll-ish"></div>
+
+        <div>地图资源</div>
+        <p>加载不出来改这里</p>
+        <p>GitHub可搭配 <a href="https://blog.xiowo.net/posts/cba8" target="_blank" style="color: #A9A4B2;">fastgithub</a>
+            使用</p>
+        <div class="resources">
+            <input type="radio" id="option1" name="options" value="1" checked>
+            <label for="option1"> GitHub</label>
+        </div>
+
+        <div class="resources">
+            <input type="radio" id="option2" name="options" value="2">
+            <label for="option2"> GitHub(RAW加速)</label>
+        </div>
     </div>
 
     <script>
@@ -702,12 +727,64 @@
         var densLayer;
         var loadedRegion = null;
         var loadedModded = {};
+
+        // 地图资源选择
+        // 全局声明 folderpath 变量
+        var folderpath = '';
+
+        if (localStorage.getItem('selectedBaseUrl')) {
+            var selectedValue = localStorage.getItem('selectedBaseUrl');
+            if (selectedValue === '1') {
+                document.getElementById('option1').checked = true;
+                setFolderPath('https://raw.githubusercontent.com');
+                console.log("当前地图资源来源: GitHub");
+            } else if (selectedValue === '2') {
+                document.getElementById('option2').checked = true;
+                setFolderPath('https://raw.gitmirror.com');
+                console.log("当前地图资源来源: GitHub(RAW加速)");
+            }
+        } else {
+            document.getElementById('option1').checked = true;
+            setFolderPath('https://raw.githubusercontent.com');
+            saveSelectedValue('1');
+        }
+
+        function saveSelectedValue(value) {
+            localStorage.setItem('selectedBaseUrl', value);
+        }
+
+        function setFolderPath(baseUrl) {
+            const modded = window.modded || false;
+            const region = window.region || 'region-name';
+            // 更新全局变量 folderpath
+            folderpath = baseUrl + '/henpemaz/Rain-World-Interactive-Map/master/docs/tiles/' + (modded ? 'modded' : 'vanilla') + '/' + region + '/';
+        }
+
+        document.getElementById('option1').addEventListener('change', function () {
+            if (this.checked) {
+                saveSelectedValue('1');
+                setFolderPath('https://raw.githubusercontent.com');
+                location.reload();
+            }
+        });
+
+        document.getElementById('option2').addEventListener('change', function () {
+            if (this.checked) {
+                saveSelectedValue('2');
+                setFolderPath('https://raw.gitmirror.com');
+                location.reload();
+            }
+        });
+
         function loadRegion(pregion, pmodded) {
             if (loadedRegion == pregion && loadedModded == pmodded) return;
-            region = pregion; // chaos
-            modded = pmodded;
+            window.region = pregion;
+            window.modded = pmodded;
             console.log("LOADING REGION " + region + " modded? " + modded);
-            var folderpath = 'https://raw.githubusercontent.com/henpemaz/Rain-World-Interactive-Map/master/docs/tiles/' + (modded ? 'modded' : 'vanilla') + '/' + region + '/';
+
+            // 在调用 setFolderPath 后，folderpath 会被设置为全局变量
+            setFolderPath(localStorage.getItem('selectedBaseUrl') === '2' ? 'https://raw.gitmirror.com' : 'https://raw.githubusercontent.com');
+
             getJsonObject(folderpath + "region.json", function (json) {
                 // Background color
                 map.getContainer().style.backgroundColor = 'rgb(' + json["bgcolor"].join(',') + ')'; // I hate this with passion, but such is the way of the CSS
