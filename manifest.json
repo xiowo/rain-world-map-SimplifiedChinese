@@ -5,7 +5,7 @@
     "background_color": "#000",
     "display": "fullscreen",
     "scope": "/",
-    "start_url": "/rw-map.html",
+    "start_url": "/",
     "icons": [
         {
             "src": "resources/img/pwa/192.png",
