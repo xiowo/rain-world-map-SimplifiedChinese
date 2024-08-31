@@ -7,6 +7,7 @@ const urlsToCache = [
     '/rw-map.html',
     '/map.html',
     '/region-map.html',
+    '/rw.css',
     '/slugcats.json',
     '/global.js',
     '/beziero.js',
