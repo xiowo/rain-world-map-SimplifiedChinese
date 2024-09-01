@@ -90,9 +90,8 @@
         }
 
         .nav ul li {
-            width: 70px;
             height: 33px;
-            margin: 3px 8px;
+            margin: 3px 15px;
             line-height: 33px;
             text-align: center;
             color: #A9A4B2;
@@ -538,16 +537,22 @@
 
             <script>
                 // 获取元素
-                // var lis = document.querySelector('.tab_list').querySelectorAll('li');
                 var tab_list = document.querySelector('.nav');
                 var lis = tab_list.querySelectorAll('li');
                 var items = document.querySelectorAll('.item');
+
                 // for 循环绑定点击事件
                 for (var i = 0; i < lis.length; i++) {
                     // 开始给小li设置索引号 
                     lis[i].setAttribute('index', i);
-                    // 2.上面的模块选项卡
+
+                    // 上面的模块选项卡
                     lis[i].onclick = function () {
+                        // 如果 li 中有 a 标签，直接返回，不执行后续逻辑
+                        if (this.querySelector('a')) {
+                            return;
+                        }
+
                         // 干掉所有人 其余的li清除 class 这个类
                         for (var i = 0; i < lis.length; i++) {
                             lis[i].className = '';
@@ -555,7 +560,7 @@
                         // 留下我自己
                         this.className = 'current';
 
-                        // 2.下面的显示内容模块
+                        // 下面的显示内容模块
                         var index = this.getAttribute('index');
                         console.log(index);
                         // 干掉所有人 让其余的item 这些div隐藏
@@ -564,7 +569,6 @@
                         }
                         // 留下我自己 让对应的item 显示出来
                         items[index].style.display = 'block';
-
                     }
                 }
             </script>
