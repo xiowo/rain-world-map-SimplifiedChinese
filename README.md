@@ -9,6 +9,6 @@
 - [x] 内置GitHub加速地图资源
 - [x] 支持PWA 
 
-可详见 [我的blog](https://blog.xiowo.net/posts/1b7c)
+可详见 [Mo的记事簿](https://blog.xiowo.net/posts/1b7c)
 
 ~~写的烂，不要介意|ू･ω･` )~~
