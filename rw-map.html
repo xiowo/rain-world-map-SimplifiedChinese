@@ -541,40 +541,46 @@
 
             <script>
                 // 获取元素
-                var tab_list = document.querySelector('.nav');
-                var lis = tab_list.querySelectorAll('li');
-                var items = document.querySelectorAll('.item');
+                    var tab_list = document.querySelector('.nav');
+                    var lis = tab_list.querySelectorAll('li');
+                    var items = document.querySelectorAll('.item');
 
-                // for 循环绑定点击事件
-                for (var i = 0; i < lis.length; i++) {
-                    // 开始给小li设置索引号 
-                    lis[i].setAttribute('index', i);
+                    // 过滤掉包含 <a> 标签的 li 元素
+                    var filteredLis = Array.from(lis).filter(li => !li.querySelector('a'));
 
-                    // 上面的模块选项卡
-                    lis[i].onclick = function () {
-                        // 如果 li 中有 a 标签，直接返回，不执行后续逻辑
-                        if (this.querySelector('a')) {
-                            return;
-                        }
-
-                        // 干掉所有人 其余的li清除 class 这个类
-                        for (var i = 0; i < lis.length; i++) {
-                            lis[i].className = '';
-                        }
-                        // 留下我自己
-                        this.className = 'current';
-
-                        // 下面的显示内容模块
-                        var index = this.getAttribute('index');
-                        console.log(index);
-                        // 干掉所有人 让其余的item 这些div隐藏
-                        for (var j = 0; j < items.length; j++) {
-                            items[j].style.display = 'none';
-                        }
-                        // 留下我自己 让对应的item 显示出来
-                        items[index].style.display = 'block';
+                    // 为每个有效的 li 元素设置索引
+                    for (var i = 0; i < filteredLis.length; i++) {
+                        filteredLis[i].setAttribute('index', i);
                     }
-                }
+
+                    // 为每个有效的 li 元素绑定点击事件
+                    for (var i = 0; i < filteredLis.length; i++) {
+                        filteredLis[i].onclick = function () {
+                            // 清除所有 li 的 class
+                            for (var j = 0; j < filteredLis.length; j++) {
+                                filteredLis[j].className = '';
+                            }
+                            // 添加当前 li 的 class
+                            this.className = 'current';
+
+                            // 获取当前 li 的索引
+                            var index = this.getAttribute('index');
+                            console.log("Selected index:", index);
+
+                            // 确保 index 是有效的
+                            if (index < 0 || index >= items.length) {
+                                console.error("Invalid index:", index);
+                                return;
+                            }
+
+                            // 隐藏所有 .item 元素
+                            for (var j = 0; j < items.length; j++) {
+                                items[j].style.display = 'none';
+                            }
+                            // 显示对应索引的 .item 元素
+                            items[index].style.display = 'block';
+                        }
+                    }
             </script>
 
 </body>
