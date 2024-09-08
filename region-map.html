@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>雨世界地图</title>
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta property="og:image" content="https://rain-world-map-sc.github.io/embed.jpg" />
     <meta property="og:type" content="object" />
@@ -129,6 +130,69 @@
             margin-bottom: 8px;
         }
 
+        .scroll-ish {
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 24px !important;
+            margin-right: -16px !important;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .collapse-tab {
+            display: none;
+            width: 30px;
+            height: 30px;
+            user-select: none;
+            background: #0c0c0c;
+            background-image: url(../mod-map/resources/hamburger.png);
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        @media (max-width: 768px) {
+            .side-panel {
+                transition: left ease 0.3s, right ease 0.3s;
+            }
+
+            .top-panel {
+                display: none !important;
+            }
+
+            .collapse-tab {
+                display: block;
+                cursor: pointer;
+            }
+
+            .left-panel.collapsed {
+                left: var(--hide-pos);
+            }
+
+            .right-panel.collapsed {
+                right: var(--hide-pos);
+            }
+
+            .left-panel .collapse-tab {
+                position: absolute;
+                right: -30px;
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+
+            .right-panel .collapse-tab {
+                position: absolute;
+                left: -30px;
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+            }
+
+            .collapsed .scroll-ish {
+                overflow-y: hidden;
+            }
+        }
+
         /* Difficulty select and layers panel */
         .right-panel {
             right: 24px;
@@ -235,8 +299,10 @@
         </label>
     </div>
 
-    <div class="side-panel left-panel rw-text">
+    <div class="side-panel left-panel rw-text collapsible collapsed">
         <div style="padding-left: 8px; padding-bottom: 8px;">
+            <a href="./rw-map.html" class="rw-text rw-index">&lt; 返回索引</a>
+            <hr />
             <span>区域</span>
             <span id="modded-ckb-group">
                 <input type="checkbox" id="modded-ckb" name="modded" class="rw-ui rw-ui-ckb" autocomplete="off"
@@ -245,9 +311,11 @@
             </span>
         </div>
         <form name="regionselect" id="region-select" class="scroll-ish"></form>
+
+        <div class="collapse-tab"></div>
     </div>
 
-    <div class="side-panel right-panel rw-text">
+    <div class="side-panel right-panel rw-text collapsible collapsed">
         <div>蛞蝓猫</div>
         <form name="difficulty" class="difficulty-select">
             <label class="difficulty-btn">
@@ -283,6 +351,8 @@
             <input type="radio" id="option2" name="options" value="2">
             <label for="option2"> GitHub(RAW加速)</label>
         </div>
+
+        <div class="collapse-tab"></div>
     </div>
 
     <script>
@@ -940,6 +1010,35 @@
                 loadedRegion = pregion;
                 loadedModded = pmodded;
             }, true);
+        }
+
+        // Collapsible things
+        var uncollapsed = null;
+        var collapsible = document.querySelectorAll(".collapsible");
+
+        for (const el of collapsible) {
+            if (el.classList.contains("left-panel")) {
+                // 获取左栏的宽度
+                var width = el.getBoundingClientRect().width;
+                // 设置 --hide-pos 属性值，左栏减去n个px
+                el.style.setProperty("--hide-pos", "-" + (width + 110) + "px");
+            } else if (el.classList.contains("right-panel")) {
+                // 对于右栏，不做任何变化
+                el.style.setProperty("--hide-pos", "-" + el.getBoundingClientRect().width + "px");
+            }
+
+            var button = el.querySelector(".collapse-tab");
+            button.addEventListener("click", (e) => {
+                if (uncollapsed != null) {
+                    uncollapsed.classList.add("collapsed");
+                }
+                if (uncollapsed == el) {
+                    uncollapsed = null;
+                } else {
+                    uncollapsed = el;
+                    el.classList.remove("collapsed");
+                }
+            });
         }
 
     </script>
