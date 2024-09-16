@@ -1,4 +1,4 @@
-// sw.js
+// sw.js for 主站点
 
 // 定义要缓存的文件列表
 const urlsToCache = [
@@ -14,11 +14,11 @@ const urlsToCache = [
 ];
 
 const VERSION_URL = '/version.json';
-let cacheVersion = '0.0.0';
+let cacheVersion = 'RWMSC版本号-0.0.0'; // 初始版本号，使用独特前缀 RWMSC
 
 // 从 caches 中读取 cacheVersion
 async function getCacheVersion() {
-    const cache = await caches.open('version-cache');
+    const cache = await caches.open('version-cache-RWMSC'); // 使用特定的版本缓存名称
     const response = await cache.match('cacheVersion');
     if (response) {
         return response.text();
@@ -28,19 +28,20 @@ async function getCacheVersion() {
 
 // 将 cacheVersion 保存到 caches
 async function setCacheVersion(version) {
-    const cache = await caches.open('version-cache');
+    const cache = await caches.open('version-cache-RWMSC'); // 使用特定的版本缓存名称
     await cache.put('cacheVersion', new Response(version));
 }
 
-// 获取最新的版本号
+// 获取最新的版本号，并更新缓存名称
 async function fetchCacheVersion() {
     try {
         const response = await fetch(VERSION_URL);
         const data = await response.json();
+        cacheVersion = `RWMSC版本号-${data.cacheVersion}`; // 从 version.json 获取版本号并动态设置缓存名称
         return data.cacheVersion;
     } catch (error) {
         console.error('无法获取缓存版本:', error);
-        return cacheVersion; // 如果获取版本号失败，返回当前版本号
+        return cacheVersion.split('-')[1]; // 如果获取版本号失败，返回当前缓存中的版本号
     }
 }
 
@@ -51,12 +52,12 @@ async function updateCache() {
 
     if (newCacheVersion !== currentCacheVersion) {
         console.log(`缓存更新: 本地 ${currentCacheVersion} --> 最新 ${newCacheVersion}`);
-        cacheVersion = newCacheVersion;
 
         const cacheNames = await caches.keys();
         await Promise.all(
             cacheNames.map((cacheName) => {
-                if (cacheName !== cacheVersion && cacheName !== 'version-cache') {
+                // 仅删除与当前站点相关的缓存，防止删除其他站点的缓存
+                if (cacheName.startsWith('RWMSC版本号') && cacheName !== cacheVersion && cacheName !== 'version-cache-RWMSC') {
                     console.log(`删除过时缓存: ${cacheName}`);
                     return caches.delete(cacheName);
                 }
@@ -69,7 +70,7 @@ async function updateCache() {
         await cacheResources(cache, urlsToCache);
 
         // 保存新的缓存版本号到 caches
-        await setCacheVersion(cacheVersion);
+        await setCacheVersion(newCacheVersion);
     }
 }
 
