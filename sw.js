@@ -11,15 +11,6 @@ const urlsToCache = [
     '/global.js',
     '/beziero.js',
     '/embed.jpg',
-    //mod-map
-    '/mod-map/',
-    '/mod-map/index.html',
-    '/mod-map/map.html',
-    '/mod-map/rw.css',
-    '/mod-map/regions.json',
-    '/mod-map/slugcats.json',
-    '/mod-map/global.js',
-    '/mod-map/beziero.js',
 ];
 
 const VERSION_URL = '/version.json';
