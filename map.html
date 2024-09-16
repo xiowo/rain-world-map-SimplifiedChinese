@@ -375,6 +375,9 @@
         }
 
         @media (max-width: 768px) {
+            .hidden {
+                display: block !important;
+            }
             .side-panel {
                 transition: left ease 0.3s, right ease 0.3s;
             }
@@ -603,21 +606,20 @@
     </div>
 
     <div class="side-panel left-panel rw-text collapsible collapsed">
-        <div class="panel-box-left">
             <div style="padding-left: 8px; padding-bottom: 8px;">
-                <a href="./rw-map.html" class="rw-text rw-index">&lt; 返回总览</a>
-                <hr />
+                <div class="hidden">
+                    <a href="./rw-map.html" class="rw-text rw-index">&lt; 返回总览</a>
+                    <hr />
+                </div>
                 <span>区域</span>
             </div>
 
             <form name="regionselect" id="region-select" class="scroll-ish"></form>
 
-        </div>
         <div class="collapse-tab"></div>
     </div>
 
     <div class="side-panel right-panel rw-text collapsible collapsed">
-        <div class="panel-box-right">
             <div>蛞蝓猫</div>
             <form name="difficulty" class="difficulty-select" id="scug-selector">
             </form>
@@ -643,7 +645,6 @@
             <div class="resources">
                 <input type="radio" id="option3" name="options" value="3">
                 <label for="option3"> cf-works加速</label>
-            </div>
         </div>
 
         <div class="collapse-tab"></div>

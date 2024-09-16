@@ -6,29 +6,38 @@ const urlsToCache = [
     '/index.html',
     '/rw-map.html',
     '/map.html',
-    '/region-map.html',
     '/rw.css',
     '/slugcats.json',
     '/global.js',
     '/beziero.js',
     '/embed.jpg',
+    //mod-map
+    '/mod-map/',
+    '/mod-map/index.html',
+    '/mod-map/map.html',
+    '/mod-map/rw.css',
+    '/mod-map/regions.json',
+    '/mod-map/slugcats.json',
+    '/mod-map/global.js',
+    '/mod-map/beziero.js',
 ];
 
 const VERSION_URL = '/version.json';
+let cacheVersion = '0.0.0';
 
-// 获取本地缓存的版本号
+// 从 caches 中读取 cacheVersion
 async function getCacheVersion() {
-    const cache = await caches.open('RWMSC-version-cache');
+    const cache = await caches.open('version-cache');
     const response = await cache.match('cacheVersion');
     if (response) {
         return response.text();
     }
-    return null; // 本地没有缓存版本
+    return '0.0.0';
 }
 
-// 将版本号保存到缓存中
+// 将 cacheVersion 保存到 caches
 async function setCacheVersion(version) {
-    const cache = await caches.open('RWMSC-version-cache');
+    const cache = await caches.open('version-cache');
     await cache.put('cacheVersion', new Response(version));
 }
 
@@ -40,48 +49,36 @@ async function fetchCacheVersion() {
         return data.cacheVersion;
     } catch (error) {
         console.error('无法获取缓存版本:', error);
-        throw error; // 无法获取版本号时抛出错误
+        return cacheVersion; // 如果获取版本号失败，返回当前版本号
     }
 }
 
 // 更新缓存，删除旧版本并缓存最新资源
 async function updateCache() {
-    let currentCacheVersion = await getCacheVersion();
-
-    if (!currentCacheVersion) {
-        console.log('本地没有缓存版本，直接更新到最新版');
-        currentCacheVersion = await fetchCacheVersion();
-    }
-
     const newCacheVersion = await fetchCacheVersion();
-
-    console.log(`当前缓存版本: ${currentCacheVersion}`);
-    console.log(`最新缓存版本: ${newCacheVersion}`);
+    const currentCacheVersion = await getCacheVersion();
 
     if (newCacheVersion !== currentCacheVersion) {
         console.log(`缓存更新: 本地 ${currentCacheVersion} --> 最新 ${newCacheVersion}`);
+        cacheVersion = newCacheVersion;
 
-        // 删除旧版本缓存
         const cacheNames = await caches.keys();
         await Promise.all(
             cacheNames.map((cacheName) => {
-                if (cacheName !== `RWMSC-${newCacheVersion}` && cacheName !== 'RWMSC-version-cache') {
+                if (cacheName !== cacheVersion && cacheName !== 'version-cache') {
                     console.log(`删除过时缓存: ${cacheName}`);
                     return caches.delete(cacheName);
                 }
             })
         );
 
-        // 创建并填充新版本缓存
-        const cache = await caches.open(`RWMSC-${newCacheVersion}`);
-        console.log('启用最新缓存:', `RWMSC-${newCacheVersion}`);
+        const cache = await caches.open(cacheVersion);
+        console.log('启用最新缓存:', cacheVersion);
 
         await cacheResources(cache, urlsToCache);
 
         // 保存新的缓存版本号到 caches
-        await setCacheVersion(newCacheVersion);
-    } else {
-        console.log('缓存版本未更改，无需更新');
+        await setCacheVersion(cacheVersion);
     }
 }
 
@@ -108,12 +105,11 @@ async function cacheResources(cache, urls) {
 // 安装阶段：缓存初始资源
 self.addEventListener('install', (event) => {
     event.waitUntil(
-        fetchCacheVersion().then(async (newCacheVersion) => {
-            const cache = await caches.open(`RWMSC-${newCacheVersion}`);
-            console.log('已启用缓存');
-            await cacheResources(cache, urlsToCache);
-            await setCacheVersion(newCacheVersion);
-        })
+        caches.open(cacheVersion)
+            .then((cache) => {
+                console.log('已启用缓存');
+                return cacheResources(cache, urlsToCache);
+            })
     );
 });
 
@@ -121,7 +117,8 @@ self.addEventListener('install', (event) => {
 self.addEventListener('fetch', (event) => {
     const requestURL = new URL(event.request.url);
 
-    if (!requestURL.pathname.startsWith('/mod-map/')) {
+    // 仅处理 HTTP 和 HTTPS 请求
+    if (requestURL.protocol !== 'http:' && requestURL.protocol !== 'https:') {
         return;
     }
 
@@ -138,16 +135,16 @@ self.addEventListener('fetch', (event) => {
                 }
 
                 return fetch(event.request)
-                    .then(async (networkResponse) => {
+                    .then((networkResponse) => {
                         if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
                             return networkResponse;
                         }
 
                         const responseClone = networkResponse.clone();
-                        const cacheName = `RWMSC-${await getCacheVersion()}`;
-                        const cache = await caches.open(cacheName);
 
-                        await cache.put(event.request, responseClone);
+                        caches.open(cacheVersion).then(async (cache) => {
+                            await cache.put(event.request, responseClone);
+                        });
 
                         return networkResponse;
                     })

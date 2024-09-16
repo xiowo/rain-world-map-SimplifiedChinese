@@ -16,8 +16,8 @@
     <title>雨世界地图</title>
     <link rel="stylesheet" href="rw.css">
 
-    <script src="./global.js"></script>
-    <script src="./resources/js/console.js"></script>
+    <script src="/global.js"></script>
+    <script src="/resources/js/console.js"></script>
     <link rel="manifest" href="/manifest.json">
     <script src="/resources/js/app.js" defer></script>
 
@@ -174,11 +174,12 @@
             }
 
             .container {
-                min-width: calc(100% - 30px)!important;
+                min-width: calc(100% - 30px) !important;
             }
 
             .regionlist-group {
-                width: 276px !important;
+                width: 100% !important;
+                margin-left: 25px !important;
             }
 
             #footer {
@@ -449,12 +450,14 @@
                                     target="_blank"><b>雨世界wiki</b></a> ( ‵▽′)ψ
                                 </p>
 
-                                <!-- 原版地图 -->
-                                <h2>原版地图</h2>
-                                <p class="right grey">1.5</p>
-                                <form action="region-map.html" method="get">
+                                <!-- 区域地图 -->
+                                <h2>区域地图</h2>
+                                <p class="right grey">Downpour</p>
+                                <form action="map.html" method="GET">
                                     <div class="regionlist-group">
-                                        <div id="regionlist-vanilla"></div>
+                                        <div id="regionlist-vanilla">
+                                        </div>
+                                            <input type="hidden" name="slugcat" value="white">
                                     </div>
                                     <script>
                                         var region_order = ['SU', 'HI', 'DS', 'CC', 'GW', 'SH', 'SL', 'SI', 'LF', 'UW', 'SS', 'SB'];
