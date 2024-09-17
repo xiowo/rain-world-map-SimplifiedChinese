@@ -1070,8 +1070,8 @@
                     console.log("当前地图资源来源:GitHub(Raw加速)");
                 } else if (selectedValue === '3') {
                     document.getElementById('option3').checked = true;
-                    setSlugcatUrl('https://xiowo.us.kg/msc-1.9.07b/v1.9.07b/');
-                    console.log("当前地图资源来源:cf-works)");
+                    setSlugcatUrl('https://rw.xiowo.us.kg/msc-1.9.07b/v1.9.07b/');
+                    console.log("当前地图资源来源:cf-works");
                 }
             } else {
                 // 如果之前未保存过值，默认选择第一个单选框并保存值
@@ -1120,7 +1120,7 @@
             document.getElementById('option3').addEventListener('change', function () {
                 if (this.checked) {
                     saveSelectedValue('3');
-                    setSlugcatUrl('https://xiowo.us.kg/msc-1.9.07b/v1.9.07b/');
+                    setSlugcatUrl('https://rw.xiowo.us.kg/msc-1.9.07b/v1.9.07b/');
                     location.reload(); // 刷新页面以应用更改
                 }
             });

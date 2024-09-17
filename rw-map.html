@@ -64,6 +64,11 @@
             margin: -27px 30px 0 0;
         }
 
+        .left {
+            float: left;
+            margin: -27px 0px 0 95px;
+        }
+
         .container {
             display: flex;
             flex-direction: row;
@@ -179,7 +184,6 @@
 
             .regionlist-group {
                 width: 100% !important;
-                margin-left: 25px !important;
             }
 
             #footer {
@@ -451,13 +455,13 @@
                                 </p>
 
                                 <!-- 区域地图 -->
-                                <h2>区域地图</h2>
+                                <h2 id="RegionMap">区域地图</h2>
                                 <p class="right grey">Downpour</p>
                                 <form action="map.html" method="GET">
                                     <div class="regionlist-group">
                                         <div id="regionlist-vanilla">
                                         </div>
-                                            <input type="hidden" name="slugcat" value="white">
+                                        <input type="hidden" name="slugcat" value="white">
                                     </div>
                                     <script>
                                         var region_order = ['SU', 'HI', 'DS', 'CC', 'GW', 'SH', 'SL', 'SI', 'LF', 'UW', 'SS', 'SB'];
@@ -473,7 +477,7 @@
                                 </form>
 
                                 <!-- 倾盆大雨 & 模组地图 -->
-                                <h2>倾盆大雨</h2>
+                                <h2 id="DownpourMap">倾盆大雨</h2>
                                 <p class="right grey">1.9.07b</p>
                                 <form>
                                     <div class="scuglist-group">
@@ -481,7 +485,10 @@
                                     </div>
                                 </form>
 
-                                <h2>模组地图</h2>
+                                <h2 id="ModMap">模组地图</h2>
+                                <label class="left">
+                                    <input type="checkbox" id="toggleLanguage" onclick="toggleLanguage()"> 显示为中文
+                                </label>
                                 <p class="right grey">mod-map</p>
                                 <form action="mod-map/map.html" method="GET">
                                     <div class="regionlist-group">
@@ -491,23 +498,9 @@
                                 </form>
 
                                 <script>
+                                    // 倾盆大雨
                                     let slugcats = {};
-                                    let regions = {};
 
-                                    function getJsonObject(url, callback, async = true) {
-                                        fetch(url)
-                                            .then(response => response.json())
-                                            .then(data => callback(data))
-                                            .catch(error => console.error('Error:', error));
-                                    }
-
-                                    function selectDifficulty(slugName) {
-                                        window.location.href = `map.html?slugcat=${slugName}&region=${slugcats[slugName].startingRegion}&room=${slugcats[slugName].startingRoom}`;
-                                    }
-
-                                    window.addEventListener("resize", () => organizeColumns());
-
-                                    // Load slugcats for "倾盆大雨"
                                     getJsonObject("slugcats.json", function (json) {
                                         slugcats = json;
                                         var html = "";
@@ -519,28 +512,67 @@
                                                 console.log("missing icon for " + slugcatName);
                                             }
                                             html += `
-                                        <label class="difficulty-btn">
-                                            <input type="radio" class="rw-ui" name="difficulties" onclick="selectDifficulty('${slugcatName}');" autocomplete="off">
-                                            <img src="./resources/icons/${icon}.png">
-                                        </label>`;
+                                                <label class="difficulty-btn">
+                                                    <input type="radio" class="rw-ui" name="difficulties" onclick="selectDifficulty('${slugcatName}');" autocomplete="off">
+                                                    <img src="./resources/icons/${icon}.png">
+                                                </label>`;
+                                            document.getElementById('downpour').innerHTML = html;
                                         }
-                                        document.getElementById('downpour').innerHTML = html;
                                     }, true);
 
-                                    // Load regions for "模组地图"
+                                    function selectDifficulty(slugName) {
+                                        window.location.href = `map.html?slugcat=${slugName}&region=${slugcats[slugName].startingRegion}&room=${slugcats[slugName].startingRoom}`;
+                                    }
+
+                                    // 模组地图
+                                    let regions = {};
+                                    let displayChinese = false;  // 控制是否显示中文的标记
+
+                                    // 加载初始语言选择状态
+                                    window.addEventListener("load", () => {
+                                        displayChinese = localStorage.getItem('displayChinese') === 'true';
+                                        document.getElementById("toggleLanguage").checked = displayChinese;
+                                    });
+
+                                    function getJsonObject(url, callback, async = true) {
+                                        fetch(url)
+                                            .then(response => response.json())
+                                            .then(data => callback(data))
+                                            .catch(error => console.error('Error:', error));
+                                    }
+
+                                    // 切换语言显示并记住用户的选择
+                                    function toggleLanguage() {
+                                        displayChinese = document.getElementById("toggleLanguage").checked;
+                                        localStorage.setItem('displayChinese', displayChinese);
+                                        renderRegions();
+                                    }
+
+                                    // 加载 regions.json 数据并渲染模组地图区域
                                     getJsonObject("mod-map/regions.json", function (json) {
-                                        console.log(json);
                                         regions = json;
+                                        renderRegions();
+                                    }, true);
+
+                                    // 渲染模组地图区域按钮的函数
+                                    function renderRegions() {
                                         let html = "";
-                                        const regionListSorted = Object.keys(regions).sort((a, b) => regions[a]["name"].toLowerCase().localeCompare(regions[b]["name"].toLowerCase()));
+                                        const regionListSorted = Object.keys(regions).sort((a, b) => regions[a]["name"]?.toLowerCase().localeCompare(regions[b]["name"]?.toLowerCase()));
+
                                         for (const r of regionListSorted) {
-                                            // 使用 onerror 事件来处理图片加载失败时的情况
-                                            html += '<button class="region-button rw-ui rw-text" name="region" value="' + r + '">'
-                                                + '<img src="./resources/img/' + regions[r]["name"] + '.webp" onerror="this.onerror=null;this.src=\'./resources/img/none.webp\';"><p>'
-                                                + regions[r]["name"].toUpperCase() + ' (' + r + ')</p></button>';
+                                            const region = regions[r];
+
+                                            // 如果区域的 cname 不存在，设置默认值为 name，name不存在则设置为"unknown"
+                                            const regionName = displayChinese ? (region["cname"] || region["name"] || "UNKNOWN") : (region["name"] || "UNKNOWN");
+
+                                            html += `
+                                                <button class="region-button rw-ui rw-text" name="region" value="${r}">
+                                                    <img src="./resources/img/${region["name"]}.webp" onerror="this.onerror=null;this.src='./resources/img/none.webp';">
+                                                    <p>${regionName.toUpperCase()} (${r})</p>
+                                                </button>`;
                                         }
                                         document.getElementById('regionlist').innerHTML = html;
-                                    }, true);
+                                    }
                                 </script>
 
                         </div>
