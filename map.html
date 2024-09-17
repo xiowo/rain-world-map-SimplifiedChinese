@@ -378,6 +378,7 @@
             .hidden {
                 display: block !important;
             }
+
             .side-panel {
                 transition: left ease 0.3s, right ease 0.3s;
             }
@@ -606,45 +607,44 @@
     </div>
 
     <div class="side-panel left-panel rw-text collapsible collapsed">
-            <div style="padding-left: 8px; padding-bottom: 8px;">
-                <div class="hidden">
-                    <a href="./rw-map.html" class="rw-text rw-index">&lt; 返回总览</a>
-                    <hr />
-                </div>
-                <span>区域</span>
+        <div style="padding-left: 8px; padding-bottom: 8px;">
+            <div class="hidden">
+                <a href="./rw-map.html" class="rw-text rw-index">&lt; 返回总览</a>
+                <hr />
             </div>
+            <span>区域</span>
+        </div>
 
-            <form name="regionselect" id="region-select" class="scroll-ish"></form>
+        <form name="regionselect" id="region-select" class="scroll-ish"></form>
 
         <div class="collapse-tab"></div>
     </div>
 
     <div class="side-panel right-panel rw-text collapsible collapsed">
-            <div>蛞蝓猫</div>
-            <form name="difficulty" class="difficulty-select" id="scug-selector">
-            </form>
+        <div>蛞蝓猫</div>
+        <form name="difficulty" class="difficulty-select" id="scug-selector">
+        </form>
 
-            <div>图层</div>
-            <div id="layer-content" class="scroll-ish"></div>
+        <div>图层</div>
+        <div id="layer-content" class="scroll-ish"></div>
 
-            <div>地图资源</div>
-            <p>加载不出来改这里</p>
-            <p>GitHub可搭配 <a href="https://blog.xiowo.net/posts/cba8" target="_blank"
-                    style="color: #A9A4B2;">fastgithub</a>
-                使用</p>
-            <div class="resources">
-                <input type="radio" id="option1" name="options" value="1" checked>
-                <label for="option1"> GitHub</label>
-            </div>
+        <div>地图资源</div>
+        <p>加载不出来改这里</p>
+        <p>GitHub可搭配 <a href="https://blog.xiowo.net/posts/cba8" target="_blank" style="color: #A9A4B2;">fastgithub</a>
+            使用</p>
+        <div class="resources">
+            <input type="radio" id="option1" name="options" value="1" checked>
+            <label for="option1"> GitHub</label>
+        </div>
 
-            <div class="resources">
-                <input type="radio" id="option2" name="options" value="2">
-                <label for="option2"> GitHub(RAW加速)</label>
-            </div>
+        <div class="resources">
+            <input type="radio" id="option2" name="options" value="2">
+            <label for="option2"> GitHub(RAW加速)</label>
+        </div>
 
-            <div class="resources">
-                <input type="radio" id="option3" name="options" value="3">
-                <label for="option3"> cf-works加速</label>
+        <div class="resources">
+            <input type="radio" id="option3" name="options" value="3">
+            <label for="option3"> cf-works加速</label>
         </div>
 
         <div class="collapse-tab"></div>
@@ -1765,14 +1765,11 @@
         var collapsible = document.querySelectorAll(".collapsible");
 
         for (const el of collapsible) {
+            // 针对不同的 panel 设置固定的 --hide-pos 值
             if (el.classList.contains("left-panel")) {
-                // 获取左栏的宽度
-                var width = el.getBoundingClientRect().width;
-                // 设置 --hide-pos 属性值，左栏减去n个px
-                el.style.setProperty("--hide-pos", "-" + (width + 160) + "px");
+                el.style.setProperty("--hide-pos", "-261.9959716796875px"); // 固定宽度的值
             } else if (el.classList.contains("right-panel")) {
-                // 对于右栏，不做任何变化
-                el.style.setProperty("--hide-pos", "-" + el.getBoundingClientRect().width + "px");
+                el.style.setProperty("--hide-pos", "-181.9932861328125px"); // 固定宽度的值
             }
 
             var button = el.querySelector(".collapse-tab");
@@ -1788,6 +1785,7 @@
                 }
             });
         }
+
 
     </script>
 </body>
