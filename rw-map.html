@@ -80,7 +80,6 @@
         }
 
         .left-panel {
-            width: 180px;
             padding-right: 15px;
         }
 
@@ -111,10 +110,16 @@
             color: white !important;
         }
 
+        .nav {
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+        }
+
         .nav ul {
             display: flex;
             flex-direction: row;
-            cursor: default;
+            cursor: pointer;
         }
 
         .nav ul li {
@@ -135,6 +140,7 @@
 
         /* 边栏样式 */
         .aside {
+            width: 180px;
             position: sticky;
             top: 140px;
             padding: 10px;
@@ -142,6 +148,7 @@
             border: 1px solid #a2a9b1;
             font-size: 16px;
             font-weight: 500;
+
         }
 
         .aside h2 {
@@ -197,7 +204,60 @@
 
         @media (max-width: 768px) {
             .left-panel {
+                padding-right: 0;
+            }
+
+            .aside-mask {
                 display: none;
+            }
+
+            .aside {
+                width: 280px;
+                position: fixed;
+                right: 30px;
+                top: 30px;
+                transform: translate(100%, 100%);
+                transition: transform 0.2s ease-out;
+                z-index: 1500;
+                background: rgba(0, 0, 0, 0.8);
+            }
+
+
+
+            .asidebtn {
+                width: 45px;
+                height: 45px;
+                position: fixed;
+                bottom: 60px;
+                right: 15px;
+                z-index: 2000;
+            }
+
+            #toggleBtn {
+                width: 39px;
+                height: 38px;
+                background-image: url(/resources/img/aside.png);
+                background-repeat: no-repeat;
+            }
+
+            .aside-mask {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+
+            .aside.show {
+                transform: translate(0, 0);
+                transition: transform 0.2s ease-out;
+            }
+
+            .aside.hiding {
+                transform: translate(100%, 100%);
+                transition: transform 0.2s ease-in;
             }
 
             .container {
@@ -325,7 +385,7 @@
         }
 
         #regionlist-vanilla,
-        #regionlist{
+        #regionlist {
             margin: auto !important;
         }
 
@@ -391,50 +451,53 @@
     <div class="container">
         <img src="/resources/img/bg.png" class="bg">
         <div class="left-panel">
-            <div class="aside">
-                <h2>索引</h2>
-                <h3><span class="tocnumber">1.</span><a href="#top" style="font-size: 16px; margin-left: 0;">地图</a></h3>
-                <ul>
-                    <li><a href="#tilenodes"><span class="tocnumber">1.</span>房间节点</a></li>
-                    <li><a href="#roomtags"><span class="tocnumber">2.</span>房间标签</a></li>
-                    <li><a href="#slugcats"><span class="tocnumber">3.</span>蛞蝓猫</a></li>
-                </ul>
-                <h3><span class="tocnumber">2.</span><a href="#creatures"
-                        style="font-size: 16px; margin-left: 0;">生物</a>
-                </h3>
-                <ul>
-                    <li><a href="#lizards"><span class="tocnumber">2.1</span>蜥蜴</a></li>
-                    <li><a href="#centipedes"><span class="tocnumber">2.2</span>蜈蚣</a></li>
-                    <li><a href="#rot"><span class="tocnumber">2.3</span>腐化生物(香菇)</a></li>
-                    <li><a href="#spiders"><span class="tocnumber">2.4</span>蜘蛛</a></li>
-                    <li><a href="#creatureattributes"><span class="tocnumber">2.5</span>生物属性</a></li>
-                </ul>
-                <h3><span class="tocnumber">3.</span><a href="#placedobjects"
-                        style="font-size: 16px; margin-left: 0;">放置的物体</a>
-                </h3>
-                <ul>
-                    <li><a href="#placedcreatures"><span class="tocnumber">3.1</span>放置的生物</a></li>
-                    <li><a href="#consumable"><span class="tocnumber">3.2</span>消耗品</a></li>
-                    <li><a href="#non-consumable"><span class="tocnumber">3.1</span>非消耗品</a></li>
-                    <li><a href="#mechanicalobjects"><span class="tocnumber">3.4</span>机械</a></li>
-                    <li><a href="#decorativeobjects"><span class="tocnumber">3.4</span>装饰</a></li>
-                </ul>
-                <h2>wiki相关</h2>
-                <ul>
-                    <h3><span class="tocnumber">1.</span> 推荐阅读</h3>
-                    <li><a href="https://rainworld.miraheze.org/wiki/Controls/zh-hans" target="_blank">
-                            <span class="tocnumber">1.1</span>操控</a></li>
-                    <li><a href="https://rainworld.miraheze.org/wiki/Rain/zh-hans" target="_blank">
-                            <span class="tocnumber">1.2</span>暴雨</a></li>
-                    <li><a href="https://rainworld.miraheze.org/wiki/Hibernation/zh-hans" target="_blank">
-                            <span class="tocnumber">1.3</span>雨眠</a></li>
-                    <li><a href="https://rainworld.miraheze.org/wiki/Regions/zh-hans" target="_blank">
-                            <span class="tocnumber">1.4</span>区域</a></li>
-                    <li><a href="https://rainworld.miraheze.org/wiki/Food/zh-hans" target="_blank">
-                            <span class="tocnumber">1.5</span>食物</a></li>
-                    <p>更多可见 <a href="https://rainworld.miraheze.org/wiki/Rain_World_Wiki/zh-hans"
-                            target="_blank">雨世界wiki</a></p>
-                </ul>
+            <div class="aside-mask" id="asideMask">
+                <div class="aside" id="aside">
+                    <h2>索引</h2>
+                    <h3><span class="tocnumber">1.</span><a href="#top" style="font-size: 16px; margin-left: 0;">地图</a>
+                    </h3>
+                    <ul>
+                        <li><a href="#tilenodes"><span class="tocnumber">1.</span>房间节点</a></li>
+                        <li><a href="#roomtags"><span class="tocnumber">2.</span>房间标签</a></li>
+                        <li><a href="#slugcats"><span class="tocnumber">3.</span>蛞蝓猫</a></li>
+                    </ul>
+                    <h3><span class="tocnumber">2.</span><a href="#creatures"
+                            style="font-size: 16px; margin-left: 0;">生物</a>
+                    </h3>
+                    <ul>
+                        <li><a href="#lizards"><span class="tocnumber">2.1</span>蜥蜴</a></li>
+                        <li><a href="#centipedes"><span class="tocnumber">2.2</span>蜈蚣</a></li>
+                        <li><a href="#rot"><span class="tocnumber">2.3</span>腐化生物(香菇)</a></li>
+                        <li><a href="#spiders"><span class="tocnumber">2.4</span>蜘蛛</a></li>
+                        <li><a href="#creatureattributes"><span class="tocnumber">2.5</span>生物属性</a></li>
+                    </ul>
+                    <h3><span class="tocnumber">3.</span><a href="#placedobjects"
+                            style="font-size: 16px; margin-left: 0;">放置的物体</a>
+                    </h3>
+                    <ul>
+                        <li><a href="#placedcreatures"><span class="tocnumber">3.1</span>放置的生物</a></li>
+                        <li><a href="#consumable"><span class="tocnumber">3.2</span>消耗品</a></li>
+                        <li><a href="#non-consumable"><span class="tocnumber">3.1</span>非消耗品</a></li>
+                        <li><a href="#mechanicalobjects"><span class="tocnumber">3.4</span>机械</a></li>
+                        <li><a href="#decorativeobjects"><span class="tocnumber">3.4</span>装饰</a></li>
+                    </ul>
+                    <h2>wiki相关</h2>
+                    <ul>
+                        <h3><span class="tocnumber">1.</span> 推荐阅读</h3>
+                        <li><a href="https://rainworld.miraheze.org/wiki/Controls/zh-hans" target="_blank">
+                                <span class="tocnumber">1.1</span>操控</a></li>
+                        <li><a href="https://rainworld.miraheze.org/wiki/Rain/zh-hans" target="_blank">
+                                <span class="tocnumber">1.2</span>暴雨</a></li>
+                        <li><a href="https://rainworld.miraheze.org/wiki/Hibernation/zh-hans" target="_blank">
+                                <span class="tocnumber">1.3</span>雨眠</a></li>
+                        <li><a href="https://rainworld.miraheze.org/wiki/Regions/zh-hans" target="_blank">
+                                <span class="tocnumber">1.4</span>区域</a></li>
+                        <li><a href="https://rainworld.miraheze.org/wiki/Food/zh-hans" target="_blank">
+                                <span class="tocnumber">1.5</span>食物</a></li>
+                        <p>更多可见 <a href="https://rainworld.miraheze.org/wiki/Rain_World_Wiki/zh-hans"
+                                target="_blank">雨世界wiki</a></p>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -625,6 +688,42 @@
                                     // 当窗口大小变化时，重新计算宽度
                                     window.addEventListener("resize", adjustRegionListWidth);
 
+                                    // 侧栏移动端适配
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        const toggleBtn = document.getElementById('toggleBtn');
+                                        const aside = document.getElementById('aside');
+                                        const asideMask = document.getElementById('asideMask');
+
+                                        // 切换按钮点击事件：显示或隐藏侧边栏
+                                        toggleBtn.addEventListener('click', function () {
+                                            if (aside.style.display === 'none') {
+                                                aside.style.display = 'block';
+                                                asideMask.style.display = 'block';
+                                                setTimeout(() => {
+                                                    aside.classList.remove('hiding'); // 确保隐藏类已移除
+                                                    aside.classList.add('show'); // 添加显示动画
+                                                }, 10); // 延时添加类确保动画生效
+                                            } else {
+                                                aside.classList.remove('show'); // 移除显示动画类
+                                                aside.classList.add('hiding'); // 添加隐藏动画类
+                                                setTimeout(() => {
+                                                    aside.style.display = 'none';
+                                                    asideMask.style.display = 'none';
+                                                }, 500); // 动画持续时间后隐藏
+                                            }
+                                        });
+
+                                        // 点击遮罩层事件：隐藏侧边栏
+                                        asideMask.addEventListener('click', function () {
+                                            aside.classList.remove('show');
+                                            aside.classList.add('hiding');
+                                            setTimeout(() => {
+                                                aside.style.display = 'none';
+                                                asideMask.style.display = 'none';
+                                            }, 500); // 动画持续时间后隐藏遮罩层
+                                        });
+                                    });
+
                                 </script>
 
                         </div>
@@ -674,6 +773,10 @@
                         <!-- 地图信息 -->
                         <h2>地图信息</h2>
                         <p>这里是一些地图、生物、物品、蛞蝓猫的一些信息</p>
+
+                        <div class="asidebtn">
+                            <button class="rw-ui" id="toggleBtn"></button>
+                        </div>
 
                         <article id="indexcontents"></article>
                         <script src="/resources/js/map-item.js"></script>
