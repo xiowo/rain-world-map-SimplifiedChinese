@@ -83,6 +83,10 @@
             padding-right: 15px;
         }
 
+        .asidebtn {
+            display: none;
+        }
+
         .toggleLanguage-ckb {
             position: relative;
             top: -28px;
@@ -119,7 +123,7 @@
         .nav ul {
             display: flex;
             flex-direction: row;
-            cursor: pointer;
+            cursor: default;
         }
 
         .nav ul li {
@@ -141,14 +145,16 @@
         /* 边栏样式 */
         .aside {
             width: 180px;
-            position: sticky;
-            top: 140px;
             padding: 10px;
             border-radius: 4px;
             border: 1px solid #a2a9b1;
             font-size: 16px;
             font-weight: 500;
+        }
 
+        .aside-mask {
+            position: sticky;
+            top: 140px;
         }
 
         .aside h2 {
@@ -248,6 +254,10 @@
                 height: 100vh;
                 background: rgba(0, 0, 0, 0.5);
                 z-index: 999;
+            }
+
+            .asidebtn {
+                display: block;
             }
 
             .aside.show {
@@ -506,7 +516,8 @@
                 <div class="nav">
                     <ul>
                         <li class="current">| 首页 |</li>
-                        <li><a href="/mod-map/">| 雨世界Mod地图 |</a></li>
+                        <li><a href="https://rainworldmods.miraheze.org/wiki/Main_Page" target="_blank">| 雨世界模组wiki
+                                |</a></li>
                         <li>| 关于 |</li>
                     </ul>
                 </div>
@@ -526,13 +537,17 @@
                             </div><br>
                             <span style="font-size: 80%"">此地图可能会影响你的游戏体验，请理性使用</span></div>
                         
-                                                <p>部分参考于 <a href="
-                                https://rainworld.miraheze.org/wiki/Rain_World_Wiki/zh-hans"
-                                target="_blank"><b>雨世界wiki</b></a> 如有问题可以前往 <a href="
-                                                https://blog.xiowo.net/posts/1b7c" target="_blank"><b>Mo的记事簿</b></a> 指出
-                                | 如果你想详细的了解雨世界你可以查阅 <a
-                                    href="https://rainworld.miraheze.org/wiki/Rain_World_Wiki/zh-hans"
-                                    target="_blank"><b>雨世界wiki</b></a> ( ‵▽′)ψ
+                            <p>部分参考于 <a href=" https://rainworld.miraheze.org/wiki/Rain_World_Wiki/zh-hans"
+                                target="_blank"><b>雨世界wiki</b></a>
+                                如有问题可以前往 <a href="https://blog.xiowo.net/posts/1b7c" target="_blank"><b>Mo的记事簿</b></a>
+                                指出 | 如果你想详细的了解雨世界你可以查阅
+                                <a href="https://rainworld.miraheze.org/wiki/Rain_World_Wiki/zh-hans" target="_blank">
+                                    <b>雨世界wiki</b></a> ( ‵▽′)ψ
+                                </p>
+
+                                <p>为缓解GitHub问题，地图支持PWA以及内置加速源，但是请尽量使用自己的加速服务。加速地图办法见：
+                                    <a href="https://blog.xiowo.net/posts/1b7c/#无法访问-x2F-访问过慢解决办法"
+                                        target="_blank"><b>传送门</b></a>
                                 </p>
 
                                 <!-- 区域地图 -->
