@@ -204,10 +204,6 @@
                 min-width: calc(100% - 30px) !important;
             }
 
-            .regionlist-group {
-                width: 280px !important;
-            }
-
             #footer {
                 margin-left: 0 !important;
                 left: 0 !important;
@@ -328,9 +324,9 @@
             transform: scaleX(1.2) scaleY(1.2);
         }
 
-        .regionlist-group {
-            width: 828px;
-            margin: auto;
+        #regionlist-vanilla,
+        #regionlist{
+            margin: auto !important;
         }
 
         /* expando list, flex that needs wrap on really small displays */
@@ -592,13 +588,43 @@
                                             const regionName = displayChinese ? (region["cname"] || region["name"] || "UNKNOWN") : (region["name"] || "UNKNOWN");
 
                                             html += `
-            <button class="region-button rw-ui rw-text" name="region" value="${r}">
-                <img src="./resources/img/${region["name"]}.webp" onerror="this.onerror=null;this.src='./resources/img/none.webp';">
-                <p>${regionName.toUpperCase()} (${r})</p>
-            </button>`;
+        <button class="region-button rw-ui rw-text" name="region" value="${r}">
+            <img src="./resources/img/${region["name"]}.webp" onerror="this.onerror=null;this.src='./resources/img/none.webp';">
+            <p>${regionName.toUpperCase()} (${r})</p>
+        </button>`;
                                         }
-                                        document.getElementById('regionlist').innerHTML = html;
+
+                                        const regionlist = document.getElementById('regionlist');
+                                        regionlist.innerHTML = html;
+
+                                        // 动态调整 regionlist 宽度
+                                        adjustRegionListWidth();
                                     }
+
+                                    // 动态调整 regionlist 和 regionlist-vanilla 的宽度的函数
+                                    function adjustRegionListWidth() {
+                                        const regionlist = document.getElementById('regionlist');
+                                        const regionlistVanilla = document.getElementById('regionlist-vanilla');
+                                        const mapBody = document.querySelector('.map-body');
+                                        const button = document.querySelector('.region-button');
+
+                                        if (mapBody && button) {
+                                            const mapBodyWidth = mapBody.clientWidth;
+                                            const buttonWidth = button.offsetWidth + parseFloat(getComputedStyle(button).marginLeft) + parseFloat(getComputedStyle(button).marginRight);
+
+                                            // 计算每行能容纳多少个按钮
+                                            const buttonsPerRow = Math.floor(mapBodyWidth / buttonWidth);
+
+                                            // 计算 regionlist 和 regionlist-vanilla 的宽度
+                                            const newWidth = `${buttonsPerRow * buttonWidth}px`;
+                                            regionlist.style.width = newWidth;
+                                            regionlistVanilla.style.width = newWidth;  // 同步修改 regionlist-vanilla 的宽度
+                                        }
+                                    }
+
+                                    // 当窗口大小变化时，重新计算宽度
+                                    window.addEventListener("resize", adjustRegionListWidth);
+
                                 </script>
 
                         </div>
