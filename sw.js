@@ -10,6 +10,7 @@ const urlsToCache = [
     '/slugcats.json',
     '/global.js',
     '/beziero.js',
+    '/leaflet/leaflet.js',
     '/embed.jpg',
 ];
 

@@ -509,8 +509,8 @@
 
                                 <h2 id="ModMap">模组地图</h2>
                                 <span class="toggleLanguage-ckb">
-                                        <input type="checkbox" class="rw-ui rw-ui-ckb toggleLanguage-ckb"
-                                            id="toggleLanguage" onclick="toggleLanguage()">
+                                    <input type="checkbox" class="rw-ui rw-ui-ckb toggleLanguage-ckb"
+                                        id="toggleLanguage" onclick="toggleLanguage()">
                                     <label class="rw-text">显示为中文</label>
                                 </span>
                                 <p class="right grey">mod-map</p>
@@ -547,7 +547,6 @@
                                     function selectDifficulty(slugName) {
                                         window.location.href = `map.html?slugcat=${slugName}&region=${slugcats[slugName].startingRegion}&room=${slugcats[slugName].startingRoom}`;
                                     }
-
                                     // 模组地图
                                     let regions = {};
                                     let displayChinese = false;  // 控制是否显示中文的标记
@@ -555,7 +554,10 @@
                                     // 加载初始语言选择状态
                                     window.addEventListener("load", () => {
                                         displayChinese = localStorage.getItem('displayChinese') === 'true';
-                                        document.getElementById("toggleLanguage").checked = displayChinese;
+                                        console.log('Loaded from localStorage:', localStorage.getItem('displayChinese'));  // 调试：打印从 localStorage 中读取的值
+                                        const checkbox = document.getElementById("toggleLanguage");
+                                        checkbox.checked = displayChinese;  // 确保复选框状态与 localStorage 中的值同步
+                                        renderRegions();  // 确保页面渲染与复选框状态一致
                                     });
 
                                     function getJsonObject(url, callback, async = true) {
@@ -568,8 +570,8 @@
                                     // 切换语言显示并记住用户的选择
                                     function toggleLanguage() {
                                         displayChinese = document.getElementById("toggleLanguage").checked;
-                                        localStorage.setItem('displayChinese', displayChinese);
-                                        renderRegions();
+                                        localStorage.setItem('displayChinese', displayChinese);  // 保存用户选择到 localStorage
+                                        renderRegions();  // 更新区域显示的语言
                                     }
 
                                     // 加载 regions.json 数据并渲染模组地图区域
@@ -590,10 +592,10 @@
                                             const regionName = displayChinese ? (region["cname"] || region["name"] || "UNKNOWN") : (region["name"] || "UNKNOWN");
 
                                             html += `
-                                                <button class="region-button rw-ui rw-text" name="region" value="${r}">
-                                                    <img src="./resources/img/${region["name"]}.webp" onerror="this.onerror=null;this.src='./resources/img/none.webp';">
-                                                    <p>${regionName.toUpperCase()} (${r})</p>
-                                                </button>`;
+            <button class="region-button rw-ui rw-text" name="region" value="${r}">
+                <img src="./resources/img/${region["name"]}.webp" onerror="this.onerror=null;this.src='./resources/img/none.webp';">
+                <p>${regionName.toUpperCase()} (${r})</p>
+            </button>`;
                                         }
                                         document.getElementById('regionlist').innerHTML = html;
                                     }
