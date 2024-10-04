@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | 你的页面被吃掉啦~</title>
+
+    <link rel="stylesheet" href="./rw.css" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #7F868F;
+        }
+
+        body,
+        html {
+            min-height: 100vh;
+            display: flex;
+            font-family: 'Segoe UI';
+            background-color: black;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @media screen and (min-width: 450px) {
+            .Mo-content {
+                width: 450px;
+            }
+        }
+
+        .Mo-content {
+            margin: 100px auto;
+            padding: 25px;
+            font-size: 14px;
+            color: #999;
+            text-align: center;
+        }
+
+        .pic-box {
+            width: 100px;
+            margin: auto;
+            padding-bottom: 10px;
+        }
+
+        .content-box p {
+            font-size: 14px;
+            line-height: 25px;
+            color: #61666D;
+        }
+
+        .center-title {
+            font-size: 20px;
+            margin: 12px 0;
+        }
+
+        .content-box {
+            display: flex;
+            flex-direction: column;
+            margin-top: 7px;
+            padding: 10px;
+            color: #7F868F;
+            border: 1px solid #A9A4B2;
+            border-radius: 5px;
+        }
+
+        .footer {
+            margin-bottom: 0.1em;
+            margin: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Mo-content">
+        <div class="content-box">
+            <img class="pic-box" src="/resources/img/Slugcat_no_right.png">
+            <h1 class="center-title">404 你的页面被吃掉了</h1>
+            <p>貌似出了一点问题U•ェ•*U</p>
+            <p>当前页面无法访问或不存在，到其他地方看看吧</p>
+        </div>
+
+        <button class="rw-ui" style="width: 150px; margin-top: 15px;"
+            onclick="window.location.href = `/rw-map.html`;">返回首页</button>
+
+        <div class="footer" style=" margin-top: 65px;">
+            ©2024 雨世界地图 | 莫塔尔猫
+        </div>
+    </div>
+</body>
+
+</html>
