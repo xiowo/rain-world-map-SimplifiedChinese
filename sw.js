@@ -15,13 +15,15 @@ const urlsToCache = [
 ];
 
 const VERSION_URL = '/version.json';
-let cacheVersion = ''; // 不再定义默认版本号
+let cacheVersion = ''; // 初始未定义默认版本号
 
 // 定义需要过滤的域名，资源文件不会被缓存或拦截
 const blockedDomains = [
     'raw.githubusercontent.com',
     'rw.xiowo.us.kg',
     'raw.gitmirror.com',
+    'alduris.github.io',
+    'rwmm.xiowo.us.kg',
 ];
 
 // 从 caches 中读取 cacheVersion
@@ -31,7 +33,7 @@ async function getCacheVersion() {
     if (response) {
         return response.text();
     }
-    return ''; // 如果没有缓存版本，则返回空字符串
+    return '';
 }
 
 // 将 cacheVersion 保存到 caches
@@ -50,14 +52,11 @@ async function fetchCacheVersion() {
     } catch (error) {
         console.error('无法获取缓存版本:', error);
 
-        // 如果无法获取版本号，则尝试使用现有缓存中的版本
         const currentVersion = await getCacheVersion();
         if (currentVersion) {
             cacheVersion = `RWMSC版本号-${currentVersion}`;
             return currentVersion;
         }
-
-        // 如果没有现有缓存版本，则返回空字符串，稍后会处理为空的情况
         return '';
     }
 }
@@ -73,7 +72,6 @@ async function updateCache() {
         const cacheNames = await caches.keys();
         await Promise.all(
             cacheNames.map((cacheName) => {
-                // 仅删除与当前站点相关的缓存，防止删除其他站点的缓存
                 if (cacheName.startsWith('RWMSC版本号') && cacheName !== cacheVersion && cacheName !== 'version-cache-RWMSC') {
                     console.log(`删除过时缓存: ${cacheName}`);
                     return caches.delete(cacheName);
@@ -115,20 +113,41 @@ async function cacheResources(cache, urls) {
     );
 }
 
-// 安装阶段：缓存初始资源
+// 安装阶段：首次获取最新版本号并缓存资源
 self.addEventListener('install', (event) => {
     event.waitUntil(
-        caches.open(cacheVersion || 'RWMSC临时缓存') // 如果没有版本号，使用临时缓存
-            .then((cache) => {
-                console.log('已启用缓存');
-                return cacheResources(cache, urlsToCache);
-            })
+        (async () => {
+            const initialCacheVersion = await fetchCacheVersion(); // 获取最新版本号
+
+            // 如果有最新版本号，设置缓存名称，否则使用临时缓存
+            const cacheName = initialCacheVersion ? cacheVersion : 'RWMSC-临时缓存';
+            const cache = await caches.open(cacheName);
+
+            console.log('正在缓存最新资源:', cacheName);
+            await cacheResources(cache, urlsToCache);
+
+            // 如果获取到版本号则保存
+            if (initialCacheVersion) {
+                await setCacheVersion(initialCacheVersion);
+            }
+        })()
     );
 });
 
 // 拦截 fetch 请求，优先从缓存中获取资源，若未命中则从网络获取并缓存
 self.addEventListener('fetch', (event) => {
     const requestURL = new URL(event.request.url);
+    
+    // 跳过对 version.json 的缓存，始终从网络获取
+    if (event.request.url.includes(VERSION_URL)) {
+        event.respondWith(fetch(event.request));
+        return;
+    }
+
+    // 排除 /mod-map/ 路径
+    if (requestURL.pathname.startsWith('/mod-map/')) {
+        return; // 跳过 /mod-map/ 路径的缓存
+    }
 
     // 仅处理 HTTP 和 HTTPS 请求
     if (requestURL.protocol !== 'http:' && requestURL.protocol !== 'https:') {
@@ -138,7 +157,6 @@ self.addEventListener('fetch', (event) => {
     // 检查请求的域名是否在过滤名单中
     const matchedDomain = blockedDomains.find(domain => requestURL.hostname.includes(domain));
     if (matchedDomain) {
-        // 打印过滤的域名
         console.log(`Skipping cache for domain: ${matchedDomain}`);
         event.respondWith(fetch(event.request));
         return;
