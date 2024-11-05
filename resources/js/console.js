@@ -8,11 +8,11 @@ queueMicrotask(async () => {
     // 定义一个函数来获取版本号
     async function getVersion() {
         try {
-            const response = await fetch('/version.json');
+            const response = await fetch('./version.json');
             const data = await response.json();
-            return data.cacheVersion; // 假设 JSON 文件中的字段是 cacheVersion
+            return data.cacheVersion;
         } catch (error) {
-            console.error("Failed to fetch version:", error);
+            console.error("版本获取失败:", error);
             return "未知版本";
         }
     }
@@ -44,7 +44,7 @@ queueMicrotask(async () => {
         "已上线",
         dnum,
         "天",
-        `©2024 By R-W-M-SC | 地图版本: ${version}` // 插入版本号
+        `©2024 By R-W-M-SC | 地图版本: ${version}`
     ];
     const ascll2 = [`NCC2-036`, `业力等级识别成功，允许访问.`, `您的业力: `, `⨂`];
 
