@@ -20,10 +20,9 @@ let cacheVersion = ''; // 初始未定义默认版本号
 // 定义需要过滤的域名，资源文件不会被缓存或拦截
 const blockedDomains = [
     'raw.githubusercontent.com',
-    'rw.xiowo.us.kg',
+    'api.xiowo.us.kg',
     'raw.gitmirror.com',
     'alduris.github.io',
-    'rwmm.xiowo.us.kg',
 ];
 
 // 从 caches 中读取 cacheVersion
@@ -137,7 +136,7 @@ self.addEventListener('install', (event) => {
 // 拦截 fetch 请求，优先从缓存中获取资源，若未命中则从网络获取并缓存
 self.addEventListener('fetch', (event) => {
     const requestURL = new URL(event.request.url);
-    
+
     // 跳过对 version.json 的缓存，始终从网络获取
     if (event.request.url.includes(VERSION_URL)) {
         event.respondWith(fetch(event.request));
