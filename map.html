@@ -22,8 +22,6 @@
     <link rel="manifest" href="./manifest.json">
     <script src="./resources/js/app.js"></script>
 
-    <script defer src="https://umami.xiowo.net/script.js" data-website-id="e8919a0f-ae5e-40c1-b238-291427a33ac3"></script>
-
     <style id="mapstyle">
         body,
         html {
@@ -1076,7 +1074,7 @@
                     console.log("当前地图资源来源:GitHub(Raw加速)");
                 } else if (selectedValue === '3') {
                     document.getElementById('option3').checked = true;
-                    setSlugcatUrl('https://rw.xiowo.us.kg/msc-1.9.07b/v1.9.07b/');
+                    setSlugcatUrl('https://api.xiowo.us.kg/https://raw.githubusercontent.com/NobleCat57/msc-1.9.07b/v1.9.07b/');
                     console.log("当前地图资源来源:cf-works");
                 }
             } else {
@@ -1111,7 +1109,7 @@
                 if (this.checked) {
                     saveSelectedValue('1');
                     setSlugcatUrl('https://raw.githubusercontent.com/NobleCat57/msc-1.9.07b/v1.9.07b/');
-                    location.reload(); // 刷新页面以应用更改
+                    location.reload();
                 }
             });
 
@@ -1119,15 +1117,15 @@
                 if (this.checked) {
                     saveSelectedValue('2');
                     setSlugcatUrl('https://raw.gitmirror.com/NobleCat57/msc-1.9.07b/v1.9.07b/');
-                    location.reload(); // 刷新页面以应用更改
+                    location.reload();
                 }
             });
 
             document.getElementById('option3').addEventListener('change', function () {
                 if (this.checked) {
                     saveSelectedValue('3');
-                    setSlugcatUrl('https://rw.xiowo.us.kg/msc-1.9.07b/v1.9.07b/');
-                    location.reload(); // 刷新页面以应用更改
+                    setSlugcatUrl('https://api.xiowo.us.kg/https://raw.githubusercontent.com/NobleCat57/msc-1.9.07b/v1.9.07b/');
+                    location.reload();
                 }
             });
 
