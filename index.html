@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雨世界地图</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+
+    <meta property="og:image" content="https://rain-world-map-sc.github.io/embed.jpg" />
+    <meta property="og:type" content="object" />
+    <meta property="og:title" content="雨世界地图" />
+    <meta property="og:url" content="https://rain-world-map-sc.github.io" />
+    <meta property="og:description" content="一个在线互动地图，包括雨世界:倾盆大雨中的每个地区和每个蛞蝓猫。" />
+    <link rel="stylesheet" href="./rw.css" />
+
+    <script src="/global.js"></script>
+    <script src="/resources/js/console.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <script src="/resources/js/app.js"></script>
+
+    <style>
+        /* big flex block of darkness */
+        body,
+        html {
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* floaty in the center */
+        #main-menu {
+            margin: auto;
+        }
+
+        /* stuck to the bottom, custom link colors */
+        #main-menu-footer {
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-family: 'Segoe UI';
+            font-size: 0.8em;
+            font-weight: 500;
+            color: #A9A4B2;
+            /* menu lightgray */
+            background-color: black;
+        }
+
+        #main-menu-footer a:link {
+            color: white;
+        }
+
+        #main-menu-footer a:visited {
+            color: #A9A4B2;
+            /* menu lightgray */
+        }
+
+        /* expando list, flex that needs wrap on really small displays */
+        #scuglist-group {
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 0.8em;
+            width: fit-content;
+            max-width: 100vw;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        #scuglist-group>div {
+            width: 200px;
+            overflow: hidden;
+            position: relative;
+            /* re-center after wrap */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 4px;
+            transition: width 0.4s;
+        }
+
+        button.region-button {
+            position: relative;
+            width: 200px;
+            height: 40px;
+            background: black;
+            margin: 4px;
+        }
+
+        .difficulty-btn {
+            display: inline-block;
+            width: 38px;
+            height: 38px;
+            margin: 4px;
+            position: relative;
+        }
+
+        button.rw-ui {
+            display: inline-block;
+            width: 50px;
+            height: 25px;
+            font-family: 'AlimamaFangYuanTiVF-Thin';
+            border-radius: 7px;
+        }
+
+        button.rw-ui::before {
+            border: 2px solid #4B4653;
+        }
+    </style>
+
+</head>
+
+<body>
+    <form id="main-menu">
+        <div class="rw-title">Rain World</div>
+        <div class="rw-bigtext" style="text-align: center; margin-top:0.9em;">我迷路了…</div>
+        <div id="scuglist-group">
+            <div id="scuglist-vanilla"></div>
+        </div>
+        <div style="text-align: center;">
+            <button class="rw-ui" type="button" onclick="window.location.href='./rw-map.html'">···</button>
+        </div>
+
+
+        <script>
+            let slugcats = {};
+
+            getJsonObject("slugcats.json", function (json) {
+                slugcats = json;
+                var html = "";
+                for (const slugcatName in slugcats) {
+                    // 排除 inv 值
+                    if (slugcatName === 'inv') continue;
+
+                    var icon = "72_unknown";
+                    if (slugcatName in icon_by_name) {
+                        icon = icon_by_name[slugcatName];
+                    } else {
+                        console.log("missing icon for " + slugcatName);
+                    }
+                    html += `
+        <label class="difficulty-btn">
+    <input type="radio" class="rw-ui" name="difficulties" onclick="selectDifficulty('${slugcatName}');" autocomplete="off">
+            <img src="./resources/icons/${icon}.png">
+        </label>`;
+                }
+                document.getElementById('scuglist-vanilla').innerHTML = html;
+            }, true);
+
+            function selectDifficulty(slugName) {
+                window.location.href = `map.html?slugcat=${slugName}&region=${slugcats[slugName].startingRegion}&room=${slugcats[slugName].startingRoom}`;
+            }
+        </script>
+    </form>
+
+    <div id="main-menu-footer">
+        <a href="https://github.com/xiowo/rain-world-map-SimplifiedChinese/" target="_blank">GitHub</a> 上的代码 |
+        <a href="https://henpemaz.github.io/Rain-World-Interactive-Map/"> 最初 </a>
+        由 <a href="https://github.com/henpemaz/" target="_blank">Henpemaz</a> 制作 |
+        由 <a href="https://github.com/Dual-Iron/" target="_blank">Dual</a> 移植 |
+        基于 <a href="https://github.com/NobleCat57/" target="_blank">JuliaCat</a> 改进版本 |
+        站点图标和缩略图由 <a href="https://twitter.com/liszhuk" target="_blank">lis</a> 提供 |
+        由 <a href="https://github.com/xiowo/" target="_blank">MortalCat</a> 翻译和修改 |
+        <a href="https://store.steampowered.com/app/312520/Rain_World/" target="_blank">雨世界</a> 是
+        <a href="https://twitter.com/VideocultMedia" target="_blank">Videocult</a> 的财产
+    </div>
+</body>
+
+</ht ml>

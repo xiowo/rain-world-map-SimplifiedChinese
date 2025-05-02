@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:image" content="https://rain-world-map-sc.github.io/embed.jpg" />
+    <meta property="og:type" content="object" />
+    <meta property="og:title" content="雨世界地图" />
+    <meta property="og:url" content="https://rain-world-map-sc.github.io" />
+    <meta property="og:description" content="一个在线互动地图，包括雨世界:倾盆大雨中的每个地区和每个蛞蝓猫。" />
+    <meta name="keywords" content="雨世界,雨世界地图">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雨世界地图 | 索引</title>
+    <link rel="stylesheet" href="rw.css">
+    <link rel="stylesheet" href="main.css">
+
+    <script src="/global.js"></script>
+    <script src="main.js" defer></script>
+    <script src="/resources/console.js" defer></script>
+
+    <style>
+        body {
+            background-color: black;
+            color: #eee;
+        }
+
+        .bg {
+            min-height: 100%;
+            min-width: 1024px;
+            width: 100%;
+            height: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            margin: 0 auto;
+            margin-top: 30px;
+            padding: 0 15px;
+            min-width: 1100px;
+            max-width: 1430px;
+        }
+
+        .asidebtn,
+        .about {
+            display: none;
+        }
+
+        .left-panel {
+            padding-right: 15px;
+        }
+
+        .toggleLanguage-ckb {
+            position: relative;
+            top: -28px;
+            padding-left: 6px;
+            margin-left: 90px;
+        }
+
+        #toggleLanguage {
+            position: relative;
+            width: 24px;
+            height: 24px;
+        }
+
+        #toggleLanguage~label {
+            left: 4px;
+            top: -6px;
+        }
+
+        #toggleLanguage::before {
+            font-size: 1rem;
+        }
+
+        .main {
+            width: 100%;
+            color: white !important;
+        }
+
+        /* 主体样式 */
+        .map-body {
+            padding: 0 1.5em 1.5em 1.5em;
+            border-radius: 2px;
+            border: 1px solid #fff6;
+            background-color: #0004
+        }
+
+        /* 区域按钮样式 */
+        button.region-button {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            background-color: rgba(0, 0, 0, .3);
+            margin: 15px 4px;
+        }
+
+        #regionlist button.region-button {
+            margin: 15px 2px 30px 2px;
+        }
+
+        #DP-regionlist {
+            max-width: 828px;
+        }
+
+        .region-button p {
+            position: absolute;
+            left: -2px;
+            top: 122px;
+            width: 130px;
+            text-align: center;
+        }
+
+        .region-button:hover {
+            opacity: 1.0;
+            transform: scaleX(1.2) scaleY(1.2);
+        }
+
+        /* expando list, flex that needs wrap on really small displays */
+        .scuglist-group {
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 0.8em;
+            margin-bottom: 0.8em;
+            width: fit-content;
+            max-width: 100vw;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .scuglist-group>div {
+            width: 150px;
+            position: relative;
+            /* re-center after wrap */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 4px;
+            transition: width 0.4s;
+        }
+
+        .difficulty-btn {
+            display: inline-block;
+            width: 38px;
+            height: 38px;
+            margin: 4px;
+            position: relative;
+        }
+
+        #footer {
+            position: fixed;
+            margin-bottom: 0.1em;
+            margin-left: -190px;
+            bottom: 2%;
+            left: 50%;
+            align-content: center;
+            text-align: center;
+            font-family: var(--font-body);
+            font-size: 0.8em;
+            font-weight: 500;
+            color: var(--rw-main-grey);
+            /* menu lightgray */
+            background-color: black;
+        }
+
+        #footer a:link {
+            color: white;
+        }
+
+        #footer a:visited {
+            color: var(--rw-main-grey);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="/resources/img/bg.png" class="bg">
+        <div class="left-panel">
+            <div class="aside-mask" id="asideMask">
+                <div class="aside" id="aside">
+                    <h2>索引</h2>
+                    <h3><span class="tocnumber">1.</span><a href="#top" style="font-size: 16px; margin-left: 0;">地图</a>
+                    </h3>
+                    <ul>
+                        <li><a href="#tilenodes"><span class="tocnumber">1.</span>房间节点</a></li>
+                        <li><a href="#roomtags"><span class="tocnumber">2.</span>房间标签</a></li>
+                        <li><a href="#slugcats"><span class="tocnumber">3.</span>蛞蝓猫</a></li>
+                    </ul>
+                    <h3><span class="tocnumber">2.</span><a href="#creatures"
+                            style="font-size: 16px; margin-left: 0;">生物</a>
+                    </h3>
+                    <ul>
+                        <li><a href="#lizards"><span class="tocnumber">2.1</span>蜥蜴</a></li>
+                        <li><a href="#centipedes"><span class="tocnumber">2.2</span>蜈蚣</a></li>
+                        <li><a href="#rot"><span class="tocnumber">2.3</span>腐化生物(香菇)</a></li>
+                        <li><a href="#spiders"><span class="tocnumber">2.4</span>蜘蛛</a></li>
+                        <li><a href="#creatureattributes"><span class="tocnumber">2.5</span>生物属性</a></li>
+                    </ul>
+                    <h3><span class="tocnumber">3.</span><a href="#placedobjects"
+                            style="font-size: 16px; margin-left: 0;">放置的物体</a>
+                    </h3>
+                    <ul>
+                        <li><a href="#placedcreatures"><span class="tocnumber">3.1</span>放置的生物</a></li>
+                        <li><a href="#consumable"><span class="tocnumber">3.2</span>消耗品</a></li>
+                        <li><a href="#non-consumable"><span class="tocnumber">3.1</span>非消耗品</a></li>
+                        <li><a href="#mechanicalobjects"><span class="tocnumber">3.4</span>机械</a></li>
+                        <li><a href="#decorativeobjects"><span class="tocnumber">3.4</span>装饰</a></li>
+                    </ul>
+                    <h2>wiki相关</h2>
+                    <ul>
+                        <h3><span class="tocnumber">1.</span> 推荐阅读</h3>
+                        <li><a href="https://rainworld.miraheze.org/wiki/Controls/zh-hans" target="_blank">
+                                <span class="tocnumber">1.1</span>操控</a></li>
+                        <li><a href="https://rainworld.miraheze.org/wiki/Rain/zh-hans" target="_blank">
+                                <span class="tocnumber">1.2</span>暴雨</a></li>
+                        <li><a href="https://rainworld.miraheze.org/wiki/Hibernation/zh-hans" target="_blank">
+                                <span class="tocnumber">1.3</span>雨眠</a></li>
+                        <li><a href="https://rainworld.miraheze.org/wiki/Regions/zh-hans" target="_blank">
+                                <span class="tocnumber">1.4</span>区域</a></li>
+                        <li><a href="https://rainworld.miraheze.org/wiki/Food/zh-hans" target="_blank">
+                                <span class="tocnumber">1.5</span>食物</a></li>
+                        <p>更多可见 <a href="https://rainworld.miraheze.org/wiki/Rain_World_Wiki/zh-hans"
+                                target="_blank">雨世界wiki</a></p>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="holyfox">
+                <div class="nav">
+                    <ul>
+                        <li class="current">| 首页 |</li>
+                        <li><a href="https://rainworldmods.miraheze.org/wiki/Main_Page" target="_blank">| 雨世界模组wiki
+                                |</a></li>
+                        <li>| 关于 |</li>
+                    </ul>
+                </div>
+
+                <div class="map-body">
+                    <!-- 地图 -->
+                    <div class="maps item">
+                        <h2 id="top">雨世界地图</h2>
+                        <p>这里是雨世界地图，希望能对你有帮助ヽ(´•ω•`)､</p>
+                        <!-- 警告 -->
+                        <div class="warning">
+                            <div
+                                style="display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 125%;">
+                                <img alt="Slugcat no right.png" src="/resources/img/Slugcat_no_right.png">
+                                <img alt="Large DLC icon.png" src="/resources/img/Large_DLC_icon.png">
+                                <span>游戏剧透警告</span>
+                            </div><br>
+                            <span style="font-size: 80%"">此地图可能会影响你的游戏体验，你已经被警告了</span></div>
+                        
+                            <p>部分参考于 <a href="
+                                https://rainworld.miraheze.org/wiki/Rain_World_Wiki/zh-hans"target="_blank"><b>雨世界wiki</b></a>
+                                | 如果你想详细的了解雨世界你可以查阅
+                                <a href="https://rainworld.miraheze.org/wiki/Rain_World_Wiki/zh-hans" target="_blank">
+                                    <b>雨世界wiki</b></a> ( ‵▽′)ψ
+                                </p>
+
+                                <!-- 区域地图 -->
+                                <h2 id="DPRegionMap">倾盆大雨-区域</h2>
+                                <p class="right">Downpour</p>
+                                <form action="map.html" method="GET">
+                                    <div class="regionlist-group">
+                                        <div id="DP-regionlist">
+                                        </div>
+                                        <input type="hidden" name="slugcat" value="white">
+                                    </div>
+                                    <script>
+                                        var region_order = ['SU', 'HI', 'DS', 'CC', 'GW', 'SH', 'SL', 'SI', 'LF', 'UW', 'SS', 'SB'];
+                                        var region = { "CC": "烟囱天棚", "DS": "排水系统", "GW": "垃圾堆", "HI": "工业区", "LF": "农场阵列", "SB": "地下", "SH": "阴影城堡", "SI": "天空群岛", "SL": "海岸线", "SS": "五块卵石", "SU": "郊区", "UW": "外缘" };
+                                        var html = "";
+                                        for (var r of region_order) {
+                                            html += '<button class="region-button rw-ui rw-text" name="region" value="' + r + '"><img src="./resources/img/downpour/' + region[r].toUpperCase() + '.png" onerror="this.onerror=null;this.src=\'./resources/img/none.webp\';"><p>' + region[r].toUpperCase() + '</p></button>'
+                                        }
+                                        document.getElementById('DP-regionlist').innerHTML = html;
+                                    </script>
+                                </form>
+
+                                <!-- 倾盆大雨 & 模组地图 -->
+                                <h2 id="DownpourMap">倾盆大雨-蛞蝓猫</h2>
+                                <p class="right">1.9.07b</p>
+                                <form>
+                                    <div class="scuglist-group">
+                                        <div id="downpour"></div>
+                                    </div>
+                                </form>
+
+                                <h2 id="TheWatcherMap">观望者地图</h2>
+                                <p class="right">The Watcher</p>
+                                <form action="watcher-map/map.html" method="GET">
+                                    <div class="regionlist-group">
+                                        <div id="TW-regionlist"></div>
+                                    </div>
+                                </form>
+
+                                <h2 id="ModMap">模组地图</h2>
+                                <span class="toggleLanguage-ckb">
+                                    <input type="checkbox" class="rw-ui rw-ui-ckb toggleLanguage-ckb"
+                                        id="toggleLanguage" onclick="toggleLanguage()">
+                                    <label class="rw-text">显示为中文</label>
+                                </span>
+                                <p class="right">mod-map</p>
+                                <form action="mod-map/map.html" method="GET">
+                                    <div class="regionlist-group">
+                                        <div id="Mod-regionlist"></div>
+                                        <input type="hidden" name="slugcat" value="white" required />
+                                    </div>
+                                </form>
+
+
+                                <script>
+                                    // 倾盆大雨
+                                    let slugcats = {};
+
+                                    getJsonObject("slugcats.json", function (json) {
+                                        console.log("Fetched DP regions:", json);
+                                        slugcats = json;
+                                        let html = "";
+                                        for (const slugcatName in slugcats) {
+                                            let icon = "72_unknown";
+                                            if (slugcatName in icon_by_name) {
+                                                icon = icon_by_name[slugcatName];
+                                            } else {
+                                                console.log("missing icon for " + slugcatName);
+                                            }
+                                            html += `
+                                                <label class="difficulty-btn">
+                                                    <input type="radio" class="rw-ui" name="difficulties" onclick="selectDifficulty('${slugcatName}');" autocomplete="off">
+                                                    <img src="./resources/icons/${icon}.png">
+                                                </label>`;
+                                            document.getElementById('downpour').innerHTML = html;
+                                        }
+                                    }, true);
+
+                                    function selectDifficulty(slugName) {
+                                        window.location.href = `map.html?slugcat=${slugName}&region=${slugcats[slugName].startingRegion}&room=${slugcats[slugName].startingRoom}`;
+                                    }
+
+
+                                    // 观望者地图
+                                    getJsonObject("https://rain-world-map-sc.github.io/watcher-map/regions.json", function (json) {
+                                        console.log("Fetched TW regions:", json);
+                                        regions = json;
+
+                                        let html = "";
+                                        for (const r of Object.keys(regions)) {
+                                            const region = regions[r];
+                                            const name = region.name || "未知";
+                                            html += `
+                                            <button class="region-button rw-ui rw-text" name="region" value="${r}">
+                                                <img src="./resources/img/watcher/${name}.webp" onerror="this.onerror=null;this.src='./resources/img/none.webp';">
+                                                <p>${name.toUpperCase()} (${r})</p>
+                                            </button>`;
+                                        }
+
+                                        document.getElementById('TW-regionlist').innerHTML = html;
+                                    });
+
+
+                                    // 模组地图
+                                    let Modregions = {};
+                                    let displayChinese = false;
+
+                                    // 页面加载时初始化语言选项并渲染区域按钮
+                                    window.addEventListener("load", () => {
+                                        displayChinese = localStorage.getItem('displayChinese') === 'true';
+                                        const checkbox = document.getElementById("toggleLanguage");
+                                        if (checkbox) checkbox.checked = displayChinese;
+                                        fetchRegions();
+                                    });
+
+                                    // 切换语言后保存设置并重新渲染
+                                    function toggleLanguage() {
+                                        displayChinese = document.getElementById("toggleLanguage").checked;
+                                        localStorage.setItem('displayChinese', displayChinese);
+                                        renderRegions();
+                                    }
+
+                                    function getJsonObject(url, callback) {
+                                        fetch(url)
+                                            .then(res => res.json())
+                                            .then(data => callback(data))
+                                            .catch(err => console.error("Error loading JSON:", err));
+                                    }
+
+                                    function fetchRegions() {
+                                        getJsonObject("https://rain-world-map-sc.github.io/mod-map/regions.json", json => {
+                                            console.log("Fetched Mod regions:", json);
+                                            regions = json;
+                                            renderRegions();
+                                        });
+                                    }
+
+                                    // 渲染区域按钮
+                                    function renderRegions() {
+                                        console.log("Rendering Mod regions...");
+                                        const regionList = document.getElementById("Mod-regionlist");
+                                        if (!regionList) return;
+
+                                        const sortedKeys = Object.keys(regions).sort((a, b) => {
+                                            const nameA = regions[a]?.name?.toLowerCase() || "";
+                                            const nameB = regions[b]?.name?.toLowerCase() || "";
+                                            return nameA.localeCompare(nameB);
+                                        });
+
+                                        const html = sortedKeys.map(r => {
+                                            const region = regions[r];
+                                            const name = displayChinese ? (region.cname || region.name || "未知") : (region.name || "未知");
+                                            return `
+                                            <button class="region-button rw-ui rw-text" name="region" value="${r}">
+                                            <img src="./resources/img/mod/${region.name}.webp" onerror="this.onerror=null;this.src='./resources/img/none.webp';">
+                                            <p>${name.toUpperCase()} (${r})</p>
+                                            </button>`;
+                                        }).join("");
+
+                                        regionList.innerHTML = html;
+                                        adjustRegionListWidth();
+                                    }
+
+                                    // 根据按钮大小调整区域列表宽度
+                                    function adjustRegionListWidth() {
+                                        const regionlistDP = document.getElementById('DP-regionlist');
+                                        const regionlistTW = document.getElementById('TW-regionlist');
+                                        const regionlistMod = document.getElementById('Mod-regionlist');
+                                        const mapBody = document.querySelector('.map-body');
+                                        const button = document.querySelector('.region-button');
+
+                                        if (mapBody && button) {
+                                            const mapBodyWidth = mapBody.clientWidth;
+                                            const buttonWidth = 142;
+
+                                            // 计算每行能容纳多少个按钮
+                                            const buttonsPerRow = Math.floor(mapBodyWidth / buttonWidth);
+                                            console.log(buttonsPerRow);
+
+                                            // 计算宽度
+                                            const newWidth = `${buttonsPerRow * buttonWidth}px`;
+                                            console.log(newWidth);
+
+                                            [regionlistDP, regionlistTW, regionlistMod].forEach(el => el.style.width = newWidth);
+                                            [regionlistDP, regionlistTW, regionlistMod].forEach(el => el.style.margin = '0 auto');
+                                        }
+                                    }
+
+                                    // 当窗口大小变化时，重新计算宽度
+                                    window.addEventListener("resize", adjustRegionListWidth);
+
+                                    // 侧栏移动端适配
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        const toggleBtn = document.getElementById('toggleBtn');
+                                        const aside = document.getElementById('aside');
+                                        const asideMask = document.getElementById('asideMask');
+
+                                        toggleBtn.addEventListener('click', function () {
+                                            if (aside.style.display === 'none') {
+                                                aside.style.display = 'block';
+                                                asideMask.style.display = 'block';
+                                                setTimeout(() => {
+                                                    aside.classList.remove('hiding');
+                                                    aside.classList.add('show');
+                                                }, 10);
+                                            } else {
+                                                aside.classList.remove('show');
+                                                aside.classList.add('hiding');
+                                                setTimeout(() => {
+                                                    aside.style.display = 'none';
+                                                    asideMask.style.display = 'none';
+                                                }, 500);
+                                            }
+                                        });
+
+                                        asideMask.addEventListener('click', function () {
+                                            aside.classList.remove('show');
+                                            aside.classList.add('hiding');
+                                            setTimeout(() => {
+                                                aside.style.display = 'none';
+                                                asideMask.style.display = 'none';
+                                            }, 500);
+                                        });
+                                    });
+                                </script>
+
+                        </div>
+
+                        <!-- 关于 -->
+                        <div class="about item">
+                            <h2>关于 RWM-SC</h2>
+                            <p>这是一个雨世界交互地图的汉化项目</p>
+
+                            <h5>参考或修改自一下项目：</h5>
+                            <ul>
+                                <li>
+                                    - <a href="https://henpemaz.github.io/Rain-World-Interactive-Map/"
+                                        target="_blank">Rain World Interactive Map</a>
+                                </li>
+                                <li>
+                                    - <a href="https://rain-world-map.github.io/" target="_blank">Rain World Map</a>
+                                </li>
+                                <li>
+                                    - <a href="https://rain-world-downpour-map.github.io/" target="_blank">Rain World
+                                        Downpour Map</a>
+                                </li>
+                                <li>
+                                    - <a href="https://alduris.github.io/mod-map/" target="_blank">Rain World Mod
+                                        Map</a>
+                                </li>
+                            </ul>
+
+                            <h5>用到的资源：</h5>
+                            <ul>
+                                <p>背景素材</p>
+                                <li>- <a href="https://rainworldgame.com/" target="_blank">Rain World</a>
+                                </li>
+                                <p>图片素材</p>
+                                <li>- <a href="https://rainworld.miraheze.org/wiki/Rain_World_Wiki/zh-hans"
+                                        target="_blank">Rain World Wiki</a>
+                                </li>
+                                <li>- <a href="https://rain-world-map.github.io/" target="_blank">Rain World
+                                        Map</a></li>
+                            </ul>
+
+                            <h5>关于雨世界和这个地图你可以查看:</h5>
+                            <ul>
+                                <li>- <a href="https://rainworld.miraheze.org/wiki/Rain_World_Wiki/zh-hans#关于雨世界"
+                                        target="_blank">关于雨世界</a></li>
+                                <li>- <a href="https://blog.xiowo.net/posts/1b7c" target="_blank">关于地图</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- 地图信息 -->
+                        <h2>地图信息</h2>
+                        <p>这里是一些地图、生物、物品、蛞蝓猫的一些信息</p>
+
+                        <div class="asidebtn">
+                            <button class="rw-ui" id="toggleBtn"></button>
+                        </div>
+
+                        <article id="indexcontents"></article>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="footer">
+                <a href="https://github.com/xiowo/rain-world-map-SimplifiedChinese" target="_blank">GitHub</a> 上的代码 |
+                图标和样式来自于 <a href="https://rainworld.miraheze.org/wiki/Rain_World_Wiki/zh-hans"
+                    target="_blank">雨世界wiki</a> |
+                由 <a href="https://github.com/xiowo/" target="_blank">MortalCat</a> 修改 |
+                <a href="https://store.steampowered.com/app/312520/Rain_World/" target="_blank">雨世界</a> 是
+                <a href="https://twitter.com/VideocultMedia" target="_blank">Videocult</a> 的财产
+            </div>
+
+</body>
+
+</html>

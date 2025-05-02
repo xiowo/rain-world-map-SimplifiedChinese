@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>雨世界地图</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <meta property="og:image" content="https://rain-world-map-sc.github.io/embed.jpg" />
+    <meta property="og:type" content="object" />
+    <meta property="og:title" content="雨世界地图" />
+    <meta property="og:url" content="https://rain-world-map-sc.github.io" />
+    <meta property="og:description" content="一个在线互动地图，包括雨世界:倾盆大雨中的每个地区和每个蛞蝓猫。" />
+    <link rel="stylesheet" href="./rw.css" />
+    <link rel="stylesheet" href="./leaflet/leaflet.css" />
+
+    <script src="./global.js"></script>
+    <script src="./leaflet/leaflet.js"></script>
+    <script src="./beziero.js"></script>
+
+    <style id="mapstyle">
+        body,
+        html {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            color: #999;
+        }
+
+        #mapid {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            background: black;
+        }
+
+        .room-labels {
+            opacity: 0.4;
+            pointer-events: auto;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            color: white;
+            background-color: black;
+            border: none;
+        }
+
+        .creature-divs {
+            display: flex;
+            justify-content: center;
+        }
+
+        .creature-entry {
+            display: none;
+            /* to be overwritten */
+            margin-left: 16px;
+            margin-right: 16px;
+        }
+
+        .creature-label {
+            position: absolute;
+            margin-left: 0px;
+            margin-top: -5px;
+            font-weight: 900;
+            font-size: 140%;
+            color: white;
+            -webkit-text-fill-color: white;
+            /* Will override color (regardless of order) */
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+        }
+
+        .creature-tooltip {
+            position: absolute;
+            margin-left: -100px;
+            margin-top: -20px;
+            font-weight: 900;
+            font-size: 150%;
+            color: white;
+            -webkit-text-fill-color: white;
+            /* Will override color (regardless of order) */
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+        }
+
+        .creature-attribute {
+            position: absolute;
+            margin-left: -15px;
+            margin-top: -35px;
+        }
+
+        .creature-image {
+            position: absolute;
+            margin-left: -25px;
+            margin-top: -25px;
+        }
+
+        .lineage-entry {
+            height: 24px;
+        }
+
+        .object-divs {
+            display: flex;
+            justify-content: center;
+        }
+
+        .object-entry {
+            display: none;
+            /* to be overwritten */
+            margin-left: 16px;
+            margin-right: 16px;
+        }
+
+        .object-label {
+            position: absolute;
+            margin-left: 0px;
+            margin-top: -5px;
+            font-weight: 900;
+            font-size: 140%;
+            color: white;
+            -webkit-text-fill-color: white;
+            /* Will override color (regardless of order) */
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+        }
+
+        .object-tooltip {
+            position: absolute;
+            margin-left: 0px;
+            margin-top: 0px;
+            font-weight: 900;
+            font-size: 150%;
+            color: white;
+            -webkit-text-fill-color: white;
+            /* Will override color (regardless of order) */
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+        }
+
+        .object-image {
+            position: absolute;
+            margin-left: -25px;
+            margin-top: -25px;
+        }
+
+        .roomtag-divs {
+            display: flex;
+            justify-content: center;
+        }
+
+        .roomtag-entry {
+            display: none;
+            /* to be overwritten */
+            margin-left: 16px;
+            margin-right: 16px;
+        }
+
+        .roomtag-label {
+            position: absolute;
+            margin-left: 0px;
+            margin-top: -5px;
+            font-weight: 900;
+            font-size: 140%;
+            color: white;
+            -webkit-text-fill-color: white;
+            /* Will override color (regardless of order) */
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+        }
+
+        .roomtag-tooltip {
+            position: absolute;
+            margin-left: 0px;
+            margin-top: 10px;
+            font-weight: 900;
+            font-size: 150%;
+            color: white;
+            -webkit-text-fill-color: white;
+            /* Will override color (regardless of order) */
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+        }
+
+        .roomtag-image {
+            position: absolute;
+            margin-left: -45px;
+            margin-top: 0px;
+        }
+
+        .batblockage-divs {
+            display: flex;
+            justify-content: center;
+        }
+
+        .batblockage-entry {
+            display: none;
+            /* to be overwritten */
+            margin-left: 16px;
+            margin-right: 16px;
+        }
+
+        .batblockage-label {
+            position: absolute;
+            margin-left: 0px;
+            margin-top: 10px;
+            font-weight: 900;
+            font-size: 140%;
+            color: white;
+            -webkit-text-fill-color: white;
+            /* Will override color (regardless of order) */
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+        }
+
+        .batblockage-tooltip {
+            position: absolute;
+            margin-left: 0px;
+            margin-top: 10px;
+            font-weight: 900;
+            font-size: 100%;
+            color: white;
+            -webkit-text-fill-color: white;
+            /* Will override color (regardless of order) */
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+        }
+
+        .batblockage-image {
+            position: absolute;
+            margin-left: -45px;
+            margin-top: 0px;
+        }
+
+        .tilenode-divs {
+            display: flex;
+            justify-content: center;
+        }
+
+        .tilenode-entry {
+            display: none;
+            /* to be overwritten */
+            margin-left: 16px;
+            margin-right: 16px;
+        }
+
+        .tilenode-label {
+            position: absolute;
+            margin-left: 0px;
+            margin-top: -5px;
+            font-weight: 900;
+            font-size: 140%;
+            color: white;
+            -webkit-text-fill-color: white;
+            /* Will override color (regardless of order) */
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+        }
+
+        .tilenode-tooltip {
+            position: absolute;
+            margin-left: -100px;
+            margin-top: -20px;
+            font-weight: 900;
+            font-size: 100%;
+            color: white;
+            -webkit-text-fill-color: white;
+            /* Will override color (regardless of order) */
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+        }
+
+        .tilenode-image {
+            position: absolute;
+            margin-left: -25px;
+            margin-top: -25px;
+        }
+
+        .object-image {
+            position: absolute;
+            margin-left: -25px;
+            margin-top: -25px;
+        }
+
+        .icon-image {
+            position: absolute;
+            margin-left: -25px;
+            margin-top: -25px;
+        }
+
+        .icon-attribute {
+            position: absolute;
+            margin-left: -15px;
+            margin-top: -35px;
+        }
+
+        .icon-label {
+            position: absolute;
+            margin-left: 0px;
+            margin-top: -5px;
+            font-weight: 900;
+            font-size: 140%;
+            color: white;
+            -webkit-text-fill-color: white;
+            /* Will override color (regardless of order) */
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+        }
+
+        .icon-tooltip {
+            position: absolute;
+            margin-left: -100px;
+            margin-top: -20px;
+            font-weight: 900;
+            font-size: 150%;
+            color: white;
+            -webkit-text-fill-color: white;
+            /* Will override color (regardless of order) */
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+        }
+
+
+
+        /* UI stuff */
+        .side-panel {
+            position: absolute;
+            top: 24px;
+            max-height: calc(100vh - 54px);
+            display: flex;
+            flex-direction: column;
+            padding: 8px;
+            background: #0c0c0c;
+            z-index: 1000;
+            color: #cccccc;
+        }
+
+        /* Difficulty select and layers panel */
+        .right-panel {
+            right: 24px;
+        }
+
+        .scroll-ish {
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 24px !important;
+            margin-right: -16px !important;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .collapse-tab {
+            display: none;
+            width: 30px;
+            height: 30px;
+            user-select: none;
+            background: #0c0c0c;
+            background-image: url(/resources/img/hamburger.png);
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        @media (max-width: 768px) {
+            .hidden {
+                display: block !important;
+            }
+
+            .side-panel {
+                transition: left ease 0.3s, right ease 0.3s;
+            }
+
+            .top-panel {
+                display: none !important;
+            }
+
+            .collapse-tab {
+                display: block;
+                cursor: pointer;
+            }
+
+            .left-panel.collapsed {
+                left: var(--hide-pos);
+            }
+
+            .right-panel.collapsed {
+                right: var(--hide-pos);
+            }
+
+            .left-panel .collapse-tab {
+                position: absolute;
+                right: -30px;
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+
+            .right-panel .collapse-tab {
+                position: absolute;
+                left: -30px;
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+            }
+
+            .collapsed .scroll-ish {
+                overflow-y: hidden;
+            }
+
+            .right-panel .scroll-ish {
+                max-height: 335px;
+            }
+        }
+
+        .difficulty-select {
+            padding-bottom: 6px;
+            width: 150px;
+            position: relative;
+            /* re-center after wrap */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 4px;
+            transition: width 0.4s;
+        }
+
+        .difficulty-btn {
+            display: inline-block;
+            width: 38px;
+            height: 38px;
+            margin: 4px;
+            position: relative;
+        }
+
+        #layer-content {
+            padding: 8px;
+        }
+
+        .left-panel {
+            left: 24px;
+        }
+
+        #modded-ckb-group {
+            position: relative;
+            top: 6px;
+            padding-left: 6px;
+            margin-left: auto;
+        }
+
+        #modded-ckb {
+            position: relative;
+            width: 24px;
+            height: 24px;
+        }
+
+        #modded-ckb~label {
+            left: 4px;
+            top: -6px;
+        }
+
+        #modded-ckb::before {
+            font-size: 1rem;
+        }
+
+        input[type='radio'].rw-ui+span {
+            top: calc(50% - 10px);
+            /* proof that CSS is stupid, cant fucking vertical center text */
+        }
+
+        input[type='radio'].region-radio,
+        input[type='checkbox'].rw-ui {
+            top: 2px;
+        }
+
+        input[type='radio'].region-radio+span,
+        input[type='checkbox'].rw-ui+span {
+            color: #4B4653;
+        }
+
+        #region-select {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .scroll-ish {
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 24px !important;
+            margin-right: -16px !important;
+        }
+
+        /* Button back to index */
+
+        .overlay-label {
+            position: relative;
+            margin-top: 11px;
+            margin-bottom: 11px;
+            width: 150px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .overlay-label span {
+            display: block;
+            max-width: 140px;
+            padding: 7px;
+            padding-left: 6px;
+            padding-right: 6px;
+        }
+
+        .region-label {
+            position: relative;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            width: 230px;
+            height: 24px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .region-span {
+            display: block;
+            font-size: 0.8rem;
+            padding: 4px;
+            padding-left: 6px;
+            padding-right: 6px;
+        }
+
+        .index-button {
+            width: 200px;
+            height: 24px;
+            position: relative;
+            word-wrap: anywhere;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+    </style>
+
+    <style id="creaturefilters">
+        .creature-filter {
+            display: initial
+        }
+    </style>
+
+    <style id="objectfilters">
+        .object-filter {
+            display: initial
+        }
+    </style>
+
+    <style id="roomtagfilters">
+        .roomtag-filter {
+            display: initial
+        }
+    </style>
+
+    <style id="batblockagefilters">
+        .batblockage-filter {
+            display: initial
+        }
+    </style>
+
+    <style id="tilenodefilters">
+        .tilenode-filter {
+            display: initial
+        }
+    </style>
+
+    <style id="hoverlabels">
+        .hover-label {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="mapid"></div>
+
+    <div class="side-panel left-panel rw-text collapsible collapsed">
+        <div style="padding-left: 8px; padding-bottom: 8px;">
+            <a href="./" class="rw-text">&lt; 返回索引</a>
+            <hr />
+            <span>区域</span>
+        </div>
+
+        <form name="regionselect" id="region-select" class="scroll-ish"></form>
+        <div class="collapse-tab"></div>
+    </div>
+
+    <div class="side-panel right-panel rw-text collapsible collapsed">
+        <div>蛞蝓猫</div>
+        <form name="difficulty" class="difficulty-select" id="scug-selector">
+        </form>
+
+        <div>图层</div>
+        <div id="layer-content" class="scroll-ish"></div>
+        <div class="collapse-tab"></div>
+    </div>
+
+    <script>
+        var loadedCount = 1;
+        var tospawn = false;
+        'use strict';
+        // misc iconography but mostly Creatures
+
+        var slugcats = {};
+        var region_order = [];
+        var regions = {};
+
+        getJsonObject("slugcats.json", function (json) { slugcats = json; }, false);
+
+        var html = "";
+        for (const slugcatName in slugcats) {
+            var icon = "72_unknown";
+            if (slugcatName in icon_by_name) {
+                icon = icon_by_name[slugcatName];
+            } else {
+                console.log("missing icon for " + slugcatName);
+            }
+            html += `
+<label class="difficulty-btn">
+            <input type="radio" class="rw-ui" name="difficulties" onclick="selectDifficulty('${slugcatName}','${tospawn}');" value="(${slugcatName},${tospawn});" autocomplete="off">
+            <img src="./resources/icons/${icon}.png">
+</label>`;
+            document.getElementById('scug-selector').innerHTML = html;
+        }
+
+        function updateRegionList(difficulty, modded) {
+            regions = slugcats[difficulty].regions;
+            region_order = [];
+            for (const key in regions) {
+                region_order.push(key);
+            }
+
+            var html = "";
+            for (var r of region_order) {
+                html += `
+<label class="region-label">
+            <input type="radio" class="region-radio" name="regions" onclick="selectRegion(this.value);" value="${r}"${r == region ? ' checked="checked"' : ''} autocomplete = "off">
+            <span class="region-span">${regions[r].toUpperCase()} (${r})</span>
+</label>`;
+            }
+            document.getElementById('region-select').innerHTML = html;
+        }
+
+        function selectRegion(value) {
+            let newmodded = false; // document.getElementById('modded-ckb').checked; // TODO modded slugcats and regions
+            if (region != value) {
+                room = null;
+            }
+            if (region != value || modded != newmodded) {
+                region = value;
+                modded = newmodded;
+                pushState();
+            }
+        }
+
+        function selectDifficulty(n, alt) {
+            for (var i = 0; i < document.difficulty.difficulties.length; i++) {
+                if (document.difficulty.difficulties[i].value == n) {
+                    document.difficulty.difficulties[i].checked = true;
+                }
+            }
+            if (difficulty != n) {
+                difficulty = n;
+                region = slugcats[difficulty].startingRegion;
+                room = slugcats[difficulty].startingRoom;
+                pushState();
+            }
+        }
+
+        // Control with poor control options, whodvathot
+        // layer control with control over the classnames
+        L.Control.Layers.UnstupidLayer = L.Control.Layers.extend(
+            {
+                options: {
+                    collapsed: false,
+                    containerClass: "",
+                    sectionClass: "",
+                    overlaysListClass: "",
+                    overlayInputClass: "",
+                    overlayInputDivClass: "",
+                    overlayInputLabelClass: "",
+                    hideBaseLayers: true
+                },
+                _addItem: function (obj) {
+                    let h = L.Control.Layers.prototype._addItem.call(this, obj);
+                    h.className = this.options.overlayInputLabelClass;
+                    h.children[0].className = this.options.overlayInputDivClass;
+                    h.children[0].children[0].className = this.options.overlayInputClass;
+                    return h;
+                },
+                _initLayout: function () {
+                    L.Control.Layers.prototype._initLayout.call(this);
+                    this._container.className = this.options.containerClass;
+                    this._section.className = this.options.sectionClass;
+                    if (this.options.hideBaseLayers) {
+                        this._baseLayersList.style.display = "none";
+                        this._layersLink.style.display = "none";
+                    }
+                    this._overlaysList.className = this.options.overlaysListClass;
+                },
+                expand: function () { }
+            }
+        );
+
+        // Dynamic navigation
+        var dynamicNavigation; // Stupid browsers
+        if ('pushState' in window.history) {
+            dynamicNavigation = true;
+        }
+
+        (function (w) {
+            w.URLSearchParams = w.URLSearchParams || function (searchString) {
+                //w.URLSearchParamsAlt = function (searchString) {
+                var self = this;
+                self.searchString = searchString;
+                self.values = {};
+                let result;
+                let exp = new RegExp('[\?&]([^=]*)=([^&#]*)', 'g');
+                while ((result = exp.exec(self.searchString)) != null) {
+                    console.log(result);
+                    self.values[result[1]] = decodeURI(result[2]);
+                }
+                // todo valueless
+                self.get = function (name) { return self.values[name]; };
+                self.set = function (name, value) { self.values[name] = value; };
+                self.delete = function (name) { delete self.values[name]; };
+                self.toString = function () {
+                    let str;
+                    for (var name in self.values) {
+                        if (str) str += '&'; else str = '';
+                        str += name + '=' + self.values[name];
+                    }
+                    if (!str) return '';
+                    return '?' + str;
+                };
+                return self;
+            }
+        })(window) // URLSearchParams Polyfill-ish
+
+        // Params, navigation, state
+        var params = new URLSearchParams(document.location.search);
+        var region;
+        var modded;
+        var difficulty;
+        var room;
+        var collectable;
+        var decorative;
+        var mechanical;
+        function pushState(noNavigation) {
+            let changes = false;
+            let modded_param = params.get("modded") == 'on';
+            let difficulty_param = params.get("slugcat");
+            let region_param = params.get("region");
+            let room_param = params.get("room");
+
+            params.delete("modded");
+            params.delete("slugcat");
+            params.delete("region");
+            params.delete("room");
+
+            if (modded)
+                params.set("modded", "on");
+            params.set("slugcat", difficulty);
+            params.set("region", region);
+            if (room)
+                params.set("room", room);
+
+            if (modded != modded_param || difficulty != difficulty_param || region != region_param || room != room_param) {
+                // actually changed anything
+                let newstr = params.toString();
+                if (dynamicNavigation) {
+                    window.history.pushState(null, '', window.location.pathname + '?' + newstr);
+                } else if (!noNavigation) document.location.search = newstr;
+                if (!noNavigation) newState();
+            }
+        }
+        function newState() {
+            //console.log("newState");
+            params = new URLSearchParams(document.location.search);
+            region = params.get("region");
+            difficulty = params.get("slugcat");
+            if (region == null || difficulty == null) {
+                window.location.href = "index.html";
+                return;
+            }
+            modded = params.get("modded") == 'on';
+            room = params.get("room");
+            updateRegionList(difficulty, modded);
+            loadRegion(difficulty, region, modded);
+            selectDifficulty(difficulty);
+        }
+
+        window.onpopstate = newState;
+        window.onload = newState;
+
+        // Room hover & select stuff
+        var hilightedRoom;
+        function hilightRoom(e) {
+            if (e.target) e = e.target;
+            resetHilight();
+            hilightedRoom = e;
+            if (map.getZoom() < 0 && hilightedRoom != focusedRoom) {
+                e.setStyle({
+                    fillOpacity: 0.2
+                });
+            }
+        }
+
+        function updateHilight() {
+            if (hilightedRoom == null) return;
+            if (map.getZoom() < 0 && hilightedRoom != focusedRoom) {
+                hilightedRoom.setStyle({
+                    fillOpacity: 0.2
+                });
+            } else {
+                hilightedRoom.setStyle({
+                    fillOpacity: 0
+                });
+            }
+        }
+
+        function resetHilight() {
+            if (hilightedRoom == null) return;
+            hilightedRoom.setStyle({
+                fillOpacity: 0
+            });
+            hilightedRoom = null;
+        }
+
+        var focusedRoom;
+        function focusRoom(e) {
+            if (e.target) e = e.target;
+            if (e != focusedRoom && focusedRoom) focusedRoom.setStyle(
+                {
+                    weight: 0
+                });
+            focusedRoom = e;
+            console.log(focusedRoom.feature.properties.name + " focused")
+            map.fitBounds(e.getBounds());
+            updateHilight(); // might not move
+            focusedRoom.setStyle(
+                {
+                    weight: 6
+                });
+
+            room = e.feature.properties.name;
+            pushState();
+        }
+
+        function updateFocus() {
+            if (focusedRoom == null) return;
+            if (!map.getBounds().overlaps(focusedRoom.getBounds())) {
+                resetFocus();
+            }
+        }
+
+        function resetFocus() {
+            if (focusedRoom == null) return;
+            console.log(focusedRoom.feature.properties.name + " no longer focused")
+            focusedRoom.setStyle(
+                {
+                    weight: 0
+                });
+            focusedRoom = null;
+
+            room = null;
+            pushState(true); // no navigation so no zoom change
+        }
+
+        // Map
+        var map = L.map('mapid', {
+            minZoom: -7,
+            maxZoom: 3, // 8x
+            crs: L.CRS.Simple,
+            zoomControl: false,
+        });
+        map.attributionControl.setPrefix('基于 <a href="https://leafletjs.com" title="一个用于交互式地图的JS库" target="_blank">Leaflet</a>, <a href="https://github.com/henpemaz" title="游戏开发及相关艺术爱好者">Henpemaz</a>')
+        map.setView([0, 0], -5);
+
+        // Events
+        map.on('click', function (e) { if (e.originalEvent.target == map._container) resetFocus(); });
+        // remove room highlight on maxed zoom
+        map.on('zoomend', updateHilight);
+        map.on('moveend', updateFocus);
+        L.Tooltip.include({
+            setOpacity: function (o) { } // fuck you, don't style my elements unless I tell you to.
+        });
+        // on Room Names view, prevent hover popups from displaying
+        map.on('overlayadd', function (e) {
+            if (e.name == "Room Names") {
+                document.getElementById('hoverlabels').sheet.cssRules[0].style.display = 'none';
+            }
+        });
+        map.on('overlayremove', function (e) {
+            if (e.name == "Room Names") {
+                document.getElementById('hoverlabels').sheet.cssRules[0].style.removeProperty("display");
+            }
+        });
+
+        // Overlay control
+        var overlays = new L.Control.Layers.UnstupidLayer(null, null, {
+            overlayInputClass: "rw-ui",
+            overlayInputLabelClass: "overlay-label",
+        });
+        overlays.addTo(map);
+        document.getElementById('layer-content').appendChild(overlays.getContainer());
+
+        // New additions
+        var placedObjectsLayer;
+        var tileNodesLayer;
+        var roomTagsLayer;
+        var batMigrationBlockagesLayer;
+        // Settings?
+        var standard = true;
+        var collectable = true;
+        var decorative = false;
+        var mechanical = false;
+        // Region stuff
+        var tileLayer;
+        var roomsLayer;
+        var roomNames;
+        var lastRoomFocused;
+        var connectionsLayer;
+        var geometryLayer;
+        var densLayer;
+        var loadedDifficulty = null;
+        var loadedRegion = null;
+        var loadedModded = {};
+        function loadRegion(pdifficulty, pregion, pmodded) {
+            if (loadedDifficulty == pdifficulty && loadedRegion == pregion && loadedModded == pmodded) {
+                // Region isn't changing, double-check focused room
+                let foundRoom = false;
+                if (room != null && roomsLayer != null) {
+                    for (let l of roomsLayer.getLayers()) {
+                        if (l.feature.properties.name == room) {
+                            //map.fitBounds(l.getBounds());
+                            focusRoom(l);
+                            foundRoom = true;
+                            break;
+                        }
+                    }
+                }
+                if (!foundRoom) {
+                    console.log("newState err");
+                    resetFocus();
+                    map.setView([0, 0], -5);
+                }
+                return;
+            }
+            equivalentRegion = pregion;
+
+            if (pregion == "OE" && (pdifficulty != "white" && pdifficulty != "yellow" && pdifficulty != "gourmand")) {
+                equivalentRegion = "SB";
+            } else if (pregion == "LC" && pdifficulty != "artificer") {
+                equivalentRegion = "UW";
+            } else if (pregion == "MS" && (pdifficulty != "white" && pdifficulty != "yellow" && pdifficulty != "red" && pdifficulty != "gourmand" && pdifficulty != "rivulet" && pdifficulty != "saint")) {
+                equivalentRegion == "SL";
+            } else if (pregion == "LM" && (pdifficulty != "artificer" && pdifficulty != "spear")) {
+                equivalentRegion = "SL";
+            } else if (pregion == "SL" && (pdifficulty == "artificer" || pdifficulty == "spear")) {
+                equivalentRegion = "LM";
+            } else if (pregion == "RM" && pdifficulty != "rivulet" && pdifficulty != "saint") {
+                equivalentRegion = "SS";
+            } else if (pregion == "SS" && pdifficulty == "rivulet") {
+                equivalentRegion = "RM";
+            } else if (pregion == "DM" && pdifficulty != "spear") {
+                equivalentRegion = "MS";
+            } else if (pregion == "MS" && pdifficulty == "spear") {
+                equivalentRegion = "DM";
+            } else if (pregion == "UG" && pdifficulty != "saint") {
+                equivalentRegion = "DS";
+            } else if (pregion == "DS" && pdifficulty == "saint") {
+                equivalentRegion = "UG";
+            } else if (pregion == "CL" && pdifficulty != "saint") {
+                equivalentRegion = "SH";
+            } else if ((pregion == "SH" || pregion == "UW" || pregion == "SS" || pregion == "RM") && pdifficulty == "saint") {
+                equivalentRegion = "CL";
+            } else if (pregion == "HR" && pdifficulty != "saint") {
+                equivalentRegion = "SB";
+            }
+
+            region = equivalentRegion;
+
+            if (pregion != equivalentRegion) {
+                console.log("Redirected from " + loadedDifficulty + " / " + loadedRegion + " to " + pdifficulty + " / " + pregion + " to " + region);
+            }
+            modded = pmodded;
+
+            console.log("Loading: region {" + region + "} on slugcat {" + pdifficulty + "}, modded {" + modded + "}");
+            var slugcat_url = {
+                "artificer": "https://raw.githubusercontent.com/NobleCat57/msc-1.9.07b/v1.9.07b/artificer",
+                "gourmand": "https://raw.githubusercontent.com/NobleCat57/msc-1.9.07b/v1.9.07b/gourmand",
+                "rivulet": "https://raw.githubusercontent.com/NobleCat57/msc-1.9.07b/v1.9.07b/rivulet",
+                "saint": "https://raw.githubusercontent.com/NobleCat57/msc-1.9.07b/v1.9.07b/saint",
+                "spear": "https://raw.githubusercontent.com/NobleCat57/msc-1.9.07b/v1.9.07b/spear",
+                "white": "https://raw.githubusercontent.com/NobleCat57/vanilla-1.9.07b/v1.9.07b/white",
+                "yellow": "https://raw.githubusercontent.com/NobleCat57/vanilla-1.9.07b/v1.9.07b/yellow",
+                "red": "https://raw.githubusercontent.com/NobleCat57/vanilla-1.9.07b/v1.9.07b/red",
+                "inv": "https://raw.githubusercontent.com/NobleCat57/msc-1.9.07b/v1.9.07b/inv",
+            };
+            var region_url = region.toLowerCase();
+            var roompath = `${slugcat_url[pdifficulty]}/${region_url}`;
+            getJsonObject(`${roompath}/region.json`, function (json) {
+                var roomjson = json;
+                if ('copyingrooms' in json) {
+                    getJsonObject(`${slugcat_url[json['copyingrooms']]}/${region_url}/region.json`, function (copyjson) {
+                        roomjson = copyjson;
+                        roompath = `${slugcat_url[json['copyingrooms']]}/${region_url}`;
+                    }, false);
+                }
+
+                // Background color
+                map.getContainer().style.backgroundColor = 'rgb(' + json["bgcolor"].join(',') + ')'; // I hate this with passion, but such is the way of the CSS
+
+                // Tileset layer
+                if (tileLayer != null) map.removeLayer(tileLayer);
+                tileLayer = L.tileLayer(`${roompath}/{z}/{x}_{y}.png`, {
+                    attribution: "<a href=\"https://store.steampowered.com/app/312520/Rain_World/\">雨世界</a> 由 <a href=\"https://twitter.com/VideocultMedia\">Videocult</a> 制作",
+                    minZoom: -7,
+                    maxZoom: 3,
+                    maxNativeZoom: 0, // important, stop requesting tiles at this point
+                });
+                tileLayer.addTo(map);
+
+                // Room features and name popups
+                let hadNames = map.hasLayer(roomNames) || loadedRegion == null;
+                if (roomNames != null) {
+                    overlays.removeLayer(roomNames);
+                    map.removeLayer(roomNames);
+                }
+                let hadRooms = map.hasLayer(roomsLayer) || loadedRegion == null;
+                if (roomsLayer != null) {
+                    overlays.removeLayer(roomsLayer);
+                    map.removeLayer(roomsLayer);
+                }
+                roomNames = L.layerGroup();
+                roomsLayer = L.geoJSON(roomjson["room_features"], {
+                    style: {
+                        weight: 0,
+                        color: 'rgb(' + json["highlightcolor"].join(',') + ')',
+                        fillOpacity: 0
+                    },
+                    onEachFeature: function (feature, layer) {
+                        // Room focus stuff
+                        layer.on({
+                            mouseover: hilightRoom,
+                            mouseout: resetHilight,
+                            click: focusRoom,
+                            tooltipopen: function (e) {
+                                e.tooltip.setLatLng(L.latLng([].concat(e.target.feature.properties.popupcoords).reverse()));
+                                e.tooltip.getElement().style.removeProperty('opacity'); // 'defaults' amirite
+                            },
+                        });
+
+                        L.tooltip({ direction: "center", offset: [0, -14], permanent: true, className: "rw-text room-labels" }, layer).setContent(feature.properties.name).setLatLng(L.latLng([].concat(feature.properties.popupcoords).reverse())).addTo(roomNames);
+
+                        layer.bindTooltip(feature.properties.name, { direction: "center", offset: [0, -14], interactive: true, className: "rw-text room-labels hover-label" });
+                    }
+                });
+                if (hadRooms) roomsLayer.addTo(map);
+                overlays.addOverlay(roomsLayer, "房间聚焦");
+                if (hadNames) roomNames.addTo(map);
+                overlays.addOverlay(roomNames, "房间名称");;
+
+                // Connections
+                let hadConnections = map.hasLayer(connectionsLayer) || loadedRegion == null;
+                if (connectionsLayer != null) {
+                    overlays.removeLayer(connectionsLayer);
+                    map.removeLayer(connectionsLayer);
+                }
+                connectionsLayer = new L.BezierGeoJSON(roomjson["connection_features"], {
+                    color: 'rgba(' + json["shortcutcolor"].join(',') + ',0.72)', // so the white looks better
+                    weight: 2,
+                    lineCap: "butt", // hehe
+                    dashArray: "5 8",
+                    interactive: false,
+                });
+                if (hadConnections) connectionsLayer.addTo(map);
+                overlays.addOverlay(connectionsLayer, "管道连接");
+
+                // Geometry
+                let hadGeometry = map.hasLayer(geometryLayer) || loadedRegion == null;
+                if (geometryLayer != null) {
+                    overlays.removeLayer(geometryLayer);
+                    map.removeLayer(geometryLayer);
+                }
+                geometryLayer = L.geoJSON(roomjson["geo_features"], {
+                    interactive: false,
+                    color: 'rgb(' + json["geocolor"].join(',') + ')',
+                    weight: 2,
+                    lineCap: "butt", // im easily entertained
+                    lineJoin: "miter",
+                });
+                if (hadGeometry) geometryLayer.addTo(map);
+                overlays.addOverlay(geometryLayer, "房间轮廓");
+
+                // Creatures
+                let hadCreatures = map.hasLayer(densLayer) || loadedRegion == null;
+                if (densLayer != null) {
+                    overlays.removeLayer(densLayer);
+                    map.removeLayer(densLayer);
+                }
+                densLayer = L.geoJSON(json["creatures_features"], {
+                    pointToLayer: function (feature, latlng) {
+                        // Creatures are organized by dens, dens list spawns in it, flexbox stacks them visually on the den location, filter classes control visib
+                        let divhtml = "";
+                        for (let creature of feature.properties.creatures) {
+                            let creature_filter = " creature-filter";
+                            if (creature.is_lineage) {
+                                // lineages are vertical stacks
+                                divhtml += '<div class="creature-entry ' + creature_filter + '">';
+                                for (let i = 0; i < creature.lineage.length; i++) {
+                                    var icon = "72_unknown";
+                                    if (creature.lineage[i] in icon_by_name) {
+                                        icon = icon_by_name[creature.lineage[i]];
+                                    } else {
+                                        console.log("missing icon for " + creature.lineage[i]);
+                                    }
+                                    var tooltip = "";
+                                    var attribute = "";
+                                    if (creature.attributes[i] != null) {
+                                        if (creature.precycle) {
+                                            attribute += "PreCycle";
+                                            //tooltip += "Pre-Cycle";
+                                        }
+                                        if (creature.ignorecycle) {
+                                            attribute += "IgnoreCycle";
+                                            //tooltip += "Ignore Cycle";
+                                        }
+                                        if (creature.night) {
+                                            attribute += "Night";
+                                            //tooltip += "Night";
+                                        }
+                                        if (creature.tentacleimmune) {
+                                            attribute += "TentacleImmune";
+                                            //tooltip += "Tentacle Immune";
+                                        }
+                                        if (creature.lavasafe) {
+                                            attribute += "LavaSafe";
+                                            //tooltip += "Lava Safe";
+                                        }
+                                        if (creature.voidsea) {
+                                            attribute += "VoidSea";
+                                            //tooltip += "Void Sea";
+                                        }
+                                        if (creature.winter) {
+                                            attribute += "Winter";
+                                            //tooltip += "Winter";
+                                        }
+                                        if (creature.alternateform) {
+                                            if (creature.creature == "Small Centipede" || creature.creature == "SmallCentipede" || creature.creature == "Centipede Small") {
+                                                icon = "Infant_Centipede_AlternateForm_icon";
+                                            }
+                                            tooltip += "Alternate Form";
+                                            //attribute += "AlternateForm";
+                                        }
+                                        if (creature.mean) {
+                                            tooltip += "Mean:" + creature.mean;
+                                        }
+                                        if (creature.number) {
+                                            tooltip += "Number:" + creature.number;
+                                        }
+                                        if (creature.seed) {
+                                            tooltip += "Seed:" + creature.seed;
+                                        }
+                                    }
+                                    if (attribute == "") {
+                                        divhtml += `<div class="lineage-entry">
+                                                <img class="creature-image" src="./resources/icons/${icon}.png"/>
+                                                <div class="creature-label">${Math.trunc(Number.parseFloat(creature.lineage_probs[i]) * 100)}%</div>
+                                                <div class="creature-tooltip">${tooltip}</div>
+                                                </div>`;
+                                    } else {
+                                        divhtml += `<div class="lineage-entry">
+                                                <img class="creature-image" src="./resources/icons/${icon}.png"/>
+                                                <div class="creature-label">${Math.trunc(Number.parseFloat(creature.lineage_probs[i]) * 100)}%</div>
+                                                <img class="icon-attribute" src="./resources/icons/${attribute}_icon.png"/>
+                                                <div class="creature-tooltip">${tooltip}</div>
+                                                </div>`;
+                                    }
+                                }
+                                divhtml += '</div>';
+                            } else {
+                                var icon = "72_unknown";
+                                if (creature.creature in icon_by_name) {
+                                    icon = icon_by_name[creature.creature];
+                                } else {
+                                    console.log("missing icon for " + creature.creature);
+                                }
+                                var tooltip = "";
+                                var attribute = "";
+                                if (creature.precycle) {
+                                    attribute += "PreCycle";
+                                    //tooltip += "Pre-Cycle";
+                                }
+                                if (creature.ignorecycle) {
+                                    attribute += "IgnoreCycle";
+                                    //tooltip += "Ignore Cycle";
+                                }
+                                if (creature.night) {
+                                    attribute += "Night";
+                                    //tooltip += "Night";
+                                }
+                                if (creature.tentacleimmune) {
+                                    attribute += "TentacleImmune";
+                                    //tooltip += "Tentacle Immune";
+                                }
+                                if (creature.lavasafe) {
+                                    attribute += "LavaSafe";
+                                    //tooltip += "Lava Safe";
+                                }
+                                if (creature.voidsea) {
+                                    attribute += "VoidSea";
+                                    //tooltip += "Void Sea";
+                                }
+                                if (creature.winter) {
+                                    attribute += "Winter";
+                                    //tooltip += "Winter";
+                                }
+                                if (creature.alternateform) {
+                                    if (creature.creature == "Small Centipede" || creature.creature == "SmallCentipede" || creature.creature == "Centipede Small") {
+                                        icon = "Infant_Centipede_AlternateForm_icon";
+                                    }
+                                    else {
+                                        tooltip += "Alternate Form";
+                                    }
+                                    attribute += "AlternateForm";
+                                }
+                                if (creature.mean) {
+                                    tooltip += "Mean:" + creature.mean;
+                                }
+                                if (creature.number) {
+                                    tooltip += "Number:" + creature.number;
+                                }
+                                if (creature.seed) {
+                                    tooltip += "Seed:" + creature.seed;
+                                }
+                                if (attribute == "") {
+                                    divhtml += `<div class="creature-entry${creature_filter}">
+                                            <img class="creature-image" src="./resources/icons/${icon}.png"/>
+                                            <div class="creature-label">x${creature.amount}</div>
+                                            <div class="creature-tooltip">${tooltip}</div>
+                                            </div>`;
+                                } else {
+                                    divhtml += `<div class="creature-entry${creature_filter}">
+                                            <img class="creature-image" src="./resources/icons/${icon}.png"/>
+                                            <div class="creature-label">x${creature.amount}</div>
+                                            <img class="creature-attribute" src="./resources/icons/${attribute}_icon.png"/>
+                                            </div>`;
+                                }
+                            }
+                        }
+                        return L.marker(latlng, {
+                            icon: L.divIcon({
+                                className: 'creature-divs',
+                                html: divhtml,
+                            }),
+                            interactive: false,
+                        });
+                    },
+                });
+                if (hadCreatures) densLayer.addTo(map);
+                overlays.addOverlay(densLayer, "生物生成");
+
+                // Placed Objects
+                let hadPlacedObjects = map.hasLayer(placedObjectsLayer) || loadedRegion == null;
+                if (placedObjectsLayer != null) {
+                    overlays.removeLayer(placedObjectsLayer);
+                    map.removeLayer(placedObjectsLayer);
+                }
+                placedObjectsLayer = L.geoJSON(json["placedobject_features"], {
+                    pointToLayer: function (feature, latlng) {
+                        let objecthtml = "";
+                        let object_filter = " object-filter";
+                        let object = feature.properties.object;
+                        let data = feature.properties.data;
+                        // console.log(feature);
+                        let tooltip = "";
+                        let attribute = "";
+                        let icon = "72_unknown";
+                        // handles objects that are not filtered, and objects that are filtered, which are either exempt from or hidden by such filter
+                        if (feature.properties.filterToPlayers != null) {
+                            let slugcatFilter = feature.properties.filterToPlayers.join(", ").toLowerCase();
+                            let objectRoom = feature.properties.room;
+                            if (!slugcatFilter.includes(difficulty)) {
+                                console.log(difficulty + " / " + objectRoom + " / " + object + "; is exempt from the current filter");
+                            } else {
+                                console.log(difficulty + " / " + objectRoom + " / " + object + "; is hidden by a filter");
+                            }
+                        } else {
+                            //console.log(difficulty + " / " + feature.properties.room + " / " + object + "; doesn't have a filterToPlayers attribute");
+                        }
+                        // for objects either outside of a filter, or those inside a filter and currently exempt from the rules of said filter
+                        if (feature.properties.filterToPlayers == null || (feature.properties.filterToPlayers != null && !(feature.properties.filterToPlayers.join(", ").toLowerCase()).includes(difficulty))) {
+                            if (object in standard_placed_object_icons) {
+                                if (standard) {
+                                    icon = standard_placed_object_icons[object];
+                                } else {
+                                    icon = "null_icon";
+                                    object_filter = "";
+                                }
+                            } else if (object in token_icons) {
+                                // this is the native filter property for tokens
+                                let hiddenSlugcats = feature.properties.data.availableToPlayers.join(", ").toLowerCase();
+                                if (!hiddenSlugcats.includes(difficulty)) {
+                                    if (collectable) {
+                                        // WhiteToken (Broadcasts)
+                                        if (object == "WhiteToken") {
+                                            if (difficulty != "spear") {
+                                                icon = "null_icon";
+                                            } else if (data.tokenString != null) {
+                                                if (data.tokenString != "") {
+                                                    tooltip = data.tokenString;
+                                                    if (data.tokenString in broadcast_icons) {
+                                                        icon = broadcast_icons[data.tokenString];
+                                                        console.log("Showing " + object + " - " + data.tokenString + " Due to Availability: " + hiddenSlugcats + " | current difficulty: " + difficulty);
+                                                    } else {
+                                                        console.log("missing broadcast icon for " + data.tokenString);
+                                                    }
+                                                } else {
+                                                    console.log("empty tokenString for " + object);
+                                                }
+                                            } else {
+                                                console.log("null tokenString for " + object);
+                                            }
+                                            // RedToken, GoldToken, DevToken, GreenToken, and BlueToken
+                                        } else if (object != "WhiteToken" && data.tokenString != null) {
+                                            icon = token_icons[object];
+                                            if (data.tokenString != "") {
+                                                tooltip = data.tokenString;
+                                                console.log("Showing " + object + " - " + data.tokenString + " Due to Availability: " + hiddenSlugcats + " current difficulty: " + difficulty);
+                                                /* RedToken's just use region acronyms and GoldToken's use that plus subregion strings for multiple tokens in one region:
+                                                (CC (gutter) and SB (filter), plus that one DevToken in MS with the "Default" tokenString */
+                                                if (object == "BlueToken" || object == "GreenToken") {
+                                                    if (data.tokenString in icon_by_name && (data.tokenString != "CicadaA" && data.tokenString != "BigNeedleWorm" && data.tokenString != "DataPearl")) {
+                                                        attribute = icon_by_name[data.tokenString];
+                                                    } else if (data.tokenString in standard_placed_object_icons) {
+                                                        attribute = standard_placed_object_icons[data.tokenString];
+                                                    } else if (data.tokenString == "CicadaA") {
+                                                        attribute = "Squidcadas_icon";
+                                                        tooltip = "Cicada A & B";
+                                                    } else if (data.tokenString == "BigNeedleWorm") {
+                                                        attribute = "NoodleFlies_icon";
+                                                        tooltip = "Big & Small NeedleWorm";
+                                                    } else if (data.tokenString == "DataPearl") {
+                                                        attribute = "Pearl_misc_icon";
+                                                    } else {
+                                                        console.log("missing token item icon for " + data.tokenString);
+                                                    }
+                                                } else {
+                                                    console.log("no need for an attribute icon for red, gold, or dev tokens: " + data.tokenString);
+                                                }
+                                            } else {
+                                                console.log("empty tokenString for " + object);
+                                            }
+                                        } else {
+                                            console.log("null tokenString for " + object);
+                                        }
+                                    } else {
+                                        icon = "null_icon";
+                                        object_filter = "";
+                                    }
+                                } else {
+                                    console.log("Hiding " + object + " Due to Availability: " + hiddenSlugcats + " current difficulty: " + difficulty);
+                                    icon = "null_icon";
+                                    object_filter = "";
+                                }
+                            } else if (object in pearl_icons) {
+                                if (collectable) {
+                                    icon = pearl_icons[object];
+                                    if (data.pearlType != null) {
+                                        if (data.pearlType != "") {
+                                            /* Generic Pearls are abundant and we don't need 15 thousand "Misc" strings,
+                                            and broadcast pearls are plenty identifiable with their pink icons and specific placements */
+                                            if (data.pearlType != "Misc" && data.pearlType != "BroadcastMisc") {
+                                                tooltip = data.pearlType;
+                                            }
+                                            if (data.pearlType in pearl_icons) {
+                                                icon = pearl_icons[data.pearlType];
+                                            } else {
+                                                console.log("missing pearlType icon for " + data.pearlType);
+                                            }
+                                        } else {
+                                            console.log("empty pearlType for " + object);
+                                        }
+                                    } else {
+                                        console.log("null pearlType for " + object);
+                                    }
+                                } else {
+                                    icon = "null_icon";
+                                    object_filter = "";
+                                }
+                            } else if (object in decorative_placed_object_icons) {
+                                if (decorative) {
+                                    icon = decorative_placed_object_icons[object];
+                                } else {
+                                    icon = "null_icon";
+                                    object_filter = "";
+                                }
+                            } else if (object in mechanical_placed_object_icons) {
+                                if (mechanical) {
+                                    icon = mechanical_placed_object_icons[object];
+                                } else {
+                                    icon = "null_icon";
+                                    object_filter = "";
+                                }
+                            } else {
+                                console.log("missing icon for " + object);
+                                icon = "null_icon";
+                                object_filter = "";
+                                objecthtml += ``;
+                            }
+
+                            if (attribute != "") {
+                                objecthtml += `<div class="object-entry${object_filter}">
+                                            <img class="object-image" src="./resources/icons/${icon}.png"/>
+                                            <img class="icon-attribute" src="./resources/icons/${attribute}.png"/>
+                                            <div class="object-tooltip">${tooltip}</div>
+                                            </div>`;
+                            } else if (icon != "null_icon") {
+                                objecthtml += `<div class="object-entry${object_filter}">
+                                            <img class="object-image" src="./resources/icons/${icon}.png"/>
+                                            <div class="object-tooltip">${tooltip}</div>
+                                            </div>`;
+                            }
+                        }
+
+                        return L.marker(latlng, {
+                            icon: L.divIcon({
+                                className: 'object-divs',
+                                html: objecthtml,
+                            }),
+                            interactive: false,
+                        });
+                    },
+                });
+                if (hadPlacedObjects) placedObjectsLayer.addTo(map);
+                overlays.addOverlay(placedObjectsLayer, "放置物品");
+
+                // Tile Nodes
+                let hadTileNodes = map.hasLayer(tileNodesLayer) || loadedRegion == null;
+                if (tileNodesLayer != null) {
+                    overlays.removeLayer(tileNodesLayer);
+                    map.removeLayer(tileNodesLayer);
+                }
+                tileNodesLayer = L.geoJSON(json["tilenode_features"], {
+                    pointToLayer: function (feature, latlng) {
+                        let tilenodehtml = "";
+                        let tilenode_filter = " tilenode-filter";
+                        let roomtile = feature.properties.roomtile
+                        let shortcut = roomtile.shortcut;
+                        var icon = "";
+                        if (shortcut in icon_by_name) {
+                            icon = icon_by_name[shortcut];
+                        } else if (roomtile.garbagehole != null && roomtile.garbagehole) {
+                            icon = "Garbage_Worm_icon";
+                        } else if (roomtile.wormgrass != null && roomtile.wormgrass) {
+                            icon = "Worm_Grass_icon";
+                        } else if (roomtile.waterfall != null && roomtile.waterfall) {
+                            icon = "Waterfall_icon";
+                        } else if (roomtile.hivetile != null && roomtile.hivetile) {
+                            icon = "Batfly_Hive_icon";
+                        } else if (shortcut != null) {
+                            if (shortcut == "DeadEnd") {
+                                icon = "Shortcut_Dead_End_icon";
+                            } else if (shortcut == "Normal") {
+                            } else if (shortcut == "RoomExit") {
+                                icon = "Shortcut_Room_Exit_icon";
+                            } else if (shortcut == "CreatureHole") {
+                                icon = "Shortcut_Creature_Hole_icon";
+                            } else if (shortcut == "NPCTransportation") {
+                                icon = "Shortcut_NPC_Transportation_icon";
+                            } else if (shortcut == "RegionTransportation") {
+                                icon = "Shortcut_Region_Transportation_icon";
+                            } else {
+                                console.log("missing shortcut node icon for " + shortcut);
+                            }
+                        } else {
+                            console.log("missing tile node icon for " + roomtile);
+                        }
+
+                        tilenodehtml += `<div class="tilenode-entry${tilenode_filter}">
+                                    <img class="tilenode-image" src="./resources/icons/${icon}.png"/>
+                                    <div class="tilenode-label"></div>
+                                    </div>`;
+                        return L.marker(latlng, {
+                            icon: L.divIcon({
+                                className: 'tilenode-divs',
+                                html: tilenodehtml,
+                            }),
+                            interactive: false,
+                        });
+                    },
+                });
+                if (hadTileNodes) tileNodesLayer.addTo(map);
+                overlays.addOverlay(tileNodesLayer, "房间节点");
+
+                // Room Tags
+                let hadRoomTags = map.hasLayer(roomTagsLayer) || loadedRegion == null;
+                if (roomTagsLayer != null) {
+                    overlays.removeLayer(roomTagsLayer);
+                    map.removeLayer(roomTagsLayer);
+                }
+                roomTagsLayer = L.geoJSON(json["roomtag_features"], {
+                    pointToLayer: function (feature, latlng) {
+                        let roomtag_filter = " roomtag-filter";
+                        let taghtml = "";
+                        let roomtag = feature.properties;
+                        var icon = "72_unknown";
+                        if (roomtag.tag in icon_by_name) {
+                            icon = icon_by_name[roomtag.tag.toLowerCase()];
+                        } else {
+                            console.log("missing room tag icon for " + roomtag.tag);
+                        }
+                        var tooltip = "";
+                        if (roomtag.tag == "SHELTER") {
+                            tooltip = "Shelter";
+                            icon = "Shelter_icon";
+                        }
+                        if (roomtag.tag == "ANCIENTSHELTER") {
+                            tooltip = "Ancient Shelter";
+                            icon = "AncientShelter_icon";
+                        }
+                        if (roomtag.tag == "GATE") {
+                            tooltip = "Gate";
+                            icon = "Gate_icon";
+                        }
+                        if (roomtag.tag == "SWARMROOM") {
+                            tooltip = "Swarm Room";
+                            icon = "SwarmRoom_icon";
+                        }
+                        if (roomtag.tag == "PERF_HEAVY") {
+                            tooltip = "Performance Heavy";
+                            icon = "Perf_Heavy_icon";
+                        }
+                        if (roomtag.tag == "SCAVOUTPOST") {
+                            tooltip = "Scavenger Toll";
+                            icon = "ScavOutpost_icon";
+                        }
+                        if (roomtag.tag == "SCAVTRADER") {
+                            tooltip = "Scavenger Merchant";
+                            icon = "ScavTrader_icon";
+                        }
+                        if (roomtag.tag == "NOTRACKERS") {
+                            tooltip = "No Trackers";
+                            icon = "NoTrackers_icon";
+                        }
+                        if (roomtag.tag == "ARENA") {
+                            tooltip = "Arena";
+                            icon = "Arena_icon";
+                        }
+                        taghtml += `<div class="roomtag-entry${roomtag_filter}">
+                                    <img class="roomtag-image" src="./resources/icons/${icon}.png"/>
+                                    <div class="roomtag-label"></div>
+                                    <div class="roomtag-tooltip">${tooltip}</div>
+                                    </div>`;
+                        return L.marker(latlng, {
+                            icon: L.divIcon({
+                                className: 'roomtag-divs',
+                                html: taghtml,
+                            }),
+                            interactive: false,
+                        });
+                    },
+                });
+                if (hadRoomTags) roomTagsLayer.addTo(map);
+                overlays.addOverlay(roomTagsLayer, "房间标签");
+
+                // Bat Migration Blockages
+                let hadBatMigration = map.hasLayer(batMigrationBlockagesLayer) || loadedRegion == null;
+                if (batMigrationBlockagesLayer != null) {
+                    overlays.removeLayer(batMigrationBlockagesLayer);
+                    map.removeLayer(batMigrationBlockagesLayer);
+                }
+                batMigrationBlockagesLayer = L.geoJSON(json["batmigrationblockages_features"], {
+                    pointToLayer: function (feature, latlng) {
+                        let bathtml = "";
+                        let batblockage_filter = " batblockage-filter";
+                        var icon = "";
+                        icon = "Batfly_icon";
+                        bathtml += `<div class="batblockage-entry${batblockage_filter}">
+                                    <img class="batblockage-image" src="./resources/icons/${icon}.png"/>
+                                    <div class="batblockage-label">Bat Migration Blockage</div>
+                                    <div class="batblockage-tooltip"></div>
+                                    </div>`;
+                        return L.marker(latlng, {
+                            icon: L.divIcon({
+                                className: 'batblockage-divs',
+                                html: bathtml,
+                            }),
+                            interactive: false,
+                        });
+                    },
+                });
+                if (hadBatMigration) batMigrationBlockagesLayer.addTo(map);
+                overlays.addOverlay(batMigrationBlockagesLayer, "蝙蝠迁徙阻碍");
+
+                // Zoom to room on rooms loaded
+                let foundRoom = false;
+                if (room != null && roomsLayer != null) {
+                    for (let l of roomsLayer.getLayers()) {
+                        if (l.feature.properties.name == room) {
+                            //map.fitBounds(l.getBounds());
+                            focusRoom(l);
+                            foundRoom = true;
+                            break;
+                        }
+                    }
+                }
+                if (!foundRoom) {
+                    if (room != null) {
+                        room = null;
+                        pushState();
+                    }
+                    console.log(`regionLoad err coming from ${loadedDifficulty} to ${pdifficulty}, layers len = ${roomsLayer.getLayers().length}`);
+                    resetFocus();
+                    map.setView([0, 0], -5);
+                }
+
+                loadedDifficulty = pdifficulty;
+                loadedRegion = pregion;
+                loadedModded = pmodded;
+                // Don't enable certain layers when loaded for the first time
+                if (loadedCount == 1) {
+                    map.removeLayer(placedObjectsLayer);
+                    map.removeLayer(tileNodesLayer);
+                    map.removeLayer(roomTagsLayer);
+                    map.removeLayer(batMigrationBlockagesLayer);
+                    console.log("Map has been loaded for the first time; not showing Placed Objects, Tile Nodes, Room Tags, or Bat Migration Blockages")
+                };
+                console.log("A total of " + loadedCount + " regions have been loaded");
+                loadedCount += 1;
+            }, true);
+        }
+
+        // Collapsible things
+        var uncollapsed = null;
+        var collapsible = document.querySelectorAll(".collapsible");
+
+        for (const el of collapsible) {
+            if (el.classList.contains("left-panel")) {
+                el.style.setProperty("--hide-pos", "-261.9959716796875px"); // 固定宽度的值
+            } else if (el.classList.contains("right-panel")) {
+                el.style.setProperty("--hide-pos", "-181.9932861328125px"); // 固定宽度的值
+            }
+
+            var button = el.querySelector(".collapse-tab");
+            button.addEventListener("click", (e) => {
+                if (uncollapsed != null) {
+                    uncollapsed.classList.add("collapsed");
+                }
+                if (uncollapsed == el) {
+                    uncollapsed = null;
+                } else {
+                    uncollapsed = el;
+                    el.classList.remove("collapsed");
+                }
+            });
+        }
+
+
+    </script>
+</body>
+
+</html>

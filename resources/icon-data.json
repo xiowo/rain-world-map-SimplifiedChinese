@@ -1,0 +1,2826 @@
+    [
+        {
+            "id": "random",
+            "group": "随机图标",
+            "subgroups": [
+                {
+                    "id": "random-icons",
+                    "subgroup": "图标",
+                    "items": [
+                        {
+                            "src": "./resources/icons/00_clear.png",
+                            "figcaption": "清除",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/63_none.png",
+                            "figcaption": "无",
+                            "content": "用于无生物生成"
+                        },
+                        {
+                            "src": "./resources/icons/60_randomitems_inactive.png",
+                            "figcaption": "随机项目",
+                            "content": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "tilenodes",
+            "group": "房间节点",
+            "subgroups": [
+                {
+                    "id": "tile-nodes",
+                    "subgroup": "节点",
+                    "items": [
+                        {
+                            "src": "./resources/icons/Shortcut_Dead_End_icon.png",
+                            "figcaption": "死胡同",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Shortcut_Normal_icon.png",
+                            "figcaption": "普通通道",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Shortcut_Room_Exit_icon.png",
+                            "figcaption": "房间出口",
+                            "content": "通向另一个房间"
+                        },
+                        {
+                            "src": "./resources/icons/Shortcut_Creature_Hole_icon.png",
+                            "figcaption": "生物洞",
+                            "content": "也被称为兽穴;生物在哪里生成并进入雨眠/进食"
+                        },
+                        {
+                            "src": "./resources/icons/Shortcut_NPC_Transportation_icon.png",
+                            "figcaption": "NPC 通道",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Shortcut_Region_Transportation_icon.png",
+                            "figcaption": "区域通道",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Garbage_Worm_icon.png",
+                            "figcaption": "垃圾虫",
+                            "content": "被垃圾虫占据的土地",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "未知"
+                                },
+                                {
+                                    "label": "眩晕阻力",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "未知"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Worm_Grass_icon.png",
+                            "figcaption": "舌草",
+                            "content": "虫草占据了这片土地"
+                        },
+                        {
+                            "src": "./resources/icons/Waterfall_icon.png",
+                            "figcaption": "瀑布",
+                            "content": "水会从这块地方滴下来"
+                        },
+                        {
+                            "src": "./resources/icons/Batfly_Hive_icon.png",
+                            "figcaption": "蝙蝠巢穴",
+                            "content": "蝙蝠从那里生成，可以进入它们之间穿梭，就好像它们是捷径一样"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "roomtags",
+            "group": "房间标签",
+            "subgroups": [
+                {
+                    "items": [
+                        {
+                            "src": "./resources/icons/Shelter_icon.png",
+                            "figcaption": "庇护所",
+                            "content": "允许休眠并存档"
+                        },
+                        {
+                            "src": "./resources/icons/AncientShelter_icon.png",
+                            "figcaption": "古代庇护所",
+                            "content": "一个普通庇护所的plus版本，变得更大了，增加了门和多个房间连接"
+                        },
+                        {
+                            "src": "./resources/icons/Gate_icon.png",
+                            "figcaption": "业力门",
+                            "content": "在地区之间穿行的大门"
+                        },
+                        {
+                            "src": "./resources/icons/SwarmRoom_icon.png",
+                            "figcaption": "蝙蝠生成房间",
+                            "content": "蝙蝠可以从房间内放置的巢穴中生成"
+                        },
+                        {
+                            "src": "./resources/icons/Perf_Heavy_icon.png",
+                            "figcaption": "性能繁重",
+                            "content": "一旦玩家离开房间，房间和里面的实体就会被抽象化（一种简化模拟的状态），而不是像当前房间保持实现（完全模拟）的正常行为"
+                        },
+                        {
+                            "src": "./resources/icons/ScavOutpost_icon.png",
+                            "figcaption": "拾荒者收费站/前哨站",
+                            "content": "拾荒者通行费是在放置前哨站对象的位置定义的"
+                        },
+                        {
+                            "src": "./resources/icons/ScavTrader_icon.png",
+                            "figcaption": "拾荒者商人",
+                            "content": "特定拾荒者将在这里交易"
+                        },
+                        {
+                            "src": "./resources/icons/NoTrackers_icon.png",
+                            "figcaption": "无跟踪器",
+                            "content": "当进入房间时，关键项目不会保持其跟踪状态"
+                        },
+                        {
+                            "src": "./resources/icons/Arena_icon.png",
+                            "figcaption": "竞技场",
+                            "content": "玩家进入房间后，出口将被封锁，生物将开始生成，只有在杀死生物后才能离开房间"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "slugcats",
+            "group": "蛞蝓猫",
+            "subgroups": [
+                {
+                    "items": [
+                        {
+                            "src": "./resources/icons/Monk_icon.png",
+                            "figcaption": "僧侣",
+                            "content": "身体虚弱，但精神强大。你与世界的奥秘相协调，与其中的生灵感同身受，你的旅途显然会更加安宁。“简单模式” - 总是在死亡地点生成一朵业力花。最初对大多数生物的好感度更高，肺活量为 0.83，启用Remix选项后为 1.25。生物生成经过修改，以提供更轻松的体验。",
+                            "stats": [
+                                {
+                                    "label": "初始房间",
+                                    "value": "SU_C04"
+                                },
+                                {
+                                    "label": "初始业力 (最大)",
+                                    "value": "1 (5)"
+                                },
+                                {
+                                    "label": "以沟通标记开头",
+                                    "value": "否"
+                                },
+                                {
+                                    "label": "撕咬能力",
+                                    "value": "否"
+                                },
+                                {
+                                    "label": "每次冬眠的食物 (最大)",
+                                    "value": "3 (5)"
+                                },
+                                {
+                                    "label": "饮食",
+                                    "value": "标准"
+                                },
+                                {
+                                    "label": "肺活量",
+                                    "value": "0.83 or 1.25"
+                                },
+                                {
+                                    "label": "长矛伤害",
+                                    "value": "0.6-0.9"
+                                },
+                                {
+                                    "label": "移动速度",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "体重",
+                                    "value": "0.95"
+                                },
+                                {
+                                    "label": "行动响度",
+                                    "value": "0.75"
+                                },
+                                {
+                                    "label": "可见性修正",
+                                    "value": "-0.1"
+                                },
+                                {
+                                    "label": "潜行能力",
+                                    "value": "0.6"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Survivor_icon.png",
+                            "figcaption": "求生者",
+                            "content": "身手敏捷的杂食动物，既是捕食者也是猎物。你迷失在一片冷酷无情的土地上，一切只能靠自己，智慧和谨慎是你最重要的素质。“普通模式” - 大多数生物属性都是基于默认玩家角色的值设置为 1.0，这是比较其他蛞蝓猫和生物的基线。",
+                            "stats": [
+                                {
+                                    "label": "初始房间",
+                                    "value": "SU_C04"
+                                },
+                                {
+                                    "label": "初始业力 (最大)",
+                                    "value": "1 (5)"
+                                },
+                                {
+                                    "label": "以沟通标记开头",
+                                    "value": "否"
+                                },
+                                {
+                                    "label": "撕咬能力",
+                                    "value": "否"
+                                },
+                                {
+                                    "label": "每次冬眠的食物 (最大)",
+                                    "value": "4 (7)"
+                                },
+                                {
+                                    "label": "饮食",
+                                    "value": "标准"
+                                },
+                                {
+                                    "label": "肺活量",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "长矛伤害",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "移动速度",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "体重",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "行动响度",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "可见性修正",
+                                    "value": "0"
+                                },
+                                {
+                                    "label": "潜行能力",
+                                    "value": "0.5"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Hunter_icon.png",
+                            "figcaption": "猎手",
+                            "content": "强壮而迅捷，新陈代谢旺盛，需要稳定的肉类供给。但果腹不会是你面临的唯一难题，毕竟猎手之路危机四伏。“困难模式” - 在永久死亡之前只有有限的雨期。最初在大多数生物中好感度较低，能够在其背上储存和取回长矛。生物生成使用其专属的改动，以获得更难的体验。",
+                            "stats": [
+                                {
+                                    "label": "初始房间",
+                                    "value": "LF_H01"
+                                },
+                                {
+                                    "label": "初始业力 (最大)",
+                                    "value": "3 (5)"
+                                },
+                                {
+                                    "label": "以沟通标记开头",
+                                    "value": "是"
+                                },
+                                {
+                                    "label": "撕咬能力",
+                                    "value": "否"
+                                },
+                                {
+                                    "label": "每次冬眠的食物 (最大)",
+                                    "value": "6 (9)"
+                                },
+                                {
+                                    "label": "饮食",
+                                    "value": "生物尸体 & 标准食物的1/4点"
+                                },
+                                {
+                                    "label": "肺活量",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "长矛伤害",
+                                    "value": "1.25"
+                                },
+                                {
+                                    "label": "移动速度",
+                                    "value": "1.2"
+                                },
+                                {
+                                    "label": "体重",
+                                    "value": "1.12"
+                                },
+                                {
+                                    "label": "行动响度",
+                                    "value": "1.35"
+                                },
+                                {
+                                    "label": "可见性修正",
+                                    "value": "0.1"
+                                },
+                                {
+                                    "label": "潜行能力",
+                                    "value": "0.3"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Gourmand_icon.png",
+                            "figcaption": "饕餮",
+                            "content": "沉迷于生活中简单的乐趣，将世界纳于腹中。其特点可以带来许多战术优势，但代价是容易气喘吁吁。沉重且移动速度缓慢，容易喘气，喘气时暂时降低肺活量、移动速度和长矛伤害，直到恢复体力。可以使用它的重量作为武器，并通过组合两个物品来制作新的物品和食物。",
+                            "stats": [
+                                {
+                                    "label": "初始房间",
+                                    "value": "SH_GOR02"
+                                },
+                                {
+                                    "label": "初始业力 (最大)",
+                                    "value": "1 (5)"
+                                },
+                                {
+                                    "label": "以沟通标记开头",
+                                    "value": "否"
+                                },
+                                {
+                                    "label": "撕咬能力",
+                                    "value": "否"
+                                },
+                                {
+                                    "label": "每次冬眠的食物 (最大)",
+                                    "value": "7 (11)"
+                                },
+                                {
+                                    "label": "饮食",
+                                    "value": "标准 & 生物尸体的1/2点"
+                                },
+                                {
+                                    "label": "肺活量",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "长矛伤害",
+                                    "value": "3 (0.3)"
+                                },
+                                {
+                                    "label": "移动速度",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "体重",
+                                    "value": "1.35"
+                                },
+                                {
+                                    "label": "行动响度",
+                                    "value": "1.5"
+                                },
+                                {
+                                    "label": "可见性修正",
+                                    "value": "0.3"
+                                },
+                                {
+                                    "label": "潜行能力",
+                                    "value": "0.2"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Artificer_icon.png",
+                            "figcaption": "工匠",
+                            "content": "一位凶猛的斗士，掌握烈火与爆炸之力。怀着向食物链顶层攀登的决心，你的旅途必将伴随着流血与战争。“困难模式” - 具有通过爆炸来二段跳和眩晕生物的能力，可以将某些物品变成爆炸物，攻击生物，并且对拾荒者的攻击力最大。",
+                            "stats": [
+                                {
+                                    "label": "初始房间",
+                                    "value": "GW_A24"
+                                },
+                                {
+                                    "label": "初始业力 (最大)",
+                                    "value": "1 (1)"
+                                },
+                                {
+                                    "label": "以沟通标记开头",
+                                    "value": "否"
+                                },
+                                {
+                                    "label": "撕咬能力",
+                                    "value": "是"
+                                },
+                                {
+                                    "label": "每次冬眠的食物 (最大)",
+                                    "value": "6 (9)"
+                                },
+                                {
+                                    "label": "饮食",
+                                    "value": "生物尸体 & 标准食物的1/4点"
+                                },
+                                {
+                                    "label": "肺活量",
+                                    "value": "短时间后死亡"
+                                },
+                                {
+                                    "label": "长矛伤害",
+                                    "value": "1.25"
+                                },
+                                {
+                                    "label": "移动速度",
+                                    "value": "1.2"
+                                },
+                                {
+                                    "label": "体重",
+                                    "value": "1.12"
+                                },
+                                {
+                                    "label": "行动响度",
+                                    "value": "1.35"
+                                },
+                                {
+                                    "label": "可见性修正",
+                                    "value": "0.1"
+                                },
+                                {
+                                    "label": "潜行能力",
+                                    "value": "0.3 (0.6x 标准)"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Rivulet_icon.png",
+                            "figcaption": "溪流",
+                            "content": "能够在水下呼吸，轻巧地穿梭于世界之中。这些进化至关重要，因为你将面对一个洪水愈加泛滥的世界，时间弥足珍贵。在水中和水中都具有很高的敏捷性，具有出色的肺活量，还能使泡水果在手中直接膨胀开。",
+                            "stats": [
+                                {
+                                    "label": "初始房间",
+                                    "value": "DS_RIVSTART"
+                                },
+                                {
+                                    "label": "初始业力 (最大)",
+                                    "value": "1 (5)"
+                                },
+                                {
+                                    "label": "以沟通标记开头",
+                                    "value": "是"
+                                },
+                                {
+                                    "label": "撕咬能力",
+                                    "value": "否"
+                                },
+                                {
+                                    "label": "每次冬眠的食物 (最大)",
+                                    "value": "5 (6)"
+                                },
+                                {
+                                    "label": "饮食",
+                                    "value": "标准"
+                                },
+                                {
+                                    "label": "肺活量",
+                                    "value": "6.67"
+                                },
+                                {
+                                    "label": "长矛伤害",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "移动速度",
+                                    "value": "1.75"
+                                },
+                                {
+                                    "label": "体重",
+                                    "value": "0.95"
+                                },
+                                {
+                                    "label": "行动响度",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "可见性修正",
+                                    "value": "0"
+                                },
+                                {
+                                    "label": "潜行能力",
+                                    "value": "0.5"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Spearmaster_icon.png",
+                            "figcaption": "矛大师",
+                            "content": "一个异常生物，用从身上拔下的针吸食猎物。一位来自遥远地域的旅人；信使啊，内心深处的某种感觉驱使你再次踏上旅程…… “困难模式” - 通过尾巴生成长矛，用来刺穿和吸取其他生物的血肉。矛大师只能通过这种方式果腹。",
+                            "stats": [
+                                {
+                                    "label": "初始房间",
+                                    "value": "GATE_OE_SU"
+                                },
+                                {
+                                    "label": "初始业力 (最大)",
+                                    "value": "1 (5)"
+                                },
+                                {
+                                    "label": "以沟通标记开头",
+                                    "value": "否"
+                                },
+                                {
+                                    "label": "撕咬能力",
+                                    "value": "否"
+                                },
+                                {
+                                    "label": "每次冬眠的食物 (最大)",
+                                    "value": "5 (10)"
+                                },
+                                {
+                                    "label": "饮食",
+                                    "value": "吸食活的生物和爆米花"
+                                },
+                                {
+                                    "label": "肺活量",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "长矛伤害",
+                                    "value": "1.25"
+                                },
+                                {
+                                    "label": "移动速度",
+                                    "value": "1.2"
+                                },
+                                {
+                                    "label": "体重",
+                                    "value": "0.85"
+                                },
+                                {
+                                    "label": "行动响度",
+                                    "value": "1.35"
+                                },
+                                {
+                                    "label": "可见性修正",
+                                    "value": "0.1"
+                                },
+                                {
+                                    "label": "潜行能力",
+                                    "value": "0.3"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Saint_icon.png",
+                            "figcaption": "圣徒",
+                            "content": "十分柔弱，长着一条长舌头。行走于此途需要谨慎、耐心，与世界达成完美的共鸣，你的旅途将是迈向圆满的启迪之路。开始游戏，有一系列独特的机制，例如用长舌黏附在天花板或墙壁上荡来荡去，还能通过按上下键控制舌头长度。然而，圣徒无法正常投掷长矛，因此很难保护自己。",
+                            "stats": [
+                                {
+                                    "label": "初始房间",
+                                    "value": "SI_SAINTINTRO"
+                                },
+                                {
+                                    "label": "初始业力 (最大)",
+                                    "value": "1 (2)"
+                                },
+                                {
+                                    "label": "以沟通标记开头",
+                                    "value": "N/a"
+                                },
+                                {
+                                    "label": "撕咬能力",
+                                    "value": "否"
+                                },
+                                {
+                                    "label": "每次冬眠的食物 (最大)",
+                                    "value": "4 (5)"
+                                },
+                                {
+                                    "label": "饮食",
+                                    "value": "素食，包括蛋和萤火虫蛋"
+                                },
+                                {
+                                    "label": "肺活量",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "长矛伤害",
+                                    "value": "N/a"
+                                },
+                                {
+                                    "label": "移动速度",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "体重",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "行动响度",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "可见性修正",
+                                    "value": "0"
+                                },
+                                {
+                                    "label": "潜行能力",
+                                    "value": "0.5"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Sofanthiel_icon.png",
+                            "figcaption": "Sofanthiel / Inv / ???",
+                            "content": "谢了，安德鲁。<br>？？？——被玩家们称作彩蛋猫或怪猫，是一只不属于官方设定的、DLC倾盆大雨中加入的隐藏蛞蝓猫。Meme难度 - 极其惩罚和不公平。具有伤害生物的能力，并在每个雨期开始时生成奇点炸弹。",
+                            "stats": [
+                                {
+                                    "label": "初始房间",
+                                    "value": "SH_E01"
+                                },
+                                {
+                                    "label": "初始业力 (最大)",
+                                    "value": "1 (5)"
+                                },
+                                {
+                                    "label": "以沟通标记开头",
+                                    "value": "是"
+                                },
+                                {
+                                    "label": "撕咬能力",
+                                    "value": "是"
+                                },
+                                {
+                                    "label": "每次冬眠的食物 (最大)",
+                                    "value": "12 (12)"
+                                },
+                                {
+                                    "label": "饮食",
+                                    "value": "标准 & 生物尸体的1/2点"
+                                },
+                                {
+                                    "label": "肺活量",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "长矛伤害",
+                                    "value": "0.6-0.9"
+                                },
+                                {
+                                    "label": "移动速度",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "体重",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "行动响度",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "可见性修正",
+                                    "value": "0"
+                                },
+                                {
+                                    "label": "潜行能力",
+                                    "value": "0.5"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/66_nightcat.png",
+                            "figcaption": "守望者 / 夜猫",
+                            "content": "在1.5至1.9版本中，夜猫没有属于自己的流程，并且只在竞技场模式中出现。由于DLC更多蛞蝓猫扩展包对竞技场角色的修改，加载扩展包后夜猫不会再竞技场模式中出现。竞技场模式中，夜猫没有特殊能力，数值上与求生者相同，外表为蓝黑色，有着白色的眼睛与鼻子。",
+                            "stats": [
+                                {
+                                    "label": "初始房间",
+                                    "value": "*"
+                                },
+                                {
+                                    "label": "初始业力 (最大)",
+                                    "value": "*"
+                                },
+                                {
+                                    "label": "以沟通标记开头",
+                                    "value": "*"
+                                },
+                                {
+                                    "label": "撕咬能力",
+                                    "value": "*"
+                                },
+                                {
+                                    "label": "每次冬眠的食物 (最大)",
+                                    "value": "*"
+                                },
+                                {
+                                    "label": "饮食",
+                                    "value": "*"
+                                },
+                                {
+                                    "label": "肺活量",
+                                    "value": "*"
+                                },
+                                {
+                                    "label": "长矛伤害",
+                                    "value": "*"
+                                },
+                                {
+                                    "label": "移动速度",
+                                    "value": "*"
+                                },
+                                {
+                                    "label": "体重",
+                                    "value": "*"
+                                },
+                                {
+                                    "label": "行动响度",
+                                    "value": "*"
+                                },
+                                {
+                                    "label": "可见性修正",
+                                    "value": "*"
+                                },
+                                {
+                                    "label": "潜行能力",
+                                    "value": "*"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Slugpup_icon.png",
+                            "figcaption": "蛞蝓猫幼崽",
+                            "content": "蛞蝓猫幼崽是在倾盆大雨DLC中加入的一种新生物。完成饕餮的食谱任务并达成归乡结局后，饕餮、求生者和猎手的流程中会生成猫崽。它们是蛞蝓猫的幼年形态，只能依赖玩家活下去。",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "group": "生物",
+            "id": "creatures",
+            "subgroups": [
+                {
+                    "id": "lizards",
+                    "subgroup": "蜥蜴",
+                    "items": [
+                        {
+                            "src": "./resources/icons/Green_Lizard_icon.png",
+                            "figcaption": "绿蜥蜴",
+                            "content": "巨大但缓慢。有能力冲向猎物",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "5"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "2.5"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Pink_Lizard_icon.png",
+                            "figcaption": "粉蜥蜴",
+                            "content": "和绿蜥蜴差不多，无特殊属性",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "2"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Blue_Lizard_icon.png",
+                            "figcaption": "蓝蜥蜴",
+                            "content": "具有爬墙的能力，并具有将物体拉向自身的短距离舌头",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.5"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/White_Lizard_icon.png",
+                            "figcaption": "白蜥蜴",
+                            "content": "具有爬墙和静止时伪装自己的能力，具有远距离舌头",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "1.8"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.9"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Black_Lizard_icon.png",
+                            "figcaption": "黑蜥蜴",
+                            "content": "没有视力，通过声音感知玩家",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "2"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Yellow_Lizard_icon.png",
+                            "figcaption": "黄蜥蜴",
+                            "content": "始终成群结队地出现，具有类似群体思维的能力，可以在彼此之间传达感知到玩家存在的信息",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "1.6"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.8"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Cyan_Lizard_icon.png",
+                            "figcaption": "青色蜥蜴",
+                            "content": "具有攀爬墙壁的能力，可快速的展开高度敏捷的跳跃，气体推动它们在空中飞行，距离取决于蓄力时间",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "1.8"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.9"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Red_Lizard_icon.png",
+                            "figcaption": "烈焰蜥蜴",
+                            "content": "非常高的敏捷性，能够快速向猎物吐出小球以击退和减缓它们。启用Remix选项Alpha红蜥蜴后，它们还有一个中程舌头，可以抓住玩家携带的物体，并且能够折断他们抓住的长矛",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "6"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "3"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Salamander_icon.png",
+                            "figcaption": "蝾螈",
+                            "content": "虽然在陆地上的敏捷性低，但在水中的敏捷性高，经常充当伏击捕食者，一动不动地坐在水池底部，直到发现猎物",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "2"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Caramel_Lizard_icon.png",
+                            "figcaption": "焦糖蜥蜴",
+                            "content": "拥有绿蜥蜴的笨重，能够在空中向猎物猛扑，经常在途中磕磕绊绊，并能像红蜥蜴一样吐出小球",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "5"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "2.5"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Strawberry_Lizard_icon.png",
+                            "figcaption": "草莓蜥蜴",
+                            "content": "在食物链的底层，吃蝠蝇，它可以伸出长长的舌头将自己拉向被抓住的目标",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "2.4"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "1.2"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Eel_Lizard_icon.png",
+                            "figcaption": "鳗蜥蜴",
+                            "content": "陆地上只有可怜的敏捷性，在水下具有出色的视野和敏捷性。在水下可以通过其发光的头部来识别",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "1.6"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.8"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Train_Lizard_icon.png",
+                            "figcaption": "火车蜥蜴",
+                            "content": "",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "8"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "4"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "centipede",
+                    "subgroup": "蜈蚣",
+                    "items": [
+                        {
+                            "src": "./resources/icons/Infant_Centipede_icon.png",
+                            "figcaption": "幼年蜈蚣",
+                            "content": "可以被抓起来吃掉，但如果被抓足够长的时间，会电击并眩晕捕食者",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "无"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Infant_Centipede_AlternateForm_icon.png",
+                            "figcaption": "幼年蜈蚣 (变种)",
+                            "content": "只是外观上的差异，类似于“幼年蜈蚣”"
+                        },
+                        {
+                            "src": "./resources/icons/Adult_Centipede_icon.png",
+                            "figcaption": "成年蜈蚣",
+                            "content": "其体型范围从玩家的体重到刚刚超过，因此从中立到敌对（如果交战）",
+                            "stats": [
+                                {
+                                    "label": "最大生命值 (幼体)",
+                                    "value": "0.69-1.32"
+                                },
+                                {
+                                    "label": "最大生命值 (成体)",
+                                    "value": "1.32–2.56"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.6"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Overgrown_Centipede_icon.png",
+                            "figcaption": "过度生长的蜈蚣",
+                            "content": "总是有比玩家大得多的质量，使其特别敌对",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "2.56–12"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.6"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Red_Centipede_icon.png",
+                            "figcaption": "烈焰蜈蚣",
+                            "content": "“困难模式变体” -类似于过度生长的蜈蚣，具有固定的尺寸、额外的生命值、高攻击性和高抵抗力的甲壳",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "13.3 或 ≈9.195"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.6"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Centiwing_icon.png",
+                            "figcaption": "飞蜈蚣",
+                            "content": "长度较短，具有飞行能力。最初对玩家保持中立，但随着时间的推移会逐渐变得敌对。",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "≈2.31-3.2"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.6"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Aquapede_icon.png",
+                            "figcaption": "水蜈蚣",
+                            "content": "疯狂的水下灵活性，几乎无所不能的水下瞄准镜。抓住猎物并将其电击致死，如果有机会，他甚至可以杀死利维坦",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "≈1.88-6.53"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.6"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "rot",
+                    "subgroup": "腐化生物",
+                    "items": [
+                        {
+                            "src": "./resources/icons/Brother_Long_Legs_icon.png",
+                            "figcaption": "黄长腿菌",
+                            "content": "仅通过触摸感知玩家，触手、囊肿核心较小，灵活性强",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "100"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "2"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Daddy_Long_Legs_icon.png",
+                            "figcaption": "蓝长腿菌",
+                            "content": "仅通过声音和触摸感知玩家，触手长度中等，囊肿核心灵活",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "200"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "200"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Mother_Long_Legs_icon.png",
+                            "figcaption": "紫长腿菌",
+                            "content": "只能通过声音和触摸感知玩家，灵活性较低，触角超长，囊肿核心很大",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "400"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "4"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Hunter_Long_Legs_icon.png",
+                            "figcaption": "猎手长腿菌",
+                            "content": "通过声音、视觉和触觉感知玩家，最小的腐化生物，只具有较少和短的触手，有一个猎人形状的囊肿核心",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "50"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "2"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "spiders",
+                    "subgroup": "蜘蛛",
+                    "items": [
+                        {
+                            "src": "./resources/icons/Coalescipede_icon.png",
+                            "figcaption": "小蜘蛛",
+                            "content": "小而多。通过群集攻击猎物，如果蜘蛛的累积质量大于猎物，则其将被杀死",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "无"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.1"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "0.1"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Big_Spider_icon.png",
+                            "figcaption": "狼蛛",
+                            "content": "一只体型较大的蜘蛛，在发出嘶嘶声并向猎物猛扑之前会露出獠牙",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.6"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.5"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Spitter_Spider_icon.png",
+                            "figcaption": "烈焰狼蛛",
+                            "content": "不像普通的大蜘蛛那样敏捷，但它可以通过从远处跟踪猎物并射出有毒的针头来弥补，这些针头在受影响的生物身上形成衰弱的眩晕，然后取回无法移动的猎物",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "1.1"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.6"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Mother_Spider_icon.png",
+                            "figcaption": "母蛛",
+                            "content": "最大的蜘蛛，会打滑和躲避其他生物，如果搅动蜘蛛足够长的时间或不后退，他就会冲向这些生物。死亡后释放大量聚结虫",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "1.1"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.6"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "subgroup": "其他生物",
+                    "id": "OtherCreatures",
+                    "items": [
+                        {
+                            "src": "./resources/icons/White_Squidcada_icon.png",
+                            "figcaption": "白色蝉乌贼",
+                            "content": "与玩家差不多大小的空中生物，在他们的领地内漫无目的地盘旋和思考。可以通过悬停在水面上并让水蛭附着自己，通过飞出水面来消耗它来“钓鱼”。",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.8"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Black_Squidcada_icon.png",
+                            "figcaption": "黑色蝉乌贼",
+                            "content": "蝉乌贼也可以被玩家用双手抓住，利用它们的翅膀来减缓自己的下降速度并穿过大缝隙",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.8"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Snail_icon.png",
+                            "figcaption": "波动龟",
+                            "content": "在靠近不喜欢的生物时，会发出砰砰声，使附近的生物眩晕。可以用双手捡起并投掷以击晕附近的生物",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.4"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.8"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Red_Leech_icon.png",
+                            "figcaption": "红水蛭",
+                            "content": "附着在猎物上并试图用成群结队方式将其拖入水中并淹死它们。蝉乌贼积极“捕鱼”并吃水蛭",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "无"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.1"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "0.1"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Blue_Leech_icon.png",
+                            "figcaption": "蓝水蛭",
+                            "content": "更长的水蛭，具有更大的质量和敏捷性，可以拉入水并淹死猎物",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "无"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.1"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "0.2"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Jungle_Leech_icon.png",
+                            "figcaption": "丛林水蛭",
+                            "content": "不通过拉入水来淹死猎物，具有跳跃和持久的吸附能力，除非强行解开，否则玩家会定期从猎物身上吸干食物点",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "无"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.2"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "0.2"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Pole_Plant_icon.png",
+                            "figcaption": "拟态草",
+                            "content": "细微的扭动以表明其真实性质，在进入房间时最明显，否则会把抓住它们的生物拉进它们的巢穴。通常从地面开始垂直方向，很少从屋顶倒置甚至水平开始。",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.9"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.5"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Monster_Kelp_icon.png",
+                            "figcaption": "红树",
+                            "content": "一只绿叶柔韧的手臂，可以抓住触手可及的移动生物，并将其拉入巢穴。不过你可以通过极慢地移动它们来绕过它们。",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "2.5"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.8"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Scavenger_icon.png",
+                            "figcaption": "拾荒者",
+                            "content": "聪明的灵长类动物，能够使用岩石和长矛，进行交易，交流，并与玩家形成有益或有害的关系",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "1.1"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "1.3"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "1.5"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Elite_Scavenger_icon.png",
+                            "figcaption": "精英拾荒者",
+                            "content": "高级拾荒者，拥有更好的武器，独特的秃鹫面具，能够弧形投掷和跳跃。主要发现于猎人、工匠和长矛大师时代。",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "2.2"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "1.3"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "3.5"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Chieftain_Scavenger_icon.png",
+                            "figcaption": "拾荒者酋长",
+                            "content": "所有拾荒者的酋长，拥有一个独特的面具，三片烈焰蜈蚣鳞甲护体，沟通的标记，和一架公民身份无人机",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "4"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "1.3"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "4"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Vulture_icon.png",
+                            "figcaption": "秃鹫",
+                            "content": "从空中俯冲下来的大型空中捕食者，能够杀死大多数陆地生物",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "8.5"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "3.5"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/King_Vulture_icon.png",
+                            "figcaption": "魔王鹫",
+                            "content": "一只更复杂的秃鹫，有两根可伸缩的矛叉，它用它作为激光制导的矛叉来抓住和杀死生物。",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "12.5"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "6.5"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Miros_Bird_icon.png",
+                            "figcaption": "钢鸟",
+                            "content": "敏捷的金属剪刀般的腿和锋利的喙，可以抓住并杀死大多数陆地生物。可以使用闪光果将其致盲",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "7"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "2.75"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Miros_Vulture_icon.png",
+                            "figcaption": "钢秃鹫",
+                            "content": "钢鸟的进化体，比普通的秃鹫更具杀伤力",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "15"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "5.5"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Grapple_Worm_icon.png",
+                            "figcaption": "管虫",
+                            "content": "实用生物;可以用一只胳膊抓住并在缝隙中摆动",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.3"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.3"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "1.2"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Lantern_Mouse_icon.png",
+                            "figcaption": "光鼠",
+                            "content": "脆弱而滑溜溜的生物，经常吊在屋顶上，由某种可伸缩的绳尾巴悬挂。活着时会发光。",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.5"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.4"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Rain_Deer_icon.png",
+                            "figcaption": "雨鹿",
+                            "content": "雨鹿能够绕过虫草的威胁，被烟雾果吸引并吃掉，它们趴在靠近地面的地面上时可供玩家搭便车",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "200"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "8"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Eggbug_icon.png",
+                            "figcaption": "蛋虫",
+                            "content": "敏捷性高，能够躲避半空中投掷的长矛。死亡时掉落附着在身体上的蛋虫卵",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.15"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.3"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "0.7"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Dropwig_icon.png",
+                            "figcaption": "落网虫",
+                            "content": "伏击捕食者，爬上屋顶并悬挂在屋顶上，等待扑向在下面行走的生物。经常看到使用物体作为诱饵，携带物品并在安顿到栖息处时将其放下。",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.95"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.6"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Adult_Noodlefly_icon.png",
+                            "figcaption": "成年面条虫",
+                            "content": "有翅膀的飞虫。在自身或幼崽受到威胁时，会使松弛的针状舌头伸展并变硬，然后冲上去刺伤攻击者。",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.4"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "1.2"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Infant_Noodlefly_icon.png",
+                            "figcaption": "幼年面条虫",
+                            "content": "较小的面条蝇，没有自卫能力，可以捡起来吃。",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.2"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.4"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Jetfish_icon.png",
+                            "figcaption": "蛙鱼",
+                            "content": "水生生物，允许玩家抓住以快速穿越水面。喜欢蓝色水果，喂食后会提高好感度。达到一定程度时可能会骚扰不喜欢的生物，甚至淹死它们",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.95"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.9"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Leviathan_icon.png",
+                            "figcaption": "利维坦",
+                            "content": "大型机械鳗鱼状生物，在大片水体中徘徊，用无法逃脱的嘴吞噬猎物",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "1,000"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "1,000"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Overseer_icon.png",
+                            "figcaption": "监视者",
+                            "content": "迭代器专用的有机体，用于在罐子外进行侦察和监视。经常看到投影图像并帮助引导玩家。",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.9"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.5"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Firebug_icon.png",
+                            "figcaption": "火虫",
+                            "content": "与蛋虫相似，但会恶毒地咬住并杀死任何攻击其蛋的生物。",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "1.4"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "1.3"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "4"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Inspector_icon.png",
+                            "figcaption": "监察者",
+                            "content": "DLC倾盆大雨独有的生物。它们颜色各异，三颗头通过各自的长颈连接在躯体上。它们保护着迭代器的神经元。",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "5"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Yeek_icon.png",
+                            "figcaption": "跃客",
+                            "content": "跃客是一种善于跳跃的、多动的蛙状生物，仅出现在DLC倾盆大雨中。它们是被动生物，会借助两条棒状附肢在开阔地带四处跃动，通常集群出现，个体间不会离得过远。",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.5"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.2"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Batfly_icon.png",
+                            "figcaption": "蝠蝇",
+                            "content": "弱小的飞行猎物，可以被扔出的石头杀死，也可以被长矛串起来，一次取回几个",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "无"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.2"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "0.15"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "creatureattributes",
+            "group": "生物属性",
+            "subgroups": [
+                {
+                    "items": [
+                        {
+                            "src": "./resources/icons/PreCycle_icon.png",
+                            "figcaption": "预循环",
+                            "content": "仅在预循环期间生成"
+                        },
+                        {
+                            "src": "./resources/icons/Night_icon.png",
+                            "figcaption": "月亮",
+                            "content": "仅在夜间生成，适用于具有适用昼/夜循环的区域"
+                        },
+                        {
+                            "src": "./resources/icons/IgnoreCycle_icon.png",
+                            "figcaption": "忽略雨循环",
+                            "content": "通常在雨循环开始时生成，但不会在雨循环结束时雨眠，通常在没有正常降雨威胁的区域/地区"
+                        },
+                        {
+                            "src": "./resources/icons/TentacleImmune_icon.png",
+                            "figcaption": "触手免疫",
+                            "content": "（游戏中未使用）不能被虫草或腐化生物抓住"
+                        },
+                        {
+                            "src": "./resources/icons/AlternateForm_icon.png",
+                            "figcaption": "替代形式",
+                            "content": "将某些生物的标准属性修改为预定义的状态，通常仅为外观状态"
+                        },
+                        {
+                            "src": "./resources/icons/LavaSafe_icon.png",
+                            "figcaption": "Lava Safe",
+                            "content": "与虚空流体接触时不会受到伤害"
+                        },
+                        {
+                            "src": "./resources/icons/VoidSea_icon.png",
+                            "figcaption": "虚空海",
+                            "content": "其中充斥着虚空流体，越发靠近虚空海，黄金一般的特效会变得越发粘稠，灵魂一样的东西也会越发明显"
+                        },
+                        {
+                            "src": "./resources/icons/Winter_icon.png",
+                            "figcaption": "冬",
+                            "content": "将类似雪的效果和调色板更改应用于预定义的生物"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "placedobjects",
+            "group": "放置的物体",
+            "subgroups": [
+                {
+                    "id": "placedcreatures",
+                    "subgroup": "放置的生物",
+                    "items": [
+                        {
+                            "src": "./resources/icons/Jellyfish_icon.png",
+                            "figcaption": "水母",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Giant_Jellyfish_icon.png",
+                            "figcaption": "巨型水母",
+                            "content": "",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "2"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.6"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Stowaway_icon.png",
+                            "figcaption": "藤壶",
+                            "content": "",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.8"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "2"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Guardian_icon.png",
+                            "figcaption": "守卫",
+                            "content": "",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "10,000,000"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "10,000,000"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "无"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/HR_Guard_icon.png",
+                            "figcaption": "HR 守卫",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Vulture_Grub_icon.png",
+                            "figcaption": "射线虫",
+                            "content": "",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.3"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.3"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "0.6"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Dead_Vulture_Grub_icon.png",
+                            "figcaption": "死亡的射线虫",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Hazer_icon.png",
+                            "figcaption": "墨鱼",
+                            "content": "",
+                            "stats": [
+                                {
+                                    "label": "最大生命值",
+                                    "value": "0.3"
+                                },
+                                {
+                                    "label": "眩晕抗性",
+                                    "value": "0.3"
+                                },
+                                {
+                                    "label": "瞬间死亡阈值",
+                                    "value": "0.6"
+                                }
+                            ]
+                        },
+                        {
+                            "src": "./resources/icons/Dead_Hazer_icon.png",
+                            "figcaption": "死亡的墨鱼",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Echo_icon.png",
+                            "figcaption": "回响",
+                            "content": "蛞蝓猫遇到的回响为雨世界以前的文明种族“古人”的精神残骸，它们形态为有着金色的鳞片和长鼻子的巨大黑色聚合体，像胎儿一样悬浮在空中，永远的被禁锢在现世与飞升之间。"
+                        }
+                    ]
+                },
+                {
+                    "id": "consumable",
+                    "title": "消耗品",
+                    "items": [
+                        {
+                            "src": "./resources/icons/Dandelion_Peach_icon.png",
+                            "figcaption": "蒲公英桃",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Gooieduck_icon.png",
+                            "figcaption": "悬垂霉菌",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Lilypuck_icon.png",
+                            "figcaption": "百合花灯",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Glow_Weed_icon.png",
+                            "figcaption": "发光果",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Blue_Fruit_icon.png",
+                            "figcaption": "蓝果",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Karma_Flower_icon.png",
+                            "figcaption": "业力花",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Mushroom_icon.png",
+                            "figcaption": "迷幻菇",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Slime_Mold_icon.png",
+                            "figcaption": "黏菌",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Bubble_Fruit_icon.png",
+                            "figcaption": "泡水果",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Bubble_Weed_icon.png",
+                            "figcaption": "气泡草",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Beehive_icon.png",
+                            "figcaption": "蜂巢",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Batnip_icon.png",
+                            "figcaption": "蝠蝇草",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Cherrybomb_icon.png",
+                            "figcaption": "鞭炮草",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Flashbang_icon.png",
+                            "figcaption": "闪光果",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Spore_Puff_icon.png",
+                            "figcaption": "烟雾果",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Lantern_icon.png",
+                            "figcaption": "灯笼",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_misc_icon.png",
+                            "figcaption": "珍珠（杂项）",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Rubbish_icon.png",
+                            "figcaption": "垃圾",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Grenade_icon.png",
+                            "figcaption": "手雷 / 拾荒者炸弹",
+                            "content": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "non-consumable",
+                    "title": "非消耗品",
+                    "items": [
+                        {
+                            "src": "./resources/icons/Colored_Popcorn_Plant_icon.png",
+                            "figcaption": "爆米花",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Noodlefly_Egg_icon.png",
+                            "figcaption": "面条蝇卵",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Spear_icon.png",
+                            "figcaption": "矛",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Explosive_Spear_icon.png",
+                            "figcaption": "炸矛",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Vulture_Mask_icon.png",
+                            "figcaption": "秃鹫面具",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Cloak_icon.png",
+                            "figcaption": "月姐的斗篷",
+                            "content": "在MS_FARSIDE中作为求生者、僧侣和猎手出现，并在溪流和圣猫时间线被仰望皓月所穿戴"
+                        }
+                    ]
+                },
+                {
+                    "id": "collectabletokens",
+                    "title": "可收集代币",
+                    "items": [
+                        {
+                            "src": "./resources/icons/Gold_Token_icon.png",
+                            "figcaption": "竞技场区域地图",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Blue_Token_icon.png",
+                            "figcaption": "生物/物体",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Green_Token_icon.png",
+                            "figcaption": "竞技场角色",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Red_Token_icon.png",
+                            "figcaption": "探险区域",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Dev_Token_icon.png",
+                            "figcaption": "开发者评论令牌",
+                            "content": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "broadcasts",
+                    "title": "广播",
+                    "items": [
+                        {
+                            "src": "./resources/icons/Broadcast_cc_icon.png",
+                            "figcaption": "CC",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Broadcast_dm_icon.png",
+                            "figcaption": "DM",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Broadcast_ds_icon.png",
+                            "figcaption": "DS",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Broadcast_gw_icon.png",
+                            "figcaption": "GW",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Broadcast_hi_icon.png",
+                            "figcaption": "HI",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Broadcast_lm_icon.png",
+                            "figcaption": "LM",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Broadcast_sb_icon.png",
+                            "figcaption": "SB",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Broadcast_sh_icon.png",
+                            "figcaption": "SH",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Broadcast_si_icon.png",
+                            "figcaption": "SI",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Broadcast_pre-pebbles_icon.png",
+                            "figcaption": "Pre-Pebbles Broadcast",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Broadcast_post-pebbles_icon.png",
+                            "figcaption": "Post-Pebbles Broadcast",
+                            "content": ""
+                        }
+                    ]
+                },
+                {
+                    "section": "pearls",
+                    "items": [
+                        {
+                            "src": "./resources/icons/Pearl_broadcastmisc_icon.png",
+                            "figcaption": "广播杂项",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_cc_icon.png",
+                            "figcaption": "cc",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_cl_icon.png",
+                            "figcaption": "cl",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_dm_icon.png",
+                            "figcaption": "dm",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_ds_icon.png",
+                            "figcaption": "ds",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_gw_icon.png",
+                            "figcaption": "gw",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_hi_icon.png",
+                            "figcaption": "hi",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_lc_icon.png",
+                            "figcaption": "lc",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_lc_second_icon.png",
+                            "figcaption": "lc_second",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_lf_bottom_icon.png",
+                            "figcaption": "lf_bottom",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_lf_west_icon.png",
+                            "figcaption": "lf_west",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_misc_icon.png",
+                            "figcaption": "misc",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_misc2_icon.png",
+                            "figcaption": "misc2",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_ms_icon.png",
+                            "figcaption": "ms",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_oe_icon.png",
+                            "figcaption": "oe",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_pebblespearl_-_icon.png",
+                            "figcaption": "五卵石珍珠 (月姐)",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_pebblespearl_2_icon.png",
+                            "figcaption": "五卵石珍珠 (2)",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_pebblespearl_3_icon.png",
+                            "figcaption": "五卵石珍珠 (3)",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_red_stomach_icon.png",
+                            "figcaption": "红猫开局珍珠",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_rivulet_stomach_icon.png",
+                            "figcaption": "溪流开局珍珠",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_rm_icon.png",
+                            "figcaption": "rm",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_sb_filtration_icon.png",
+                            "figcaption": "sb_filtration",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_sb_ravine_icon.png",
+                            "figcaption": "sb_ravine",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_sh_icon.png",
+                            "figcaption": "sh",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_si_chat3_icon.png",
+                            "figcaption": "si_chat3",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_si_chat4_icon.png",
+                            "figcaption": "si_chat4",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_si_chat5_icon.png",
+                            "figcaption": "si_chat5",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_si_top_icon.png",
+                            "figcaption": "si_top",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_si_west_icon.png",
+                            "figcaption": "si_west",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_sl_bridge_icon.png",
+                            "figcaption": "sl_bridge",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_sl_chimney_icon.png",
+                            "figcaption": "cl_chimney",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_sl_moon_icon.png",
+                            "figcaption": "sl_moon",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_spearmasterpearl_icon.png",
+                            "figcaption": "茅大师珍珠",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_su_filt_icon.png",
+                            "figcaption": "su_filt",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_su_icon.png",
+                            "figcaption": "SU",
+                            "content": "郊外; SU_"
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_uw_icon.png",
+                            "figcaption": "UW",
+                            "content": "外缘, 高墙; UW_H01"
+                        },
+                        {
+                            "src": "./resources/icons/Pearl_vs_icon.png",
+                            "figcaption": "VS",
+                            "content": "管道堆场; VS_C03"
+                        }
+                    ]
+                },
+                {
+                    "id": "mechanicalobjects",
+                    "title": "机械物体",
+                    "items": [
+                        {
+                            "src": "./resources/icons/Karma_Shrine_icon.png",
+                            "figcaption": "业力圣殿",
+                            "content": "一个业力符号，在飞升的前提供最大业力"
+                        },
+                        {
+                            "src": "./resources/icons/Scavenger_Outpost_icon.png",
+                            "figcaption": "拾荒者哨站",
+                            "content": "长矛上插着鹿头骨，鹿角上挂着珍珠"
+                        },
+                        {
+                            "src": "./resources/icons/Trade_Outpost_icon.png",
+                            "figcaption": "贸易哨站",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Scavenger_Treasury_icon.png",
+                            "figcaption": "拾荒者仓库",
+                            "content": "会随机生成珍珠、灯笼、拾荒者炸弹、长矛和爆炸长矛的仓库，每个雨循环都会刷新"
+                        },
+                        {
+                            "src": "./resources/icons/Coral_Stem_icon.png",
+                            "figcaption": "珊瑚茎",
+                            "content": "一段可攀爬的绳子，一端固定在墙上，另一端自由漂浮，由骨头色的部分和末端的一团菌丝组成，这些部分带有逐渐变小的蓝色发光。"
+                        },
+                        {
+                            "src": "./resources/icons/Coral_Stem_With_Neurons_icon.png",
+                            "figcaption": "带神经元的珊瑚茎",
+                            "content": "一个珊瑚茎伴随着一个短暂的自由漂浮的珊瑚神经元"
+                        },
+                        {
+                            "src": "./resources/icons/Coral_Neuron_icon.png",
+                            "figcaption": "珊瑚神经元",
+                            "content": "一根细长的红色脊椎状可攀爬的绳子，有许多红色的毛，逐渐变细为蓝色的细尖端。可以是一端连接在墙上，另一端自由浮动的相当长的一段，受到冲击时会朝向一个方向"
+                        },
+                        {
+                            "src": "./resources/icons/Coral_Circuit_icon.png",
+                            "figcaption": "珊瑚电路",
+                            "content": "一种悬浮的红色脆性晶格，内部含有几种生物，在与外部物体接触时被粉碎后重建"
+                        },
+                        {
+                            "src": "./resources/icons/Zap_Coil_icon.png",
+                            "figcaption": "电管",
+                            "content": "可调整大小的矩形线圈，在激活时会发出蓝色光，电击与之接触的物体，产生剧烈放电，杀死玩家并迅速将尸体弹开"
+                        },
+                        {
+                            "src": "./resources/icons/Gravity_Disruptor_icon.png",
+                            "figcaption": "重力干扰器",
+                            "content": "重力干扰器周围会出现空间扭曲现象，吸引并排斥其半径内的附近物体"
+                        },
+                        {
+                            "src": "./resources/icons/Neuron_Fly_icon.png",
+                            "figcaption": "神经元刷新点",
+                            "content": "生成飞行神经元"
+                        },
+                        {
+                            "src": "./resources/icons/Corruption_icon.png",
+                            "figcaption": "腐化",
+                            "content": "一团固定的囊肿，在身体接触时会拉入附近的生物，就像虫草，短垂的触手可以抓住生物并将它们拉向消化生物的囊肿"
+                        },
+                        {
+                            "src": "./resources/icons/Corruption_Tube_icon.png",
+                            "figcaption": "腐化管",
+                            "content": "一段可攀爬的绳索，不会攻击玩家"
+                        },
+                        {
+                            "src": "./resources/icons/Stuck_Daddy_icon.png",
+                            "figcaption": "卡住的香菇",
+                            "content": "一个不动的香菇，像囊肿一样，用触手附着在附近的表面上"
+                        },
+                        {
+                            "src": "./resources/icons/Rot_Fly_Paper_icon.png",
+                            "figcaption": "腐化的神经元",
+                            "content": "一种无害且不活跃的腐化变种，触手上附着着几只神经元"
+                        },
+                        {
+                            "src": "./resources/icons/Centipede_Attractor_icon.png",
+                            "figcaption": "蜈蚣引诱器",
+                            "content": "将附近的蜈蚣吸引到半径内的区域"
+                        },
+                        {
+                            "src": "./resources/icons/Super_Jump_Instruction_icon.png",
+                            "figcaption": "大跳指示 / 猛扑(大跳)教程",
+                            "content": "全息图说明如何执行猛扑(大跳)动作"
+                        },
+                        {
+                            "src": "./resources/icons/Projected_Image_Position_icon.png",
+                            "figcaption": "投影图像位置",
+                            "content": "监视者投影全息影像"
+                        },
+                        {
+                            "src": "./resources/icons/No_Spear_Stick_Zone_icon.png",
+                            "figcaption": "非插入/粘连区",
+                            "content": "防止长矛在规定的半径范围内插在墙上。还可以阻止圣猫的舌头和管虫短时间抓到表面"
+                        },
+                        {
+                            "src": "./resources/icons/Scav_Trade_Instruction_icon.png",
+                            "figcaption": "拾荒者交易提示",
+                            "content": "教蛞蝓猫将珍珠送给拾荒者以通过收费站的投影，如GW_A22所示"
+                        },
+                        {
+                            "src": "./resources/icons/Player_Pushback_icon.png",
+                            "figcaption": "玩家推回",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Multiplayer_Item_icon.png",
+                            "figcaption": "多人游戏项目",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/PreCycle_icon.png",
+                            "figcaption": "损坏庇护所水位",
+                            "content": "雨循环前的期间庇护所内的水位"
+                        },
+                        {
+                            "src": "./resources/icons/Reliable_Iggy_Direction_icon.png",
+                            "figcaption": "\"可靠\"的Iggy(监视者)指路方向",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/No_Leviathan_Stranding_Zone_icon.png",
+                            "figcaption": "无利维坦搁浅区",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Vine_icon.png",
+                            "figcaption": "藤",
+                            "content": "在外层空间中发现的一种可攀爬的一段绳索"
+                        },
+                        {
+                            "src": "./resources/icons/Filter_icon.png",
+                            "figcaption": "过滤器",
+                            "content": "一个可调整大小的圆，用于隐藏选定蛞蝓猫半径范围内的对象"
+                        },
+                        {
+                            "src": "./resources/icons/MS_Artery_Push_icon.png",
+                            "figcaption": "沉没巨构中的水流推送",
+                            "content": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "decorativeobjects",
+                    "title": "装饰性物品",
+                    "items": [
+                        {
+                            "src": "./resources/icons/Projected_Stars_icon.png",
+                            "figcaption": "投射的星星",
+                            "content": "在迭代器上层结构中投影的蓝色全息影像和几何图形数组"
+                        },
+                        {
+                            "src": "./resources/icons/Deep_Processing_icon.png",
+                            "figcaption": "深加工",
+                            "content": "未知"
+                        },
+                        {
+                            "src": "./resources/icons/Energy_Swirl_icon.png",
+                            "figcaption": "能量涡流",
+                            "content": "在质量稀释电池仓核心内部看到的视觉效果"
+                        },
+                        {
+                            "src": "./resources/icons/Lightning_Machine_icon.png",
+                            "figcaption": "闪电机",
+                            "content": "绿色闪电的无害间歇性视觉效果"
+                        },
+                        {
+                            "src": "./resources/icons/SkyDandelion.png",
+                            "figcaption": "天空蒲公英",
+                            "content": "天空蒲公英粒子场"
+                        },
+                        {
+                            "src": "./resources/icons/Void_Spawn_Egg_icon.png",
+                            "figcaption": "空心生物卵",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Lantern_on_Stick_icon.png",
+                            "figcaption": "棍子上的灯笼",
+                            "content": "长矛上的灯笼，在圣猫线一样提供照明和热量"
+                        },
+                        {
+                            "src": "./resources/icons/Rainbow_icon.png",
+                            "figcaption": "彩虹",
+                            "content": "随机出现的彩虹"
+                        },
+                        {
+                            "src": "./resources/icons/Snow_Source_icon.png",
+                            "figcaption": "雪源",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Death_Fall_Focus_icon.png",
+                            "figcaption": "死亡坠落焦点",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Cell_Distortion_icon.png",
+                            "figcaption": "细胞畸变",
+                            "content": "细胞扭曲、畸变、重影的视觉效果"
+                        },
+                        {
+                            "src": "./resources/icons/Local_Blizzard_icon.png",
+                            "figcaption": "当地暴雪",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Hanging_Pearls_icon.png",
+                            "figcaption": "悬挂的珍珠",
+                            "content": "一些悬挂的绳子，在不同的地方附有珍珠"
+                        },
+                        {
+                            "src": "./resources/icons/ShortcutShelter.png",
+                            "figcaption": "庇护所标识",
+                            "content": "避难所的标识"
+                        },
+                        {
+                            "src": "./resources/icons/hiddenclose.png",
+                            "figcaption": "隐藏的快捷方式标签",
+                            "content": "覆盖任何当前快捷方式标签的外观"
+                        },
+                        {
+                            "src": "./resources/icons/ShortcutAShelter.png",
+                            "figcaption": "古代避难所标识",
+                            "content": "古代避难所的标识"
+                        },
+                        {
+                            "src": "./resources/icons/Blinking_Flower_icon.png",
+                            "figcaption": "闪烁的花朵",
+                            "content": "接近时闭合的花朵，见于外层空间和 UG"
+                        },
+                        {
+                            "src": "./resources/icons/Germinator_icon.png",
+                            "figcaption": "萌发器官",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/OE_sphere_icon.png",
+                            "figcaption": "外层空间球体",
+                            "content": "紫色和棕色的大灯泡，中心有发光的橙色，在背景中的外层空间的许多房间都可以看到"
+                        },
+                        {
+                            "src": "./resources/icons/Super_Structure_Fuses_icon.png",
+                            "figcaption": "上部结构保险丝",
+                            "content": "一种可调整大小的金属网格，由插座状凹陷组成"
+                        },
+                        {
+                            "src": "./resources/icons/Wall_Mycelia_icon.png",
+                            "figcaption": "墙壁菌丝体",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Light_Source_icon.png",
+                            "figcaption": "光源",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Light_Fixture_icon.png",
+                            "figcaption": "灯具",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Spot_Light_icon.png",
+                            "figcaption": "聚光灯",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Corruption_Darkness_icon.png",
+                            "figcaption": "腐化黑暗",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/SS_Light_Rod_icon.png",
+                            "figcaption": "五卵石中的光杆",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Dead_Popcorn_Plant_icon.png",
+                            "figcaption": "死亡的爆米花",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Cosmetic_Slime_Mold_icon.png",
+                            "figcaption": "黏菌形态 1",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Cosmetic_Slime_Mold_2_icon.png",
+                            "figcaption": "黏菌形态 2",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Custom_Decal_icon.png",
+                            "figcaption": "自定义贴图",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Insect_Group_icon.png",
+                            "figcaption": "昆虫群",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Dead_Token_Stalk_icon.png",
+                            "figcaption": "死亡代币跟踪",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Light_Beam_icon.png",
+                            "figcaption": "光束",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Fairy_Particle_Settings_icon.png",
+                            "figcaption": "精灵粒子设置",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Day_Night_Settings_icon.png",
+                            "figcaption": "昼夜设置",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Steam_Pipe_icon.png",
+                            "figcaption": "蒸汽管道",
+                            "content": ""
+                        },
+                        {
+                            "src": "./resources/icons/Wall_Steamer_icon.png",
+                            "figcaption": "排放蒸汽的墙壁",
+                            "content": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
