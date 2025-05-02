@@ -120,19 +120,30 @@ b {
         padding-right: 0;
     }
 
-    .aside-mask {
+    #aside,
+    #asideMask {
         display: none;
+        transition: all 0.5s ease;
     }
 
-    .aside {
+    #aside.visible,
+    #asideMask.visible {
+        display: block;
+    }
+
+    #aside.hiding {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    #aside.show {
+        opacity: 1;
+        transform: translateX(0);
         width: 100%;
-        transform: translate(100%, 100%);
-        transition: transform 0.2s ease-out;
+        height: 90vh;
         z-index: 1500;
         background: rgba(0, 0, 0, 0.8);
     }
-
-
 
     .asidebtn {
         width: 45px;
@@ -147,6 +158,8 @@ b {
     #toggleBtn {
         width: 39px;
         height: 38px;
+        background-image: url(/resources/img/aside.png);
+        background-repeat: no-repeat;
     }
 
     .aside-mask {

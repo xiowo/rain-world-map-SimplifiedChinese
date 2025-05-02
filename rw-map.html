@@ -438,7 +438,7 @@
 
                                         if (mapBody && button) {
                                             const mapBodyWidth = mapBody.clientWidth;
-                                            const buttonWidth = 142;
+                                            const buttonWidth = 144;
 
                                             // 计算每行能容纳多少个按钮
                                             const buttonsPerRow = Math.floor(mapBodyWidth / buttonWidth);
@@ -456,39 +456,6 @@
                                     // 当窗口大小变化时，重新计算宽度
                                     window.addEventListener("resize", adjustRegionListWidth);
 
-                                    // 侧栏移动端适配
-                                    document.addEventListener('DOMContentLoaded', function () {
-                                        const toggleBtn = document.getElementById('toggleBtn');
-                                        const aside = document.getElementById('aside');
-                                        const asideMask = document.getElementById('asideMask');
-
-                                        toggleBtn.addEventListener('click', function () {
-                                            if (aside.style.display === 'none') {
-                                                aside.style.display = 'block';
-                                                asideMask.style.display = 'block';
-                                                setTimeout(() => {
-                                                    aside.classList.remove('hiding');
-                                                    aside.classList.add('show');
-                                                }, 10);
-                                            } else {
-                                                aside.classList.remove('show');
-                                                aside.classList.add('hiding');
-                                                setTimeout(() => {
-                                                    aside.style.display = 'none';
-                                                    asideMask.style.display = 'none';
-                                                }, 500);
-                                            }
-                                        });
-
-                                        asideMask.addEventListener('click', function () {
-                                            aside.classList.remove('show');
-                                            aside.classList.add('hiding');
-                                            setTimeout(() => {
-                                                aside.style.display = 'none';
-                                                asideMask.style.display = 'none';
-                                            }, 500);
-                                        });
-                                    });
                                 </script>
 
                         </div>

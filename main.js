@@ -123,3 +123,45 @@ fetch('/resources/icon-data.json')
         });
     })
     .catch(error => console.error('加载 JSON 数据时出错:', error));
+
+
+
+// 侧栏移动端适配
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('toggleBtn');
+    const aside = document.getElementById('aside');
+    const asideMask = document.getElementById('asideMask');
+
+    // 显示侧栏
+    const showAside = () => {
+        aside.classList.remove('hiding');
+        aside.classList.add('show');
+        aside.classList.add('visible');
+        asideMask.classList.add('visible');
+    };
+
+    // 隐藏侧栏
+    const hideAside = () => {
+        aside.classList.remove('show');
+        aside.classList.add('hiding');
+        setTimeout(() => {
+            aside.classList.remove('visible');
+            asideMask.classList.remove('visible');
+        }, 500);
+    };
+
+    toggleBtn.addEventListener('click', () => {
+        if (!aside.classList.contains('visible')) {
+            showAside();
+        } else {
+            hideAside();
+        }
+    });
+
+    asideMask.addEventListener('click', () => {
+        if (window.innerWidth < 768) {
+            hideAside();
+        }
+    });
+});
+
