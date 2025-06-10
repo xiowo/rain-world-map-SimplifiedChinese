@@ -139,9 +139,10 @@ b {
     #aside.show {
         opacity: 1;
         transform: translateX(0);
-        width: 100%;
+        width: 85%;
         height: 90vh;
         z-index: 1500;
+        margin: 10px auto;
         background: rgba(0, 0, 0, 0.8);
     }
 
@@ -189,6 +190,14 @@ b {
     #footer {
         margin-left: 0 !important;
         left: 0 !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .DPregionlist-group,
+    .regionlist-group {
+        width: 290px;
     }
 }
 

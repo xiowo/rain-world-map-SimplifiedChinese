@@ -45,8 +45,7 @@
             margin: 0 auto;
             margin-top: 30px;
             padding: 0 15px;
-            min-width: 1100px;
-            max-width: 1430px;
+            max-width: 1270px;
         }
 
         .asidebtn,
@@ -106,8 +105,14 @@
             margin: 15px 2px 30px 2px;
         }
 
-        #DP-regionlist {
-            max-width: 828px;
+        .DPregionlist-group {
+            max-width: 830px;
+            margin: auto;
+        }
+
+        .DPregionlist-group,
+        .regionlist-group {
+            margin: auto;
         }
 
         .region-button p {
@@ -199,7 +204,7 @@
                     </h3>
                     <ul>
                         <li><a href="#lizards"><span class="tocnumber">2.1</span>蜥蜴</a></li>
-                        <li><a href="#centipedes"><span class="tocnumber">2.2</span>蜈蚣</a></li>
+                        <li><a href="#centipede"><span class="tocnumber">2.2</span>蜈蚣</a></li>
                         <li><a href="#rot"><span class="tocnumber">2.3</span>腐化生物(香菇)</a></li>
                         <li><a href="#spiders"><span class="tocnumber">2.4</span>蜘蛛</a></li>
                         <li><a href="#creatureattributes"><span class="tocnumber">2.5</span>生物属性</a></li>
@@ -268,11 +273,11 @@
                                 </p>
 
                                 <!-- 区域地图 -->
-                                <h2 id="DPRegionMap">倾盆大雨-区域</h2>
+                                <h2 id="RegionMap">倾盆大雨-区域</h2>
                                 <p class="right">Downpour</p>
                                 <form action="map.html" method="GET">
-                                    <div class="regionlist-group">
-                                        <div id="DP-regionlist">
+                                    <div class="DPregionlist-group">
+                                        <div id="regionlist">
                                         </div>
                                         <input type="hidden" name="slugcat" value="white">
                                     </div>
@@ -283,7 +288,7 @@
                                         for (var r of region_order) {
                                             html += '<button class="region-button rw-ui rw-text" name="region" value="' + r + '"><img src="./resources/img/downpour/' + region[r].toUpperCase() + '.png" onerror="this.onerror=null;this.src=\'./resources/img/none.webp\';"><p>' + region[r].toUpperCase() + '</p></button>'
                                         }
-                                        document.getElementById('DP-regionlist').innerHTML = html;
+                                        document.getElementById('regionlist').innerHTML = html;
                                     </script>
                                 </form>
 
@@ -425,36 +430,7 @@
                                         }).join("");
 
                                         regionList.innerHTML = html;
-                                        adjustRegionListWidth();
                                     }
-
-                                    // 根据按钮大小调整区域列表宽度
-                                    function adjustRegionListWidth() {
-                                        const regionlistDP = document.getElementById('DP-regionlist');
-                                        const regionlistTW = document.getElementById('TW-regionlist');
-                                        const regionlistMod = document.getElementById('Mod-regionlist');
-                                        const mapBody = document.querySelector('.map-body');
-                                        const button = document.querySelector('.region-button');
-
-                                        if (mapBody && button) {
-                                            const mapBodyWidth = mapBody.clientWidth;
-                                            const buttonWidth = 144;
-
-                                            // 计算每行能容纳多少个按钮
-                                            const buttonsPerRow = Math.floor(mapBodyWidth / buttonWidth);
-                                            console.log(buttonsPerRow);
-
-                                            // 计算宽度
-                                            const newWidth = `${buttonsPerRow * buttonWidth}px`;
-                                            console.log(newWidth);
-
-                                            [regionlistDP, regionlistTW, regionlistMod].forEach(el => el.style.width = newWidth);
-                                            [regionlistDP, regionlistTW, regionlistMod].forEach(el => el.style.margin = '0 auto');
-                                        }
-                                    }
-
-                                    // 当窗口大小变化时，重新计算宽度
-                                    window.addEventListener("resize", adjustRegionListWidth);
 
                                 </script>
 
@@ -482,6 +458,10 @@
                                     - <a href="https://alduris.github.io/mod-map/" target="_blank">Rain World Mod
                                         Map</a>
                                 </li>
+                                <li>
+                                    - <a href="https://alduris.github.io/watcher-map/" target="_blank">Rain World
+                                        Watcher Map</a>
+                                </li>
                             </ul>
 
                             <h5>用到的资源：</h5>
@@ -493,8 +473,8 @@
                                 <li>- <a href="https://rainworld.miraheze.org/wiki/Rain_World_Wiki/zh-hans"
                                         target="_blank">Rain World Wiki</a>
                                 </li>
-                                <li>- <a href="https://rain-world-map.github.io/" target="_blank">Rain World
-                                        Map</a></li>
+                                <li>- <a href="https://rain-world-map.github.io/" target="_blank">Rain World Map</a>
+                                </li>
                             </ul>
 
                             <h5>关于雨世界和这个地图你可以查看:</h5>
