@@ -120,7 +120,7 @@ input[type='button'].rw-ui {
     cursor: pointer;
     position: relative;
     border-radius: 8px;
-    border: 2px solid var(--rw-border-grey);
+    border: 2px solid var(--rw--border-grey-dark);
     /* alpha 0 for fading */
     box-sizing: border-box;
     /* correctness */
